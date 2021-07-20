@@ -38,6 +38,10 @@
     ];
   };
 
+  programs.zsh = {
+    enable = true;
+  };
+
   programs.fish = {
     enable = true;
   };
@@ -45,6 +49,7 @@
   programs.starship = {
     enable = true;
     enableBashIntegration = true;
+    enableZshIntegration = true;
     enableFishIntegration = true;
   };
 
