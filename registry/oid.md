@@ -6,4 +6,4 @@
 
 I wasted it with this [tweet] by accident.
 
-[tweet]: https://twitter.c
+[tweet]: https://twitter.com/rappet_/status/1417963538715455490
