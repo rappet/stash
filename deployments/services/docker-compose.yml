@@ -78,9 +78,23 @@ services:
       - "traefik.http.middlewares.prometheus-auth.basicauth.users=${PROMETHEUS_\
         HTTP_BASIC_AUTH}"
 
+  grafana:
+    image: ${GRAFANA_TAG}
+    restart: always
+    networks:
+      - web
+    volumes:
+      - "grafana-storage:/var/lib/grafana"
+    labels:
+      - "traefik.http.routers.grafana.rule=Host(`${GRAFANA_HOST}`)"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+      - "traefik.http.routers.grafana.tls=true"
+      - "traefik.http.routers.grafana.tls.certresolver=letsencrypt"
+
 networks:
   web:
 
     null
 volumes:
   gitea: null
+  grafana-storage: null
