@@ -27,6 +27,7 @@ run_local () {
 }
 
 run_prod () {
+    decrypt_prod
     echo 'starting prod...'
     load_env prod.env secrets.prod.env
     docker-compose up -d
@@ -45,11 +46,11 @@ stop_prod () {
 }
 
 decrypt_prod () {
-    openssl aes-256-cbc -d -a -in secrets.prod.env.enc -out secrets.prod.env
+    gpg --batch --yes --passphrase-file secrets.key --output secrets.prod.env --decrypt secrets.prod.env.gpg
 }
 
 encrypt_prod () {
-    openssl aes-256-cbc -a -salt -in secrets.prod.env -out secrets.prod.env.enc
+    gpg --batch --yes --passphrase-file secrets.key --output secrets.prod.env.gpg --symmetric --cipher-algo AES256 secrets.prod.env
 }
 
 help () {
