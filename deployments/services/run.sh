@@ -21,15 +21,27 @@ load_env () {
 }
 
 run_local () {
-    echo 'starting dev...'
+    echo 'starting local...'
     load_env local.env secrets.local.env
-    docker-compose  up -d
+    docker-compose up -d
 }
 
 run_prod () {
     echo 'starting prod...'
     load_env prod.env secrets.prod.env
-    docker-compose  up -d
+    docker-compose up -d
+}
+
+stop_local () {
+    echo 'stopping local...'
+    load_env local.env secrets.local.env
+    docker-compose down
+}
+
+stop_prod () {
+    echo 'stopping prod...'
+    load_env prod.env secrets.prod.env
+    docker-compose down -d
 }
 
 decrypt_prod () {
@@ -41,12 +53,14 @@ encrypt_prod () {
 }
 
 help () {
-    echo "Usage: $0 (local|prod|decrypt-secrets|encrypt-secrets)"
+    echo "Usage: $0 (local|prod|stop-local|stop-prod|decrypt-secrets|encrypt-secrets)"
 }
 
 case "$1" in
-    dev)                run_local ;;
+    local)              run_local ;;
     prod)               run_prod ;;
+    stop-local)         stop_local ;;
+    stop-prod)          stop_prod ;;
     decrypt-secrets)    decrypt_prod ;;
     encrypt-secrets)    encrypt_prod ;;
     *)                  help ;;
