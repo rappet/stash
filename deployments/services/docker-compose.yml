@@ -4,16 +4,11 @@ services:
   traefik:
     image: ${TRAEFIK_TAG}
     restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
+    network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./config/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
       - ./data/traefik/acme:/acme
-    networks:
-      - web
   #  labels:
   #    - "traefik.http.routers.dashboard.rule=Host(`traefik.localhost`) && PathPrefix(`/`)"
   #    - "traefik.http.routers.dashboard.service=dashboard@internal"
