@@ -1,0 +1,18 @@
+version: "3.9"
+
+networks:
+  web:
+    name: web
+    external: true
+
+services:
+  info-service:
+    image: ${INFO_SERVICE_TAG}
+    restart: always
+    networks:
+      - web
+    labels:
+      - "traefik.http.routers.info-service.rule=Host(`${INFO_SERVICE_HOST}`)"
+      - "traefik.http.services.info-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.info-service.tls=true"
+      - "traefik.http.routers.info-service.tls.certresolver=letsencrypt"
