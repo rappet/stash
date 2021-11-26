@@ -2,6 +2,9 @@ global:
   checkNewVersion: true
   sendAnonymousUsage: false
 
+experimental:
+  http3: true
+
 entryPoints:
   web:
     address: :80
@@ -14,6 +17,7 @@ entryPoints:
 
   websecure:
     address: :443
+    enablehttp3: true
 
 api:
   insecure: true
