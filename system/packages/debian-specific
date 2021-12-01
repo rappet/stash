@@ -1,0 +1,8 @@
+# Debian specific packages
+
+# network-tools
+bgpq4
+
+# container
+podman
+buildah

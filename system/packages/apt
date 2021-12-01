@@ -1,0 +1,14 @@
+# apt packages
+# These packages must be available in Debian, Ubuntu and Raspian
+
+# building tools
+build-essential
+git
+zsh
+ncdu
+neovim
+emacs
+
+# network tools
+mtr-tiny
+
