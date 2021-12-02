@@ -1,0 +1,3 @@
+postgres_user=gitea
+postgres_db=gitea
+volumes=gitea

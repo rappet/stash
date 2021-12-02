@@ -1,0 +1,23 @@
+version: "3.9"
+
+networks:
+  web:
+    name: web
+    external: true
+
+volumes:
+  grafana: null
+
+services:
+  grafana:
+    image: ${GRAFANA_TAG}
+    restart: always
+    networks:
+      - web
+    volumes:
+      - "grafana-storage:/var/lib/grafana"
+    labels:
+      - "traefik.http.routers.grafana.rule=Host(`${GRAFANA_HOST}`)"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+      - "traefik.http.routers.grafana.tls=true"
+      - "traefik.http.routers.grafana.tls.certresolver=letsencrypt"

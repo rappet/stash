@@ -1,0 +1,49 @@
+version: "3.9"
+
+networks:
+  web:
+    name: web
+    external: true
+
+volumes:
+  gitea: null
+  drone: null
+
+services:
+  gitea:
+    image: ${GITEA_TAG}
+    env_file: ${GITEA_ENV}
+    restart: always
+    networks:
+      - web
+    volumes:
+      - "gitea:/data"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    ports:
+      - "${GITEA_SSH_PORT}:22"
+    labels:
+      - "traefik.http.routers.gitea.rule=Host(`${GITEA_HOST}`)"
+      - "traefik.http.services.gitea.loadbalancer.server.port=3000"
+      - "traefik.http.routers.gitea.tls=true"
+      - "traefik.http.routers.gitea.tls.certresolver=letsencrypt"
+
+  drone:
+    image: drone/drone:2
+    restart: always
+    environment:
+      DRONE_GITEA_SERVER: ${DRONE_GITEA_SERVER}
+      DRONE_GITEA_CLIENT_ID: ${DRONE_GITEA_CLIENT_ID}
+      DRONE_GITEA_CLIENT_SECRET: ${DRONE_GITEA_CLIENT_SECRET}
+      DRONE_RPC_SECRET: ${DRONE_RPC_SECRET}
+      DRONE_SERVER_HOST: ${DRONE_SERVER_HOST}
+      DRONE_SERVER_PROTO: ${DRONE_SERVER_PROTO}
+    networks:
+      - web
+    volumes:
+      - "drone:/data"
+    labels:
+      - "traefik.http.routers.drone.rule=Host(`${DRONE_HOST}`)"
+      - "traefik.http.services.drone.loadbalancer.server.port=80"
+      - "traefik.http.routers.drone.tls=true"
+      - "traefik.http.routers.drone.tls.certresolver=letsencrypt"
