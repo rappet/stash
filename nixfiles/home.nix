@@ -1,69 +1,34 @@
 { pkgs, ... }:
 
 {
-  home.packages = [
-    pkgs.pkgconfig
-    pkgs.cmake
-    # for darwin
-    pkgs.libiconv
-    pkgs.cargo
-    pkgs.rustc
-    pkgs.rust-analyzer
-    pkgs.bat
+  home.stateVersion = "22.05";
+  home.packages = with pkgs; [
+    pkgconfig
+    cmake
+    thefuck
+    cargo
+    rustc
+    rust-analyzer
+    libiconv
+    nixpkgs-fmt
+    fish
+    tmux
+    bgpq4
+    nodejs
+    ffmpeg-full
   ];
 
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-
-    extraConfig = ''
-      :colorscheme default
-      :set number
-      
-      lua << EOF
-      require'lspconfig'.rust_analyzer.setup{}
-      EOF
-    '';
-
-    plugins = with pkgs.vimPlugins; [
-      editorconfig-vim
-      ctrlp
-      gruvbox
-      nerdtree
-      tabular
-      vim-nix
-      vim-markdown
-      nvim-lspconfig
-    ];
+  programs.bash.enable = true;
+  programs.zsh = import ./zsh.nix;
+  programs.fish.enable = true;
+  programs.home-manager.enable = true;
+  programs.neovim = import ./neovim.nix {
+    pkgs = pkgs;
   };
-
-  programs.zsh = {
-    enable = true;
-  };
-
-  programs.fish = {
-    enable = true;
-  };
-
+  programs.git = import ./git.nix;
   programs.starship = {
     enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    enableFishIntegration = true;
   };
-
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      window.dimensions = {
-        columns = 140;
-        lines = 40;
-      };
-      font.normal.family = "FiraCode Nerd Font Mono";
-    };
-  };
-
   programs.tmux = {
     enable = true;
   };
