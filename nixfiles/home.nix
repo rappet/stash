@@ -16,6 +16,7 @@
     bgpq4
     nodejs
     ffmpeg-full
+    jq
   ];
 
   programs.bash.enable = true;

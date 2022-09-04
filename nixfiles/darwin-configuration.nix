@@ -9,6 +9,7 @@
     bat
     gnupg
     mtr
+    home-manager
   ];
 
   # Use a custom configuration.nix location.
