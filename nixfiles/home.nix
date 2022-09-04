@@ -33,4 +33,10 @@
   programs.tmux = {
     enable = true;
   };
+  programs.bat = {
+    enable = true;
+    config = {
+      pager = "less -FR";
+    };
+  };
 }
