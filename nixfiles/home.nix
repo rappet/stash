@@ -38,6 +38,16 @@
     };
     alacritty = {
       enable = true;
+      settings = {
+        window.padding = {
+          x = 4;
+          y = 4;
+        };
+        font = {
+          normal.family = "FiraCode Nerd Font Mono";
+          size = 12.0;
+        };
+      };
     };
   };
 }
