@@ -25,7 +25,7 @@
       pkgs = pkgs;
     };
     git = import ./git.nix;
-    starship.enable = true;
+    starship = import ./starship.nix;
     tmux.enable = true;
     bat = {
       enable = true;
@@ -36,14 +36,14 @@
     alacritty = {
       enable = true;
       settings = {
-        window.padding = {
-          x = 4;
-          y = 4;
-        };
         font = {
-          normal.family = "FiraCode Nerd Font Mono";
+          normal = {
+            family = "FiraCode Nerd Font Mono";
+            style = "Medium";
+          };
           size = 12.0;
         };
+        colors.primary.background = "#282a36";
       };
     };
     fzf.enable = true;
