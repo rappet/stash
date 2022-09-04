@@ -11,12 +11,9 @@
     rust-analyzer
     libiconv
     nixpkgs-fmt
-    fish
-    tmux
     bgpq4
     nodejs
     ffmpeg-full
-    jq
   ];
 
   programs = {
@@ -49,5 +46,6 @@
         };
       };
     };
+    fzf.enable = true;
   };
 }

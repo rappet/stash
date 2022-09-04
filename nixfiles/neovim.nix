@@ -17,6 +17,7 @@
     awesome-vim-colorschemes
     rust-vim
     nvim-lspconfig
+    fzf-vim
   ];
   extraConfig = ''
     set relativenumber

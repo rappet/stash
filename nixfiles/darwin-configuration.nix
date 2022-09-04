@@ -10,6 +10,11 @@
     gnupg
     mtr
     home-manager
+    fish
+    tmux
+    ripgrep
+    jc
+    jq
   ];
 
   # Use a custom configuration.nix location.
