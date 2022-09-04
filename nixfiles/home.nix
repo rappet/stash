@@ -18,14 +18,14 @@
 
   programs = {
     bash.enable = true;
-    zsh = import ./zsh.nix;
+    zsh = import ./programs/zsh.nix;
     fish.enable = true;
     home-manager.enable = true;
-    neovim = import ./neovim.nix {
+    neovim = import ./programs/neovim.nix {
       pkgs = pkgs;
     };
-    git = import ./git.nix;
-    starship = import ./starship.nix;
+    git = import ./programs/git.nix;
+    starship = import ./programs/starship.nix;
     tmux.enable = true;
     bat = {
       enable = true;
@@ -33,7 +33,7 @@
         pager = "less -FR";
       };
     };
-    alacritty = import ./alacritty.nix;
+    alacritty = import ./programs/alacritty.nix;
     fzf.enable = true;
   };
 }
