@@ -1,23 +1,23 @@
 let
   user = {
-    bg = "#9A348E";
-    fg = "#ffffff";
+    bg = "#b16286";
+    fg = "#000000";
   };
   directory = {
-    bg = "#DA627D";
+    bg = "#d65d0e";
     fg = "#000000";
   };
   git = {
-    bg = "#FCA17D";
+    bg = "#d79921";
     fg = "#000000";
   };
   tools = {
-    bg = "#86BBD8";
-    fg = "#ffffff";
+    bg = "#83a598";
+    fg = "#000000";
   };
   time = {
-    bg = "#33658A";
-    fg = "#ffffff";
+    bg = "#458588";
+    fg = "#000000";
   };
 in
 {
@@ -25,7 +25,7 @@ in
   settings = {
     # From pastel-powerline preset:
     # https://starship.rs/presets/pastel-powerline.html
-    format = "  [](${user.bg})$username[](bg:${directory.bg} fg:${user.bg})$directory[](fg:${directory.bg} bg:${git.bg})$git_branch$git_status[](fg:${git.bg} bg:${tools.bg})$c$elixir$elm$golang$haskell$java$julia$nodejs$nim$rust[](fg:${tools.bg} bg:#06969A)$docker_context[](fg:#06969A bg:#33658A)$time[ ](fg:#33658A)\n► ";
+    format = "╭─[](${user.bg})$username[](bg:${directory.bg} fg:${user.bg})$directory[](fg:${directory.bg} bg:${git.bg})$git_branch$git_status[](fg:${git.bg} bg:${tools.bg})$c$elixir$elm$golang$haskell$java$julia$nodejs$nim$rust[](fg:${tools.bg} bg:#06969A)$docker_context[](fg:#06969A bg:${time.bg})$time[ ](fg:${time.bg})\n╰─";
 
     username = {
       show_always = true;

@@ -27,5 +27,8 @@
     lua << EOF
     require'lspconfig'.rust_analyzer.setup{}
     EOF
+
+    let g:airline_powerline_fonts = 1
+    colorscheme gruvbox
   '';
 }
