@@ -39,4 +39,7 @@
       pager = "less -FR";
     };
   };
+  programs.alacritty = {
+    enable = true;
+  };
 }
