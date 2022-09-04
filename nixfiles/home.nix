@@ -19,27 +19,25 @@
     jq
   ];
 
-  programs.bash.enable = true;
-  programs.zsh = import ./zsh.nix;
-  programs.fish.enable = true;
-  programs.home-manager.enable = true;
-  programs.neovim = import ./neovim.nix {
-    pkgs = pkgs;
-  };
-  programs.git = import ./git.nix;
-  programs.starship = {
-    enable = true;
-  };
-  programs.tmux = {
-    enable = true;
-  };
-  programs.bat = {
-    enable = true;
-    config = {
-      pager = "less -FR";
+  programs = {
+    bash.enable = true;
+    zsh = import ./zsh.nix;
+    fish.enable = true;
+    home-manager.enable = true;
+    neovim = import ./neovim.nix {
+      pkgs = pkgs;
     };
-  };
-  programs.alacritty = {
-    enable = true;
+    git = import ./git.nix;
+    starship.enable = true;
+    tmux.enable = true;
+    bat = {
+      enable = true;
+      config = {
+        pager = "less -FR";
+      };
+    };
+    alacritty = {
+      enable = true;
+    };
   };
 }
