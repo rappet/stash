@@ -1,7 +1,7 @@
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
   hook = ''
-  eval "$(starship init bash)"
+    eval "$(starship init bash)"
   '';
 in
 pkgs.mkShell {

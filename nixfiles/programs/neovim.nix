@@ -10,6 +10,8 @@
     vim-nix
     vim-css-color
     nerdtree
+    nerdtree-git-plugin
+    vim-nerdtree-tabs
     vim-gitgutter
     vim-commentary
     vim-fugitive
@@ -19,16 +21,6 @@
     nvim-lspconfig
     fzf-vim
   ];
-  extraConfig = ''
-    set relativenumber
-    syntax enable
-    filetype plugin indent on
-
-    lua << EOF
-    require'lspconfig'.rust_analyzer.setup{}
-    EOF
-
-    let g:airline_powerline_fonts = 1
-    colorscheme gruvbox
-  '';
+  #coc.enable = true;
+  extraConfig = builtins.readFile ./neovim.vim;
 }
