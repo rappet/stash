@@ -17,6 +17,9 @@
     jq
   ];
 
+  # TODO nix flakes setup + experimental version
+  #nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   environment.darwinConfig = "$HOME/stash/nixfiles/darwin-configuration.nix";
