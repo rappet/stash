@@ -22,7 +22,7 @@
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  # environment.darwinConfig = "$HOME/stash/nixfiles/darwin-configuration.nix";
+  environment.darwinConfig = "$HOME/stash/nixfiles/hosts/ibook/darwin-configuration.nix";
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
@@ -40,5 +40,5 @@
     home = "/Users/rappet";
   };
 
-  home-manager.users.rappet = import ./home.nix;
+  home-manager.users.rappet = import ../../home.nix;
 }
