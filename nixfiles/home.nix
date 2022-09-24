@@ -2,38 +2,67 @@
 
 let
   theme = import ./theme.nix;
+  gpg-key = "6116F3CD99CB533F07E4E1441829D5210E0EEC51";
   my-python-packages = python-packages: with python-packages; [
     pandas
     numpy
     matplotlib
     requests
+    rich
   ];
   python-with-my-packages = pkgs.python3.withPackages my-python-packages;
+  common-packages = with pkgs; [
+    # CLI
+    thefuck
+    neofetch
+    mc
+    binwalk
+    xxd
+    ripgrep
+    bottom
+    # Networking
+    bgpq4
+    nmap
+    # C/C++ Building
+    pkgconfig
+    cmake
+    libiconv
+    # Rust
+    rustc
+    cargo
+    rust-analyzer
+    rustfmt
+    clippy
+    rusty-man
+    # Nix
+    nixpkgs-fmt
+    # Web
+    nodejs
+    yarn
+    # Publishing
+    graphviz
+    texlive.combined.scheme-full
+    pandoc
+    # Media
+    ffmpeg-full
+    yt-dlp
+    # Python
+    python-with-my-packages
+    # Database
+    clickhouse-cli
+  ];
+  linux-packages = with pkgs; if stdenv.isLinux then [
+    ldd
+    mold
+  ] else [];
+  mac-packages = with pkgs; if stdenv.isDarwin then [
+    zld
+  ] else [];
+  packages = common-packages ++ linux-packages ++ mac-packages;
 in
   {
     home.stateVersion = "22.05";
-    home.packages = with pkgs; [
-      pkgconfig
-      cmake
-      thefuck
-      rustc
-      cargo
-      rust-analyzer
-      libiconv
-      nixpkgs-fmt
-      bgpq4
-      nodejs
-      ffmpeg-full
-      neofetch
-      mc
-      nmap
-      python-with-my-packages
-      binwalk
-      youtube-dl
-      graphviz
-      xxd
-      rusty-man
-    ];
+    home.packages = packages;
 
     accounts.email = import ./email.nix;
 
@@ -45,23 +74,37 @@ in
       neovim = import ./programs/neovim.nix {
         pkgs = pkgs;
       };
-      git = import ./programs/git.nix;
+      helix = {
+        enable = true;
+        languages = [
+          {
+            name = "rust";
+            auto-format = true;
+
+          }
+        ];
+        settings = {
+          theme = "gruvbox";
+          editor = {
+            cursor-shape = {
+              normal = "block";
+              insert = "bar";
+              select = "underline";
+            };
+          };
+        };
+      };
+      git = import ./programs/git.nix { gpg-key= gpg-key; };
       password-store = {
         enable = true;
         settings = {
           PASSWORD_STORE_DIR = "$HOME/.password-store";
-          PASSWORD_STORE_KEY = "6116F3CD99CB533F07E4E1441829D5210E0EEC51";
+          PASSWORD_STORE_KEY = gpg-key;
           PASSWORD_STORE_CLIP_TIME = "60";
         };
       };
       starship = import ./programs/starship.nix;
-      tmux = {
-        enable = true;
-        baseIndex = 1;
-        extraConfig = ''
-          setw -g mouse on
-        '';
-      };
+      tmux = import ./programs/tmux.nix { pkgs = pkgs; };
       bat = {
         enable = true;
         config = {
