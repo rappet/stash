@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   theme = import ./theme.nix;
@@ -68,6 +68,8 @@ in
     home.stateVersion = "22.05";
     home.packages = packages;
 
+    fonts.fontconfig.enable = lib.mkForce true;
+
     accounts.email = import ./email.nix;
 
     programs = {
@@ -119,6 +121,7 @@ in
         theme = theme;
       };
       kitty = import ./programs/kitty.nix {
+        pkgs = pkgs;
         theme = theme;
       };
       fzf.enable = true;
