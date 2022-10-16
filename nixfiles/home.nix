@@ -140,6 +140,14 @@ in
       PATH = "\$HOME/.cargo/bin:\$PATH";
     };
 
+    xsession.windowManager.i3 = if pkgs.stdenv.isLinux then {
+      enable = true;
+      config = {
+        modifier = "Mod1";
+        terminal = "$HOME/.nix-profile/bin/kitty";
+      };
+    } else {};
+
     services.gpg-agent = {
       enable = true;
       pinentryFlavor = if pkgs.stdenv.isLinux then "gnome3" else "tty";
