@@ -20,6 +20,8 @@ let
     xxd
     ripgrep
     bottom
+    gnupg
+    pinentry-gnome
     # Networking
     bgpq4
     nmap
@@ -136,5 +138,10 @@ in
 
     home.sessionVariables = {
       PATH = "\$HOME/.cargo/bin:\$PATH";
+    };
+
+    services.gpg-agent = {
+      enable = true;
+      pinentryFlavor = if pkgs.stdenv.isLinux then "gnome3" else "tty";
     };
   }
