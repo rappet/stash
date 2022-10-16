@@ -8,4 +8,8 @@
     signByDefault = true;
   };
   difftastic.enable = true;
+  lfs.enable = true;
+  extraConfig = {
+    core.editor = "vi";
+  };
 }
