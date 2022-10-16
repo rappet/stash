@@ -27,6 +27,8 @@ let
     pkgconfig
     cmake
     libiconv
+    binutils
+    gcc
     # Rust
     rustc
     cargo
