@@ -30,12 +30,7 @@ let
     binutils
     gcc
     # Rust
-    rustc
-    cargo
-    rust-analyzer
-    rustfmt
-    clippy
-    rusty-man
+    rustup
     # Nix
     nixpkgs-fmt
     # Web
@@ -52,9 +47,16 @@ let
     python-with-my-packages
     # Database
     clickhouse-cli
+    # Fonts
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    nerdfonts
   ];
   linux-packages = with pkgs; if stdenv.isLinux then [
-    ldd
     mold
   ] else [];
   mac-packages = with pkgs; if stdenv.isDarwin then [
@@ -127,5 +129,9 @@ in
       man = {
         enable = true;
       };
+    };
+
+    home.sessionVariables = {
+      PATH = "\$HOME/.cargo/bin:\$PATH";
     };
   }
