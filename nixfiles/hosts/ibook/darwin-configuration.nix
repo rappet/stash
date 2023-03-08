@@ -40,5 +40,5 @@
     home = "/Users/rappet";
   };
 
-  home-manager.users.rappet = import ../../home.nix;
+  home-manager.users.rappet = import ../../home/home.nix;
 }

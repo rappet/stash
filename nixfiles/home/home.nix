@@ -25,6 +25,7 @@ let
     # Networking
     bgpq4
     nmap
+    tshark
     # C/C++ Building
     pkgconfig
     cmake
@@ -60,6 +61,8 @@ let
   ];
   linux-packages = with pkgs; if stdenv.isLinux then [
     mold
+    element-web
+    bitwarden
   ] else [];
   mac-packages = with pkgs; if stdenv.isDarwin then [
     zld
