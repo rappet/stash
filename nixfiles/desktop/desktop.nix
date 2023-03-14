@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  imports =
+   [
+      <home-manager/nixos>
+   ];
+
   # discord
   nixpkgs.config.allowUnfree = true;
 
@@ -16,7 +21,13 @@
     krita
     inkscape
     blender
+    vlc
+
+    home-manager
   ];
+
+  home-manager.users.rappet = import ../home/home.nix;
+
 
   sound.enable = true;
   security.rtkit.enable = true;

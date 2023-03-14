@@ -13,6 +13,8 @@
 
     podman-tui
     podman-compose
+
+    picocom
   ];
 
   virtualisation.podman.enable = true;

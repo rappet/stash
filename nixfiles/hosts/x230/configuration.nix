@@ -11,17 +11,12 @@
       ../../common.nix
       ../../desktop/desktop.nix
       ../../desktop/develop.nix
-      <home-manager/nixos>
     ];
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub = {
     enable = true;
     version = 2;
-    # efiSupport = true;
-    # efiInstallAsRemovable = true;
-    # boot.loader.efi.efiSysMountPoint = "/boot/efi";
-    # Define on which hard drive you want to install Grub.
     device = "/dev/sda"; # or "nodev" for efi only
     useOSProber = true;
   };
