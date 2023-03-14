@@ -15,6 +15,7 @@
     wget
     neovim
     pciutils
+    usbutils
     file
     ncdu
     fd
