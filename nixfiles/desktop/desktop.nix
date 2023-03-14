@@ -4,6 +4,7 @@
   imports =
    [
       <home-manager/nixos>
+      ../services/mdns.nix
    ];
 
   # discord
@@ -83,12 +84,6 @@
   };
 
   services.printing.enable = true;
-
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-    openFirewall = true;
-  };
 
   services.xserver = {
     enable = true;
