@@ -44,6 +44,15 @@
         "directory mask" = "0777";
         "force user" = "nobody";
       };
+      homes = {
+        path = "/smbhome/%S";
+        browseable = "no";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0700";
+        "directory mask" = "0700";
+        "valid users" = "%S";
+      };
     };
   };
 
