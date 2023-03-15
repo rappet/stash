@@ -12,7 +12,6 @@
       ../../desktop/desktop.nix
       ../../desktop/develop.nix
       ../../desktop/gaming.nix
-      <home-manager/nixos>
     ];
 
   boot.loader.efi = {
@@ -42,6 +41,12 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+
+  fileSystems."/data" =
+    { device = "/dev/disk/by-uuid/477eddca-bb72-4150-8391-534cb023b387";
+      fsType = "xfs";
+      options = [ "defaults" ];
+    };
 
   # Thanks Microsoft
   time.hardwareClockInLocalTime = true;
