@@ -87,6 +87,8 @@
 
   services.xserver = {
     enable = true;
+    displayManager.sddm.enable = true;
+    desktopManager.plasma5.enable = true;
     layout = "us";
     xkbVariant = "intl";
   };
