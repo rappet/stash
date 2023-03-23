@@ -26,6 +26,7 @@ let
     bgpq4
     nmap
     tshark
+    inetutils
     # C/C++ Building
     pkgconfig
     cmake
