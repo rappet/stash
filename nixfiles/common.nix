@@ -19,6 +19,7 @@
     file
     ncdu
     fd
+    duperemove
   ];
   
   users.users.rappet = {
