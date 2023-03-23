@@ -1,5 +1,12 @@
 { config, pkgs, ... }:
 
+let
+  x86_64_packages = with pkgs; if builtins.currentSystem == "x86_64-linux" then [
+    discord
+    blender
+    bitwarden
+  ] else [];
+in
 {
   imports =
    [
@@ -15,17 +22,15 @@
     thunderbird
     element-desktop
     nheko
-    discord
 
     qjackctl
 
     krita
     inkscape
-    blender
     vlc
 
     home-manager
-  ];
+  ] ++ x86_64_packages;
 
   home-manager.users.rappet = import ../home/home.nix;
 

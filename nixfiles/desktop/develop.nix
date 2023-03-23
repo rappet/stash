@@ -1,12 +1,17 @@
 { config, pkgs, ... }:
 
+let
+  x86_64_packages = with pkgs; if builtins.currentSystem == "x86_64-linux" then [
+    jetbrains.clion
+    jetbrains.idea-ultimate
+    jetbrains.idea-community
+  ] else [];
+in
 {
   # vscode, jetbrains
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    jetbrains.clion
-    jetbrains.idea-ultimate
     vscode
 
     wireshark
@@ -15,7 +20,7 @@
     podman-compose
 
     picocom
-  ];
+  ] ++ x86_64_packages;
 
   virtualisation.podman.enable = true;
 }
