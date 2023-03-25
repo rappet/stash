@@ -28,6 +28,8 @@ in
     krita
     inkscape
     vlc
+    superTux
+    superTuxKart
 
     home-manager
   ] ++ x86_64_packages;
