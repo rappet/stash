@@ -22,6 +22,7 @@ let
     bottom
     gnupg
     pinentry-gnome
+    glow
     # Networking
     bgpq4
     nmap
