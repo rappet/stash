@@ -34,6 +34,7 @@ let
     libiconv
     binutils
     gcc
+    gnumake
     # Rust
     rustup
     # Nix
