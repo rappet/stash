@@ -74,6 +74,13 @@ in
     home.stateVersion = "22.05";
     home.packages = packages;
 
+    # temporary hack for NixOS nstableu
+    nixpkgs.overlays = [
+      (self: super: {
+        fcitx-engines = pkgs.fcitx5;
+      })
+    ];
+
     fonts.fontconfig.enable = lib.mkForce true;
 
     accounts.email = import ./email.nix;
