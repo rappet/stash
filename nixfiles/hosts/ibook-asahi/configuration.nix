@@ -74,6 +74,8 @@ in
     useExperimentalGPUDriver = true;
   };
 
+  hardware.bluetooth.enable = true;
+
   services.xserver.videoDrivers = [ "apple" ];
 
   hardware.opengl.enable = true;
