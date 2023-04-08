@@ -15,12 +15,13 @@ in
     vscode
 
     wireshark
-
     podman-tui
     podman-compose
 
     picocom
   ] ++ x86_64_packages;
+
+  programs.wireshark.enable = true;
 
   virtualisation.podman.enable = true;
 }
