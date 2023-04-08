@@ -136,7 +136,27 @@ in
   };
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Europe/Berlin";
+
+  systemd.timers."dedupe-home" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "5m";
+      OnUnitActiveSec = "24h";
+      Unit = "dedupe-home.service";
+    };
+  };
+
+  systemd.services."dedupe-home" = {
+    script = ''
+        set -eu
+        ${pkgs.duperemove}/bin/duperemove -drh /home
+   '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
