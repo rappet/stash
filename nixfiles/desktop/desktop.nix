@@ -9,10 +9,16 @@ let
 in
 {
   imports =
-   [
-      <home-manager/nixos>
-      ../services/mdns.nix
-   ];
+  [
+     <home-manager/nixos>
+     ../services/mdns.nix
+  ];
+
+  # Set your time zone.
+  time.timeZone = "Europe/Berlin";
+
+  networking.networkmanager.enable = true;
+  users.users.rappet.extraGroups = [ "networkmanager" ];
 
   # discord
   nixpkgs.config.allowUnfree = true;
@@ -30,6 +36,10 @@ in
     vlc
     superTux
     superTuxKart
+
+    wayland
+    dracula-theme
+
 
     home-manager
   ] ++ x86_64_packages;

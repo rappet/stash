@@ -21,52 +21,19 @@
     useOSProber = true;
   };
 
-  networking.hostName = "x230"; # Define your hostname.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.windowManager.i3 = {
-    enable = true;
-    extraPackages = with pkgs; [
-      dmenu
-      i3status
-      i3lock
-      i3blocks
-    ];
+  boot.initrd.luks.devices.data.device = "/dev/disk/by-uuid/b0e23447-8c9b-4fb8-a782-244ecebfe18d";
+
+  fileSystems."/" = { device = "/dev/disk/by-uuid/b24869d1-f53a-45ff-baa9-451571402d28";
+    fsType = "btrfs";
+    options = [ "compress=lzo" ];
   };
-  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass";
+
+  networking.hostName = "x230";
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
   services.xserver.libinput.mouse.accelSpeed = "1.0";
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    home-manager
-  ];
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
-  
-  boot.initrd.luks.devices.data.device = "/dev/disk/by-uuid/b0e23447-8c9b-4fb8-a782-244ecebfe18d";
-
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b24869d1-f53a-45ff-baa9-451571402d28";
-      fsType = "btrfs";
-      options = [ "compress=lzo" ];
-    };
-
-  # nixos-config=/home/rappet/stash/nixfiles/home/x230/configuration.nix;
+  system.stateVersion = "22.11"; # Did you read the comment?
 }
 
