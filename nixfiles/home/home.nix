@@ -32,7 +32,6 @@ let
     pkgconfig
     cmake
     libiconv
-    binutils
     gcc
     gnumake
     # Rust
@@ -64,6 +63,7 @@ let
   ];
   linux-packages = with pkgs; if stdenv.isLinux then [
     mold
+    binutils
   ] else [];
   mac-packages = with pkgs; if stdenv.isDarwin then [
     zld
@@ -159,8 +159,8 @@ in
       };
     } else {};
 
-    services.gpg-agent = {
+    services.gpg-agent = if pkgs.stdenv.isLinux then {
       enable = true;
-      pinentryFlavor = if pkgs.stdenv.isLinux then "gnome3" else "tty";
-    };
+      pinentryFlavor = "qt";
+    } else {};
   }

@@ -1,7 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, home-manager, ... }:
 
 {
-  imports = [ <home-manager/nix-darwin> ];
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
@@ -9,7 +8,6 @@
     bat
     gnupg
     mtr
-    home-manager
     fish
     tmux
     ripgrep
@@ -40,5 +38,9 @@
     home = "/Users/rappet";
   };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
   home-manager.users.rappet = import ../../home/home.nix;
 }
