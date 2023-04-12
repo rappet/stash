@@ -11,8 +11,7 @@
     macos_titlebar_color = "background";
   };
   font = {
-    name = "FiraCode Nerd Font";
-    package = pkgs.terminus-nerdfont;
-    size = 8;
+    name = theme.font.family;
+    size = theme.font.size;
   };
 }

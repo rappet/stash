@@ -5,10 +5,10 @@
   settings = {
     font = {
       normal = {
-        family = "FiraCode Nerd Font Mono";
-        style = "Medium";
+        family = theme.font.family;
+        style = theme.font.style;
       };
-      size = 12.0;
+      size = theme.font.size;
     };
     colors = {
       primary.background = theme.primary.bg;
