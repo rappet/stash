@@ -23,7 +23,7 @@ in
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    firefox
+    firefox-wayland
     thunderbird
     element-desktop
     nheko
