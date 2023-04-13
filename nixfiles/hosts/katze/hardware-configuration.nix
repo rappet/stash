@@ -28,7 +28,6 @@
   fileSystems."/btrfs" =
     { device = "/dev/disk/by-uuid/9b142ca1-3766-43f2-a726-ae464f8f23fe";
       fsType = "btrfs";
-      options = [ ];
     };
 
   fileSystems."/boot" =
