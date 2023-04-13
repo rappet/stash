@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, system, ... }:
 
 let
   theme = import ./theme.nix;
@@ -66,6 +66,8 @@ let
   packages = common-packages ++ linux-packages ++ mac-packages;
 in
 {
+  home.username = "rappet";
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/rappet" else "/home/rappet";
   home.stateVersion = "22.05";
   home.packages = packages;
 

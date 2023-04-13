@@ -7,19 +7,12 @@
 
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
-
-    home-manager.url = "github:nix-community/home-manager/release-22.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    home-manager-darwin.url = "github:nix-community/home-manager/release-22.11";
-    home-manager-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
   };
 
-  outputs = { self, darwin, nixpkgs, nixpkgs-darwin, home-manager, home-manager-darwin }: {
+  outputs = { self, darwin, nixpkgs, nixpkgs-darwin, flake-utils }: {
     darwinConfigurations."ibook" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
-        home-manager-darwin.darwinModules.home-manager
         ./hosts/ibook/darwin-configuration.nix
       ];
     };
@@ -27,7 +20,6 @@
     nixosConfigurations."katze" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        home-manager.nixosModules.home-manager
         ./hosts/katze/configuration.nix
       ];
       specialArgs = { system = "x86_64-linux"; };

@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager, ... }:
+{ config, pkgs, ... }:
 
 {
   # List packages installed in system profile. To search by name, run:
@@ -39,8 +39,4 @@
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.users.rappet = import ../../home/home.nix;
 }

@@ -19,7 +19,6 @@ in
       ../../common.nix
       (import ../../desktop/desktop.nix { inherit config pkgs lib system; })
       (import ../../desktop/develop.nix { inherit config pkgs lib system; })
-      <home-manager/nixos>
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -80,7 +79,5 @@ in
   };
 
   system.stateVersion = "23.05"; # Did you read the comment?
-
-  home-manager.users.rappet = import ../../home/home.nix;
 }
 
