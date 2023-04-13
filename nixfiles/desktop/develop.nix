@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, system, ... }:
 
 let
-  x86_64_packages = with pkgs; if builtins.currentSystem == "x86_64-linux" then [
+  x86_64_packages = with pkgs; if system == "x86_64-linux" then [
     jetbrains.clion
     jetbrains.idea-ultimate
     jetbrains.idea-community

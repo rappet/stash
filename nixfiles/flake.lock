@@ -20,10 +20,10 @@
         "type": "github"
       }
     },
-    "home-manager-darwin": {
+    "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-darwin"
+          "nixpkgs"
         ],
         "utils": "utils"
       },
@@ -39,6 +39,43 @@
         "owner": "nix-community",
         "ref": "release-22.11",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-darwin"
+        ],
+        "utils": "utils_2"
+      },
+      "locked": {
+        "lastModified": 1681092193,
+        "narHash": "sha256-JerCqqOqbT2tBnXQW4EqwFl0hHnuZp21rIQ6lu/N4rI=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "f9edbedaf015013eb35f8caacbe0c9666bbc16af",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-22.11",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1681396825,
+        "narHash": "sha256-5at7jvJSopS3W4gRYZ/HTSrBFrN+bB8T7FfLovyCWIU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "bafeb07d079bc16d15893a59a9725e4fc68b656c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -61,11 +98,28 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "home-manager": "home-manager",
         "home-manager-darwin": "home-manager-darwin",
+        "nixpkgs": "nixpkgs",
         "nixpkgs-darwin": "nixpkgs-darwin"
       }
     },
     "utils": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_2": {
       "locked": {
         "lastModified": 1667395993,
         "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
