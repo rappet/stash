@@ -19,6 +19,8 @@ in
     podman-compose
 
     picocom
+
+    obsidian
   ] ++ x86_64_packages;
 
   programs.wireshark.enable = true;
