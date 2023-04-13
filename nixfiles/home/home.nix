@@ -55,7 +55,6 @@ let
     # Fonts
     fira-code
     fira-code-symbols
-    nerdfonts
   ];
   linux-packages = with pkgs; if stdenv.isLinux then [
     mold
@@ -76,7 +75,6 @@ in
       fcitx-engines = pkgs.fcitx5;
     })
   ];
-
   fonts.fontconfig.enable = lib.mkForce true;
 
   accounts.email = import ./email.nix;

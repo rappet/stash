@@ -43,7 +43,7 @@ in
     home-manager
   ] ++ x86_64_packages;
 
-
+  fonts.fonts = with pkgs; [(nerdfonts.override { fonts = [ "FiraCode" "Hack" ]; })];
 
   sound.enable = true;
   security.rtkit.enable = true;
