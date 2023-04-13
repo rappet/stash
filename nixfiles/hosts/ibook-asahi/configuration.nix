@@ -8,6 +8,7 @@ with lib.strings;
 
 let
   dedupe-paths = [ "/home" ];
+  system = "aarch64-linux";
 in
 {
   imports =
@@ -16,8 +17,8 @@ in
       ./hardware-configuration.nix
       ./apple-silicon-support
       ../../common.nix
-      ../../desktop/desktop.nix
-      ../../desktop/develop.nix
+      (import ../../desktop/desktop.nix { inherit config pkgs lib system; })
+      (import ../../desktop/develop.nix { inherit config pkgs lib system; })
     ];
 
   # Use the systemd-boot EFI boot loader.
