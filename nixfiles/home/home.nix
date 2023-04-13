@@ -141,6 +141,10 @@ in
       man = {
         enable = true;
       };
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
     };
 
     home.sessionVariables = {
