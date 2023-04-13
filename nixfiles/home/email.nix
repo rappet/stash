@@ -4,9 +4,9 @@
     realName = "Raphael Peters";
     signature = {
       text = ''
-          Mit freundlichen Grüßen
-          Raphael Peters
-          https://www.raphaelpeters.de/
+        Mit freundlichen Grüßen
+        Raphael Peters
+        https://www.raphaelpeters.de/
       '';
       showSignature = "append";
     };

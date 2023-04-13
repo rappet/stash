@@ -18,5 +18,6 @@
         ./hosts/ibook/darwin-configuration.nix 
       ];
     };
+    formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
   };
 }

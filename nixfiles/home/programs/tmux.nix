@@ -1,4 +1,4 @@
-{ pkgs, ... }: 
+{ pkgs, ... }:
 {
   enable = true;
   baseIndex = 1;
@@ -8,6 +8,6 @@
     gruvbox
   ];
   extraConfig = ''
-  setw -g mouse on
+    setw -g mouse on
   '';
 }

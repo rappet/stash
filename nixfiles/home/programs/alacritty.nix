@@ -15,8 +15,8 @@
       primary.foreground = theme.primary.fg;
       primary.dim_foreground = "#a5abb6";
       cursor = {
-        text= "#2e3440";
-        cursor= "#d8dee9";
+        text = "#2e3440";
+        cursor = "#d8dee9";
       };
       normal = {
         black = "#282828";
