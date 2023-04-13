@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "usb_storage" "usbhid" ];
@@ -14,24 +15,28 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos-asahi-btrfs";
+    {
+      device = "/dev/disk/by-label/nixos-asahi-btrfs";
       fsType = "btrfs";
       options = [ "subvol=@nixos-root" ];
     };
-  
+
   fileSystems."/btrfs" =
-    {  device = "/dev/disk/by-label/nixos-asahi-btrfs";
-       fsType = "btrfs";
+    {
+      device = "/dev/disk/by-label/nixos-asahi-btrfs";
+      fsType = "btrfs";
     };
 
   fileSystems."/home" =
-    {  device = "/dev/disk/by-label/nixos-asahi-btrfs";
-       fsType = "btrfs";
-       options = [ "subvol=@home" ];
+    {
+      device = "/dev/disk/by-label/nixos-asahi-btrfs";
+      fsType = "btrfs";
+      options = [ "subvol=@home" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/5236-0C8C";
+    {
+      device = "/dev/disk/by-uuid/5236-0C8C";
       fsType = "vfat";
     };
 

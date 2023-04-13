@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sdhci_pci" ];
@@ -14,12 +15,14 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b24869d1-f53a-45ff-baa9-451571402d28";
+    {
+      device = "/dev/disk/by-uuid/b24869d1-f53a-45ff-baa9-451571402d28";
       fsType = "btrfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8b6bc986-77d7-4f36-8319-2d0d64b80826";
+    {
+      device = "/dev/disk/by-uuid/8b6bc986-77d7-4f36-8319-2d0d64b80826";
       fsType = "ext2";
     };
 

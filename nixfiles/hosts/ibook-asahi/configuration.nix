@@ -11,13 +11,14 @@ let
 in
 {
   imports =
-  [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ./apple-silicon-support
-    ../../common.nix
-    ../../desktop/desktop.nix
-    ../../desktop/develop.nix
-  ];
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      ./apple-silicon-support
+      ../../common.nix
+      ../../desktop/desktop.nix
+      ../../desktop/develop.nix
+    ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -67,9 +68,9 @@ in
 
   systemd.services."dedupe-home" = {
     script = ''
-        set -eu
-        ${pkgs.duperemove}/bin/duperemove -drh ${concatStringsSep " " dedupe-paths}
-   '';
+      set -eu
+      ${pkgs.duperemove}/bin/duperemove -drh ${concatStringsSep " " dedupe-paths}
+    '';
     serviceConfig = {
       Type = "oneshot";
       User = "root";

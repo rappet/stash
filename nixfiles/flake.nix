@@ -15,9 +15,11 @@
       system = "aarch64-darwin";
       modules = [
         home-manager-darwin.darwinModules.home-manager
-        ./hosts/ibook/darwin-configuration.nix 
+        ./hosts/ibook/darwin-configuration.nix
       ];
     };
+    formatter.x86_64-linux = nixpkgs-darwin.legacyPackages.x86_64-linux.nixpkgs-fmt;
+    formatter.aarch64-linux = nixpkgs-darwin.legacyPackages.aarch64-linux.nixpkgs-fmt;
     formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
   };
 }

@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../common.nix
       ../../desktop/desktop.nix
@@ -23,7 +24,8 @@
 
   boot.initrd.luks.devices.data.device = "/dev/disk/by-uuid/b0e23447-8c9b-4fb8-a782-244ecebfe18d";
 
-  fileSystems."/" = { device = "/dev/disk/by-uuid/b24869d1-f53a-45ff-baa9-451571402d28";
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/b24869d1-f53a-45ff-baa9-451571402d28";
     fsType = "btrfs";
     options = [ "compress=lzo" ];
   };
