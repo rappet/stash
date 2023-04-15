@@ -59,6 +59,7 @@
       '';
     }
     vim-devicons
+    rust-tools-nvim
   ];
   #coc.enable = true;
   extraConfig = builtins.readFile ./neovim.vim + "\nlua << EOF\n" + builtins.readFile ./neovim.lua + "\nEOF";

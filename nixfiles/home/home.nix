@@ -35,7 +35,10 @@ let
     gcc
     gnumake
     # Rust
-    rustup
+    rustc
+    cargo
+    clippy
+    rust-analyzer
     # Nix
     nixpkgs-fmt
     # Web
