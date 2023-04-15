@@ -11,5 +11,6 @@
   lfs.enable = true;
   extraConfig = {
     core.editor = "vi";
+    pull.rebase = true;
   };
 }
