@@ -1,0 +1,20 @@
+[package]
+name = "ultrasonic_modulate"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.68"
+#codec2 = { version = "0.2.0", path= "../../codec2-rs" }
+cpal = "0.15.0"
+minifb = "0.24.0"
+palette = "0.6.1"
+rand = "0.8.5"
+rustfft = "6.1.0"
+wav = "1.0.0"
+
+[profile.dev]
+opt-level = 2
+
+[profile.release]
+lto = true
