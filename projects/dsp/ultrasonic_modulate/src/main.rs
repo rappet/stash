@@ -20,12 +20,12 @@ use std::time::Duration;
 const SAMPLE_RATE: u32 = 48000;
 
 const WIDTH: usize = 800;
-const HEIGT: usize = 800;
+const HEIGHT: usize = 800;
 
 fn main() -> Result<()> {
-    let mut buffer: Vec<u32> = vec![0; WIDTH * HEIGT];
+    let mut buffer: Vec<u32> = vec![0; WIDTH * HEIGHT];
 
-    let mut window = Window::new("FFT view", WIDTH, HEIGT, WindowOptions::default()).unwrap();
+    let mut window = Window::new("FFT view", WIDTH, HEIGHT, WindowOptions::default()).unwrap();
     window.limit_update_rate(Some(Duration::from_millis(1000 / 60)));
 
     let (encoder_sender, audio_receiver) = mpsc::sync_channel(100000);
@@ -153,11 +153,11 @@ fn main() -> Result<()> {
         }
     });
 
-    let mut last_ffts = VecDeque::with_capacity(HEIGT);
+    let mut last_ffts = VecDeque::with_capacity(HEIGHT);
 
     while window.is_open() && !window.is_key_down(Key::Escape) {
         while let Ok(fft) = fft_receiver.try_recv() {
-            while last_ffts.len() >= HEIGT {
+            while last_ffts.len() >= HEIGHT {
                 last_ffts.pop_front();
             }
             last_ffts.push_back(fft);
@@ -209,7 +209,7 @@ fn main() -> Result<()> {
             }
         }
 
-        window.update_with_buffer(&buffer, WIDTH, HEIGT).unwrap();
+        window.update_with_buffer(&buffer, WIDTH, HEIGHT).unwrap();
     }
 
     Ok(())
