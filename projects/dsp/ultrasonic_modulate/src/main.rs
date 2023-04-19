@@ -4,7 +4,7 @@ mod audio_io;
 mod window;
 
 use crate::audio_io::AudioIo;
-use crate::window::WindowFunction;
+use crate::window::ComputedWindowFunction;
 use anyhow::Result;
 use minifb::{Key, Window, WindowOptions};
 use palette::{FromColor, LinSrgb, OklabHue, Oklch, Pixel, Srgb};
@@ -21,6 +21,8 @@ const SAMPLE_RATE: u32 = 48000;
 
 const WIDTH: usize = 800;
 const HEIGHT: usize = 800;
+
+const SAMPLES_PER_FRAME: usize = SAMPLE_RATE as usize / 100;
 
 fn main() -> Result<()> {
     let mut buffer: Vec<u32> = vec![0; WIDTH * HEIGHT];
@@ -76,26 +78,25 @@ fn main() -> Result<()> {
         }
     }*/
 
-    let samples_per_frame = SAMPLE_RATE as usize / 100;
-    println!("{samples_per_frame}");
+    println!("{SAMPLES_PER_FRAME}");
 
-    let fft = FftPlanner::<f32>::new().plan_fft_forward(samples_per_frame);
+    let fft = FftPlanner::<f32>::new().plan_fft_forward(SAMPLES_PER_FRAME);
 
     let (fft_sender, fft_receiver) = sync_channel(1000);
 
     thread::spawn(move || {
-        let mut input_samples = VecDeque::with_capacity(samples_per_frame * 10);
+        let mut input_samples = VecDeque::with_capacity(SAMPLES_PER_FRAME * 10);
 
         let mut frame_id = 0u64;
 
-        let window = WindowFunction::new_hamming(samples_per_frame);
+        let window = ComputedWindowFunction::<SAMPLES_PER_FRAME>::new(window::functions::hamming);
 
         loop {
-            for _ in 0..samples_per_frame / 4 {
+            for _ in 0..SAMPLES_PER_FRAME / 4 {
                 let _ = input_samples.pop_front();
             }
 
-            while input_samples.len() < samples_per_frame {
+            while input_samples.len() < SAMPLES_PER_FRAME {
                 input_samples.push_back(encoder_receiver.recv().unwrap());
             }
 
@@ -105,32 +106,26 @@ fn main() -> Result<()> {
                 .iter()
                 .map(|s| *s as f32 / i16::MAX as f32)
                 .collect();
-            let mut hanning_samples = float_samples.clone();
+            let mut hanning_samples = [0f32; SAMPLES_PER_FRAME];
+            hanning_samples.copy_from_slice(&float_samples);
             window.apply(&mut hanning_samples);
 
-            let mut frequencies: Vec<_> = hanning_samples
-                .iter()
-                .map(|v| Complex::new(*v, 0.0))
-                .collect();
-            fft.process(&mut frequencies);
-            let mut abs_frequencies: Vec<_> = frequencies
-                .iter()
-                .take(samples_per_frame / 2)
-                .map(|c| c.abs())
-                .enumerate()
-                .map(|(f, e)| (f * 100, e))
-                .collect();
-            abs_frequencies.sort_by_key(|(_, v)| (*v * -100000.0) as i64);
+            let mut frequencies = [Complex::new(0.0, 0.0); SAMPLES_PER_FRAME];
+            for (frequency, sample) in frequencies.iter_mut().zip(hanning_samples) {
+                *frequency = Complex::new(sample, 0.0);
+            }
 
-            fft_sender
-                .send(
-                    frequencies
-                        .iter()
-                        .take(samples_per_frame / 2)
-                        .map(|e| e.abs())
-                        .collect::<Vec<_>>(),
-                )
-                .unwrap();
+            fft.process(&mut frequencies);
+
+            let mut abs_frequencies = [0.0; SAMPLES_PER_FRAME / 2];
+            for (abs_energy, complex_energy) in
+                abs_frequencies.iter_mut().zip(frequencies.into_iter())
+            {
+                *abs_energy = complex_energy.abs();
+            }
+            //abs_frequencies.sort_by_key(|(_, v)| (*v * -100000.0) as i64);
+
+            fft_sender.send(abs_frequencies).unwrap();
 
             //println!("{energy}");
         }
