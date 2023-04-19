@@ -10,11 +10,13 @@
       (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          apple_pkgs = with pkgs.darwin.apple_sdk.frameworks; [
-            Cocoa
-            MetalKit
-          ];
-        in {
+          apple_pkgs =
+            if pkgs.stdenv.isDarwin then with pkgs.darwin.apple_sdk.frameworks; [
+              Cocoa
+              MetalKit
+            ] else [ ];
+        in
+        {
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
               libiconv
