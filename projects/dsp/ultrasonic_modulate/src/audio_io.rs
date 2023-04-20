@@ -1,7 +1,7 @@
 use crate::SAMPLE_RATE;
 use anyhow::{Context, Result};
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
-use cpal::{FromSample, OutputCallbackInfo, Sample, SampleFormat, SampleRate, Stream};
+use cpal::{FromSample, Sample, SampleFormat, SampleRate, Stream};
 use std::iter::repeat;
 
 pub struct AudioIo {

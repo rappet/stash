@@ -29,7 +29,7 @@ fn main() -> Result<()> {
     let mut window = Window::new("FFT view", WIDTH, HEIGHT, WindowOptions::default()).unwrap();
     window.limit_update_rate(Some(Duration::from_millis(1000 / 60)));
 
-    let (encoder_sender, audio_receiver) = mpsc::sync_channel(100000);
+    let (_encoder_sender, audio_receiver) = mpsc::sync_channel(100000);
     let (audio_sender, encoder_receiver) = mpsc::sync_channel(100000);
     //for _ in 0..50000 {
     //    encoder_sender.send(0);
@@ -86,8 +86,6 @@ fn main() -> Result<()> {
     thread::spawn(move || {
         let mut input_samples = VecDeque::with_capacity(SAMPLES_PER_FRAME * 10);
 
-        let mut frame_id = 0u64;
-
         let window =
             window::ComputedFunction::<SAMPLES_PER_FRAME>::new(&window::functions::hamming);
 
@@ -99,8 +97,6 @@ fn main() -> Result<()> {
             while input_samples.len() < SAMPLES_PER_FRAME {
                 input_samples.push_back(encoder_receiver.recv().unwrap());
             }
-
-            frame_id += 1;
 
             let float_samples: Vec<_> = input_samples
                 .iter()

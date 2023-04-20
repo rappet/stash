@@ -1,4 +1,4 @@
-use std::f32::consts::{PI, TAU};
+use std::f32::consts::PI;
 use std::fs::File;
 use std::io::Write;
 use wav::{BitDepth, WAV_FORMAT_IEEE_FLOAT};
