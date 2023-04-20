@@ -41,6 +41,7 @@ let
     rust-analyzer
     # Nix
     nixpkgs-fmt
+    rnix-lsp
     # Web
     nodejs
     yarn

@@ -82,6 +82,10 @@ require('lspconfig')['tsserver'].setup{
   on_attach = on_attach,
   flags = lsp_flags,
 }
+require('lspconfig')['rnix'].setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
 
 local rust_tools_opts = {
   server = {
