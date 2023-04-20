@@ -90,6 +90,9 @@ local rust_tools_opts = {
         checkOnSave = {
           command = "clippy"
         },
+        procMacro = {
+          enable = true
+        },
       },
     },
   },
