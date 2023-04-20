@@ -1,11 +1,10 @@
 extern crate core;
 
 mod audio_io;
-mod window;
 
 use crate::audio_io::AudioIo;
-use crate::window::ComputedWindowFunction;
 use anyhow::Result;
+use dsp_lib::window;
 use minifb::{Key, Window, WindowOptions};
 use palette::{FromColor, LinSrgb, OklabHue, Oklch, Pixel, Srgb};
 use rustfft::num_complex::{Complex, ComplexFloat};
@@ -89,7 +88,8 @@ fn main() -> Result<()> {
 
         let mut frame_id = 0u64;
 
-        let window = ComputedWindowFunction::<SAMPLES_PER_FRAME>::new(window::functions::hamming);
+        let window =
+            window::ComputedFunction::<SAMPLES_PER_FRAME>::new(&window::functions::hamming);
 
         loop {
             for _ in 0..SAMPLES_PER_FRAME / 4 {

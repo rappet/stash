@@ -13,6 +13,9 @@ rand = "0.8.5"
 rustfft = "6.1.0"
 wav = "1.0.0"
 
+[dependencies.dsp_lib]
+path = "../dsp_lib"
+
 [profile.dev]
 opt-level = 2
 

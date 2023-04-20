@@ -6,18 +6,18 @@
 //!
 //! ```
 //! # use ultrasonic_modulate::window::functions as functions;
-//! # use ultrasonic_modulate::window::{WindowFunction, ComputedWindowFunction};
+//! # use ultrasonic_modulate::window::{Function, ComputedFunction};
 //! #
 //! // Generate some data and a window with a static size
 //! let mut data = [1.0; 512];
-//! let window = ComputedWindowFunction::new(functions::hamming);
+//! let window = ComputedFunction::new(functions::hamming);
 //!
 //! window.apply(&mut data);
 //! println!("{data:?}");
 //! ```
 
 /// A pre-computed window with a static size
-pub struct ComputedWindowFunction<const LENGTH: usize> {
+pub struct ComputedFunction<const LENGTH: usize> {
     buffer: [f32; LENGTH],
 }
 
@@ -29,12 +29,12 @@ pub struct ComputedWindowFunction<const LENGTH: usize> {
 ///
 /// ```
 /// # use ultrasonic_modulate::window::functions as functions;
-/// # use ultrasonic_modulate::window::WindowFunction;
+/// # use ultrasonic_modulate::window::Function;
 /// #
 /// let sample = functions::hamming.window_sample(0.5);
 /// assert!(f32::abs(sample - 1.0) < 0.001);
 /// ```
-pub trait WindowFunction {
+pub trait Function {
     /// Compute the multiplication factor for a window function
     ///
     /// # Arguments
@@ -43,7 +43,7 @@ pub trait WindowFunction {
     fn window_sample(&self, x: f32) -> f32;
 }
 
-impl<F> WindowFunction for F
+impl<F> Function for F
 where
     F: Fn(f32) -> f32,
 {
@@ -56,8 +56,9 @@ where
 pub mod functions {
     use std::f32::consts::PI;
 
+    #[must_use]
     pub fn hann(x: f32) -> f32 {
-        0.5 - 0.5 * f32::cos(x * 2.0 * PI)
+        0.5_f32.mul_add(-f32::cos(x * 2.0 * PI), 0.5)
     }
 
     /// Very good general purpose window function
@@ -65,19 +66,21 @@ pub mod functions {
     /// Cancels first sidelobe of [Hann] window.
     ///
     /// [Hann]: `hann`
+    #[must_use]
     pub fn hamming(x: f32) -> f32 {
-        0.54 - 0.46 * f32::cos(x * 2.0 * PI)
+        0.46_f32.mul_add(-f32::cos(x * 2.0 * PI), 0.54)
     }
 }
 
-impl<const LENGTH: usize> ComputedWindowFunction<LENGTH> {
+impl<const LENGTH: usize> ComputedFunction<LENGTH> {
     /// Compute a window from a window function
-    pub fn new(window_function: impl WindowFunction) -> Self {
+    pub fn new(window_function: &impl Function) -> Self {
         let mut buffer = [0f32; LENGTH];
+        #[allow(clippy::cast_precision_loss)]
         for (n, sample) in buffer.iter_mut().enumerate() {
             *sample = window_function.window_sample(n as f32 / LENGTH as f32);
         }
-        ComputedWindowFunction { buffer }
+        Self { buffer }
     }
 
     #[inline]
@@ -89,8 +92,9 @@ impl<const LENGTH: usize> ComputedWindowFunction<LENGTH> {
     }
 
     #[inline]
+    #[must_use]
     /// The precomputed buffer of the window function
-    pub fn buffer(&self) -> &[f32] {
+    pub const fn buffer(&self) -> &[f32] {
         &self.buffer
     }
 }

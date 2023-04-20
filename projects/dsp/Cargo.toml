@@ -1,0 +1,6 @@
+[workspace]
+members = [
+  "dsp_lib",
+  "synthesizer",
+  "ultrasonic_modulate",
+]
