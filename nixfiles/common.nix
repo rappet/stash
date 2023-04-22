@@ -35,6 +35,8 @@ in {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
 
+    name = "Raphael Peters";
+
     openssh.authorizedKeys.keys = ssh-keys;
   };
 
