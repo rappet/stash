@@ -1,4 +1,4 @@
-use std::{any::type_name, iter::repeat, time::Instant};
+use std::{iter::repeat, time::Instant};
 
 use aead::{AeadCore, AeadInPlace, KeyInit, OsRng};
 use aes_gcm::{Aes128Gcm, Aes256Gcm};
@@ -20,7 +20,7 @@ struct BenchSettings {
     pub buffer_size: usize,
 }
 
-fn bench<C: AeadCore + AeadInPlace + KeyInit + 'static>(settings: BenchSettings) {
+fn bench<C: AeadCore + AeadInPlace + KeyInit + 'static>(name: &str, settings: BenchSettings) {
     let key = C::generate_key(&mut OsRng);
     let cipher = C::new(&key);
     let nonce = C::generate_nonce(&mut OsRng);
@@ -35,8 +35,7 @@ fn bench<C: AeadCore + AeadInPlace + KeyInit + 'static>(settings: BenchSettings)
     let time_taken = Instant::now().duration_since(start);
     let time_per_round = time_taken / settings.rounds;
     println!(
-        "| {:40} | {:3} | {time_taken:15?} | {time_per_round:15?} |",
-        type_name::<C>().split('<').next().unwrap(),
+        "| {name:20} | {:8} | {time_taken:15?} | {time_per_round:15?} |",
         key.len() * 8,
     );
 }
@@ -48,20 +47,20 @@ fn main() {
         "Benchmarking with {:5} rounds of a {:5} bytes large buffer",
         settings.rounds, settings.buffer_size
     );
-    println!("------------------------------------------------------");
+    println!("------------------------------------------------------------");
     println!();
 
-    println!("| cipher | key size | time | time per round |");
-    println!("| ------ | -------- | ---- | -------------- |");
-    bench::<ChaCha20Poly1305>(settings);
-    bench::<XChaCha20Poly1305>(settings);
-    bench::<XSalsa20Poly1305>(settings);
-    bench::<Aes128Gcm>(settings);
-    bench::<Aes256Gcm>(settings);
-    bench::<Aes128SivAead>(settings);
-    bench::<Aes256SivAead>(settings);
-    bench::<Aes128GcmSiv>(settings);
-    bench::<Aes256GcmSiv>(settings);
+    println!("| cipher               | key size | time            | time per round  |");
+    println!("| -------------------- | -------- | --------------- | --------------- |");
+    bench::<ChaCha20Poly1305>("ChaCha20Poly1305", settings);
+    bench::<XChaCha20Poly1305>("XChaCha20Poly1305", settings);
+    bench::<XSalsa20Poly1305>("XSalsa20Poly1305", settings);
+    bench::<Aes128Gcm>("AES GCM", settings);
+    bench::<Aes256Gcm>("AES GCM", settings);
+    bench::<Aes128SivAead>("AES SIV", settings);
+    bench::<Aes256SivAead>("AES SIV", settings);
+    bench::<Aes128GcmSiv>("AES GCM SIV", settings);
+    bench::<Aes256GcmSiv>("AES GCM SIV", settings);
 
     println!("\n");
 }
