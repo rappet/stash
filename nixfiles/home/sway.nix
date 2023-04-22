@@ -22,7 +22,6 @@ in
         menu = "${pkgs.bemenu}/bin/bemenu-run -l 8 --fn 'FiraCode 12' --tb '#0284c7' --tf '#ffffff'";
         bars = [ ];
         startup = [
-          { command = "${pkgs.waybar}/bin/waybar"; }
           { command = "${pkgs.mako}/bin/mako"; }
         ];
         keybindings = lib.mkOptionDefault {
