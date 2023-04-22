@@ -24,6 +24,8 @@
               ./home.nix
             ];
           };
+
+          formatter = pkgs.nixpkgs-fmt;
         }
       );
 }
