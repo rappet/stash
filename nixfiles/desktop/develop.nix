@@ -5,7 +5,7 @@ let
     jetbrains.clion
     jetbrains.idea-ultimate
     jetbrains.idea-community
-  ] else [];
+  ] else [ ];
 in
 {
   # vscode, jetbrains

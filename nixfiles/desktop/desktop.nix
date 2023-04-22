@@ -5,14 +5,14 @@ let
     discord
     blender
     bitwarden
-  ] else [];
+  ] else [ ];
 in
 {
   imports =
-  [
-    ../services/mdns.nix
-    ./sway.nix
-  ];
+    [
+      ../services/mdns.nix
+      ./sway.nix
+    ];
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -44,7 +44,7 @@ in
     home-manager
   ] ++ x86_64_packages;
 
-  fonts.fonts = with pkgs; [(nerdfonts.override { fonts = [ "FiraCode" "Hack" ]; })];
+  fonts.fonts = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" "Hack" ]; }) ];
 
   sound.enable = true;
   security.rtkit.enable = true;
