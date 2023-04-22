@@ -64,4 +64,37 @@ in
     borderSize = 0;
     padding = "8";
   };
+
+  gtk = {
+    enable = true;
+
+    iconTheme = {
+      name = "breeze-dark";
+      package = pkgs.libsForQt5.breeze-icons;
+    };
+
+    theme = {
+      name = "Breeze-Dark";
+      package = pkgs.libsForQt5.breeze-gtk;
+    };
+
+    cursorTheme = {
+      name = "breeze_cursors";
+      package = pkgs.libsForQt5.breeze-icons;
+    };
+
+    gtk3.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+
+    gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+  };
+
+  home.sessionVariables.GTK_THEME = "Breeze-Dark";
 }

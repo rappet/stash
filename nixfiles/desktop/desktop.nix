@@ -51,6 +51,8 @@ in
   users.extraUsers.rappet.extraGroups = [ "audio" ];
   nixpkgs.config.pulseaudio = true;
 
+  programs.dconf.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
