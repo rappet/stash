@@ -25,6 +25,14 @@
       specialArgs = { system = "x86_64-linux"; };
     };
 
+    nixosConfigurations."x230" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./hosts/x230/configuration.nix
+      ];
+      specialArgs = { system = "x86_64-linux"; };
+    };
+
     formatter.x86_64-linux = nixpkgs-darwin.legacyPackages.x86_64-linux.nixpkgs-fmt;
     formatter.aarch64-linux = nixpkgs-darwin.legacyPackages.aarch64-linux.nixpkgs-fmt;
     formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
