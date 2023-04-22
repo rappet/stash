@@ -21,9 +21,6 @@ in
         terminal = "kitty";
         menu = "${pkgs.bemenu}/bin/bemenu-run -l 8 --fn 'FiraCode 12' --tb '#0284c7' --tf '#ffffff'";
         bars = [ ];
-        startup = [
-          { command = "${pkgs.mako}/bin/mako"; }
-        ];
         keybindings = lib.mkOptionDefault {
           "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudioFull}/bin/pactl set-sink-volume 0 +5%";
           "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudioFull}/bin/pactl set-sink-volume 0 -5%";
@@ -59,4 +56,12 @@ in
       };
       systemd.enable = true;
     } else { };
+
+  services.mako = {
+    enable = true;
+    backgroundColor = "#3b4045";
+    borderRadius = 8;
+    borderSize = 0;
+    padding = "8";
+  };
 }
