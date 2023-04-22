@@ -70,6 +70,10 @@ let
   packages = common-packages ++ linux-packages ++ mac-packages;
 in
 {
+  imports = [
+    ./sway.nix
+  ];
+
   home.username = "rappet";
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/rappet" else "/home/rappet";
   home.stateVersion = "22.05";

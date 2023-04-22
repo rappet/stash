@@ -8,11 +8,13 @@ let
     "ssh-ed25519 aaaac3nzac1lzdi1nte5aaaaio5jiceqbiaq/pbcbau1av3v2mor1zdgkoo3o9vjqw4f rappet@katze"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJh6LcV2AdljIQBFYWE7tRUvEfTfbNqFM3J5N8cmz50Z rappet@ibook-nixos"
   ];
-in {
-  imports =
-    [];
-
+in
+{
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  security = {
+    polkit.enable = true;
+  };
 
 
   # Set your time zone.

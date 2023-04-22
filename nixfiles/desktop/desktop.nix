@@ -10,7 +10,8 @@ in
 {
   imports =
   [
-     ../services/mdns.nix
+    ../services/mdns.nix
+    ./sway.nix
   ];
 
   # Set your time zone.
