@@ -38,6 +38,7 @@ let
     rustc
     cargo
     clippy
+    rustfmt
     rust-analyzer
     # Nix
     nixpkgs-fmt
