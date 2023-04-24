@@ -39,4 +39,16 @@
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix.distributedBuilds = true;
+  nix.buildMachines = [
+    {
+      hostName = "services.rappet.de";
+      system = "aarch64-linux";
+      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUM3bmlPR21neDd0c0s0ekdSb3NnU2dTTm9PaGdRNXBkYzF6V1RuTFFPR00gcm9vdEBzZXJ2aWNlcwo=";
+      sshUser = "root";
+      sshKey = "/Users/rappet/.ssh/id_ed25519";
+      maxJobs = 4;
+    }
+  ];
 }
