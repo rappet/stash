@@ -3,8 +3,10 @@
 
 let
   ssh-keys = [
+    # this key is broken - for some reason lowercased
     "ssh-ed25519 aaaac3nzac1lzdi1nte5aaaaihkdt1hqwygxouny4ylsnk5hgc+wdz3q2xye8y05ds3+ rappet@x230.rappet.de"
-    "ssh-ed25519 aaaac3nzac1lzdi1nte5aaaaiomz+wvohfl9er2qidqsp/z4qifk8uj75rfnpva2wvdr rappet@macbook-air-von-raphael.local"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMz+WvOHfl9Er2QIdQsP/z4Qifk8uj75RfNpVa2WVDr rappet@MacBook-Air-von-Raphael.local"
+    # this key is broken - for some reason lowercased
     "ssh-ed25519 aaaac3nzac1lzdi1nte5aaaaio5jiceqbiaq/pbcbau1av3v2mor1zdgkoo3o9vjqw4f rappet@katze"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJh6LcV2AdljIQBFYWE7tRUvEfTfbNqFM3J5N8cmz50Z rappet@ibook-nixos"
   ];
