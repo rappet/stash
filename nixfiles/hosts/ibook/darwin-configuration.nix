@@ -46,9 +46,17 @@
       hostName = "services.rappet.de";
       system = "aarch64-linux";
       publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUM3bmlPR21neDd0c0s0ekdSb3NnU2dTTm9PaGdRNXBkYzF6V1RuTFFPR00gcm9vdEBzZXJ2aWNlcwo=";
-      sshUser = "root";
+      sshUser = "rappet";
       sshKey = "/Users/rappet/.ssh/id_ed25519";
       maxJobs = 4;
+    }
+    {
+      hostName = "katze.local";
+      system = "x86_64-linux";
+      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUpsUkVhcDRPM1pxUmFpR0pxRTFJUFp0N3NOU1duQXJvSHRaTDRXZFl3eDUgcm9vdEBrYXR6ZQo=";
+      sshUser = "rappet";
+      sshKey = "/Users/rappet/.ssh/id_ed25519";
+      maxJobs = 16;
     }
   ];
 }
