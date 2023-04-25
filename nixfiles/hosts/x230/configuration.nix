@@ -35,7 +35,5 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
   services.xserver.libinput.mouse.accelSpeed = "1.0";
-
-  system.stateVersion = "22.11"; # Did you read the comment?
 }
 

@@ -64,4 +64,6 @@ in
       PermitRootLogin = "yes";
     };
   };
+
+  system.stateVersion = "23.05";
 }
