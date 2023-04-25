@@ -2,6 +2,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../common.nix
+    ../../services/web.nix
+    ../../services/nitter.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
