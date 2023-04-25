@@ -41,6 +41,14 @@
         modules = [
           ./hosts/services/configuration.nix
         ];
+        specialArgs = { system = "aarch64-linux"; };
+      };
+
+      "apu" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/apu/configuration.nix
+        ];
         specialArgs = { system = "x86_64-linux"; };
       };
     };
@@ -49,8 +57,16 @@
       services = {
         hostname = "services.rappet.de";
         profiles.system = {
-          user = "root";
+          sshUser = "root";
           path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.services;
+          remoteBuild = true;
+        };
+      };
+      apu = {
+        hostname = "apu";
+        profiles.system = {
+          sshUser = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.services;
         };
       };
     };
