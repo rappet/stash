@@ -57,44 +57,46 @@ in
       systemd.enable = true;
     } else { };
 
-  services.mako = {
-    enable = true;
-    backgroundColor = "#3b4045";
-    borderRadius = 8;
-    borderSize = 0;
-    padding = "8";
-  };
+  services.mako =
+    if isLinux then {
+      enable = true;
+      backgroundColor = "#3b4045";
+      borderRadius = 8;
+      borderSize = 0;
+      padding = "8";
+    } else { };
 
-  gtk = {
-    enable = true;
+  gtk =
+    if isLinux then {
+      enable = true;
 
-    iconTheme = {
-      name = "breeze-dark";
-      package = pkgs.libsForQt5.breeze-icons;
-    };
+      iconTheme = {
+        name = "breeze-dark";
+        package = pkgs.libsForQt5.breeze-icons;
+      };
 
-    theme = {
-      name = "Breeze-Dark";
-      package = pkgs.libsForQt5.breeze-gtk;
-    };
+      theme = {
+        name = "Breeze-Dark";
+        package = pkgs.libsForQt5.breeze-gtk;
+      };
 
-    cursorTheme = {
-      name = "breeze_cursors";
-      package = pkgs.libsForQt5.breeze-icons;
-    };
+      cursorTheme = {
+        name = "breeze_cursors";
+        package = pkgs.libsForQt5.breeze-icons;
+      };
 
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
+      gtk3.extraConfig = {
+        Settings = ''
+          gtk-application-prefer-dark-theme=1
+        '';
+      };
 
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-  };
+      gtk4.extraConfig = {
+        Settings = ''
+          gtk-application-prefer-dark-theme=1
+        '';
+      };
+    } else { };
 
   home.sessionVariables.GTK_THEME = "Breeze-Dark";
 }
