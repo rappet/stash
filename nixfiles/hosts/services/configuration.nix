@@ -3,8 +3,8 @@
     ./hardware-configuration.nix
     ../../common.nix
     ../../services/web.nix
-    ../../services/nitter.nix
-    ../../services/libreddit.nix
+    # ../../services/nitter.nix
+    # ../../services/libreddit.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
