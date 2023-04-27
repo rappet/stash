@@ -26,4 +26,5 @@ panic = "abort"
 
 [build-dependencies]
 clap = { version = "4.2.4", features = ["derive"] }
+clap_complete = "4.2.1"
 clap_mangen = "0.2.10"

@@ -14,7 +14,7 @@ rustPlatform.buildRustPackage rec {
   version = "0.0.1";
 
   src = ./.;
-  cargoSha256 = "sha256-FKb031OtkQjdXxZ+nRnmshnJspsMecOEgjK5FrtBuXM=";
+  cargoSha256 = "sha256-zhqPIwi78bLvMxSp7rp6oJmBlub8wUPOBvnZs2khefs=";
 
   nativeBuildInputs = [ pkgconfig installShellFiles ];
 
@@ -22,6 +22,8 @@ rustPlatform.buildRustPackage rec {
 
   postInstall = ''
     installManPage man/${pname}.1
+    installShellCompletion completions/${pname}.{bash,fish}
+    installShellCompletion completions/_${pname}
   '';
 
   meta = with lib; {
