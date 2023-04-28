@@ -1,0 +1,12 @@
+baseURL = 'https://rappet.xyz/'
+languageCode = 'de-de'
+title = "rappet's blog"
+theme = 'ananke'
+
+[languages.en]
+languageName = "English"
+weight = 2
+
+[languages.de]
+languageName = "Deutsch"
+weight = 1

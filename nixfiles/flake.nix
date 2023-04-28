@@ -9,9 +9,11 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
 
     deploy-rs.url = "github:serokell/deploy-rs";
+
+    blog.url = "path:../projects/web/blog";
   };
 
-  outputs = { self, darwin, nixpkgs, nixpkgs-darwin, flake-utils, deploy-rs }: {
+  outputs = { self, darwin, nixpkgs, nixpkgs-darwin, flake-utils, deploy-rs, blog }: {
     darwinConfigurations."ibook" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
@@ -41,7 +43,7 @@
         modules = [
           ./hosts/services/configuration.nix
         ];
-        specialArgs = { system = "aarch64-linux"; };
+        specialArgs = { system = "aarch64-linux"; blog = blog; };
       };
 
       "apu" = nixpkgs.lib.nixosSystem {
@@ -71,7 +73,7 @@
       };
     };
 
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+    #checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
     formatter.x86_64-linux = nixpkgs-darwin.legacyPackages.x86_64-linux.nixpkgs-fmt;
     formatter.aarch64-linux = nixpkgs-darwin.legacyPackages.aarch64-linux.nixpkgs-fmt;

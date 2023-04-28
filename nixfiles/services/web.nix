@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, blog, system, ... }:
 {
   services.nginx = {
     enable = true;
@@ -6,7 +6,7 @@
       "rappet.xyz" = {
         forceSSL = true;
         enableACME = true;
-        root = "/var/www/rappet.xyz";
+        root = "${blog.packages.${system}.blog}";
       };
     };
   };
