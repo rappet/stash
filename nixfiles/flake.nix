@@ -1,5 +1,5 @@
 {
-  description = "rappet's NixOS/nix-darwin/Home Manager config";
+  description = "rappet's NixOS/nix-darwin";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
@@ -10,10 +10,12 @@
 
     deploy-rs.url = "github:serokell/deploy-rs";
 
+    flake-utils.url = "github:numtide/flake-utils";
+
     blog.url = "path:../projects/web/blog";
   };
 
-  outputs = { self, darwin, nixpkgs, nixpkgs-darwin, flake-utils, deploy-rs, blog }: {
+  outputs = inputs: with inputs; {
     darwinConfigurations."ibook" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
@@ -73,10 +75,8 @@
       };
     };
 
-    #checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-
-    formatter.x86_64-linux = nixpkgs-darwin.legacyPackages.x86_64-linux.nixpkgs-fmt;
-    formatter.aarch64-linux = nixpkgs-darwin.legacyPackages.aarch64-linux.nixpkgs-fmt;
-    formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
-  };
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+  } // flake-utils.lib.eachDefaultSystem (system: {
+    formatter = nixpkgs-darwin.legacyPackages.${system}.nixpkgs-fmt;
+  });
 }

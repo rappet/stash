@@ -1,4 +1,4 @@
-{ pkgs, lib, system, ... }:
+{ pkgs, lib, system, rust-cli, ... }:
 
 let
   theme = import ./theme.nix;
