@@ -20,5 +20,12 @@
     extraConfig = ''
       access_log off;
     '';
+    basicAuthFile = config.age.secrets.nitter-auth.path;
+  };
+
+  age.secrets.nitter-auth = {
+    file = ../secret/nitter-auth.age;
+    owner = "nginx";
+    group = "nginx";
   };
 }

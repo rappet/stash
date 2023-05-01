@@ -15,5 +15,12 @@
     extraConfig = ''
       access_log off;
     '';
+    basicAuthFile = config.age.secrets.libreddit-auth.path;
+  };
+
+  age.secrets.libreddit-auth = {
+    file = ../secret/libreddit-auth.age;
+    owner = "nginx";
+    group = "nginx";
   };
 }
