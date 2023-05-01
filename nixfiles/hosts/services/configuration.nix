@@ -5,6 +5,7 @@
     ../../services/web.nix
     # ../../services/nitter.nix
     # ../../services/libreddit.nix
+    ../../services/mumble.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
