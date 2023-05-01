@@ -1,5 +1,5 @@
 # common files for NixOS
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
   ssh-keys = [

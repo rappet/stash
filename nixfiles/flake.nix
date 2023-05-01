@@ -9,6 +9,10 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
 
     deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -28,6 +32,7 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/katze/configuration.nix
+          agenix.nixosModules.default
         ];
         specialArgs = { system = "x86_64-linux"; };
       };
@@ -36,6 +41,7 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/x230/configuration.nix
+          agenix.nixosModules.default
         ];
         specialArgs = { system = "x86_64-linux"; };
       };
@@ -44,6 +50,7 @@
         system = "aarch64-linux";
         modules = [
           ./hosts/services/configuration.nix
+          agenix.nixosModules.default
         ];
         specialArgs = { system = "aarch64-linux"; blog = blog; };
       };
@@ -52,6 +59,7 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/apu/configuration.nix
+          agenix.nixosModules.default
         ];
         specialArgs = { system = "x86_64-linux"; };
       };
