@@ -73,7 +73,10 @@ in
 {
   imports = [
     ./sway.nix
+    ./modules/neovim
   ];
+
+
 
   home.username = "rappet";
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/rappet" else "/home/rappet";
@@ -95,9 +98,7 @@ in
     zsh = import ./programs/zsh.nix;
     fish.enable = true;
     home-manager.enable = true;
-    neovim = import ./programs/neovim.nix {
-      pkgs = pkgs;
-    };
+    neovim-config.enable = true;
     helix = {
       enable = true;
       languages = [
