@@ -79,6 +79,7 @@
         profiles.system = {
           sshUser = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.services;
+          remoteBuild = true;
         };
       };
     };
