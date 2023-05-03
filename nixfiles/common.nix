@@ -64,7 +64,6 @@ in
       PermitRootLogin = "yes";
     };
   };
-
   services.tailscale.enable = true;
   networking.firewall = {
     checkReversePath = "loose";

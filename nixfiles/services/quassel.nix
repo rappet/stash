@@ -2,7 +2,8 @@
 
 let
   domain = "quassel.rappet.xyz";
-in rec {
+in
+rec {
   services.quassel = {
     enable = true;
     requireSSL = true;
