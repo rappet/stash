@@ -8,6 +8,7 @@
     ../../services/mumble.nix
     ../../services/headscale.nix
     ../../services/quassel.nix
+    ../../services/dns-nsd.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
@@ -26,5 +27,6 @@
       address = "fe80::1";
       interface = "enp1s0";
     };
+    extraHosts = "167.235.255.49 ns1.rappet.xyz";
   };
 }
