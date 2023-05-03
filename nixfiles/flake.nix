@@ -75,10 +75,10 @@
         };
       };
       apu = {
-        hostname = "apu";
+        hostname = "apu.rappet.xyz";
         profiles.system = {
           sshUser = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.services;
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.apu;
           remoteBuild = true;
         };
       };

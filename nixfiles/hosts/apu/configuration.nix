@@ -47,5 +47,20 @@
     };
   };
 
+
+  services.ddclient = {
+    enable = false;
+    server = "dyndns.inwx.com";
+    domains = [ "apu.rappet.xyz" ];
+    username = "rappet-apu";
+    passwordFile = config.age.secrets.apu-dyndns-password.path;
+    protocol = "dyndns2";
+    use = "web, web=ip.dnshome.de/";
+  };
+
+  age.secrets.apu-dyndns-password = {
+    file = ../../secret/apu-dyndns-password.age;
+  };
+
   networking.hostName = "apu";
 }
