@@ -41,3 +41,6 @@ piped		CNAME	services
 prometheus	CNAME	services
 quassel		CNAME	services
 teddit		CNAME	services
+grafana		CNAME	services
+prometheus	CNAME	services
+mqtt		CNAME	services
