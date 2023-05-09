@@ -6,7 +6,7 @@
       title = "nitter - rappet.xyz";
       # IPv6 does not work :/
       address = "127.0.0.1";
-      port = 10001;
+      port = (import ./ports.nix).nitter;
       hostname = "nitter.rappet.xyz";
     };
   };
@@ -15,7 +15,7 @@
     forceSSL = true;
     enableACME = true;
     locations."/" = {
-      proxyPass = "http://127.0.0.1:10001";
+      proxyPass = "http://127.0.0.1:${toString config.services.nitter.server.port}";
     };
     extraConfig = ''
       access_log off;
