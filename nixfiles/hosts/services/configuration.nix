@@ -9,6 +9,8 @@
     ../../services/headscale.nix
     ../../services/quassel.nix
     ../../services/dns-nsd.nix
+    ../../services/grafana.nix
+    ../../services/prometheus.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
