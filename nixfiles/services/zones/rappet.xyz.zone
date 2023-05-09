@@ -1,7 +1,7 @@
 $TTL 300
 $ORIGIN rappet.xyz.
 @ IN SOA ns1.rappet.xyz. dns.rappet.de. (
-        2023050301
+        2023050701
         3H      ; refresh (>=10000)
         1H      ; retry (>=1800)
         1W      ; expire
@@ -27,6 +27,8 @@ fra1-de.bb	A	193.148.249.188
 
 apu		A	217.230.91.201
 		AAAA	2003:f9:8f01:c800:d9fe:a7c:a877:3a01
+
+*		CNAME	services
 
 www		CNAME	services
 git		CNAME	services
