@@ -17,6 +17,7 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     blog.url = "path:../projects/web/blog";
+    blog.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: with inputs; {
