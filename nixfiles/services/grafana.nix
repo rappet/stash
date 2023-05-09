@@ -17,6 +17,11 @@ in{
         url = "http://[::1]:${toString ports.prometheus}";
         type = "prometheus";
       }
+      {
+        name = "Loki";
+        url = "http://[::1]:${toString config.services.loki.configuration.server.http_listen_port}";
+        type = "loki";
+      }
     ];
   };
 

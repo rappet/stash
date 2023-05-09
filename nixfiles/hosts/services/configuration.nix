@@ -11,6 +11,7 @@
     ../../services/dns-nsd.nix
     ../../services/grafana.nix
     ../../services/prometheus.nix
+    ../../services/loki.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
