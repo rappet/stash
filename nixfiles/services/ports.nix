@@ -10,4 +10,6 @@
   loki_http = 10008;
   loki_grpc = 10009;
   promtail_http = 10010;
+
+  gitea-http = 10011;
 }

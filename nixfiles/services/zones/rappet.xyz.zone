@@ -46,3 +46,4 @@ teddit		CNAME	services
 grafana		CNAME	services
 prometheus	CNAME	services
 mqtt		CNAME	services
+git		CNAME	services

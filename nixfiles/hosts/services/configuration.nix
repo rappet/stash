@@ -13,6 +13,7 @@
     ../../services/grafana.nix
     ../../services/prometheus.nix
     ../../services/loki.nix
+    ../../services/gitea.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
