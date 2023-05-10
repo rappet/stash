@@ -3,6 +3,7 @@
     ./hardware-configuration.nix
     ../../common.nix
     ../../services/web.nix
+    ../../services/postgresql-backup.nix
     ../../services/nitter.nix
     ../../services/libreddit.nix
     ../../services/mumble.nix

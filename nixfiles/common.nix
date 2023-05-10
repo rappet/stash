@@ -13,6 +13,11 @@ in
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 2d";
+  };
+
   security = {
     polkit.enable = true;
   };
