@@ -2,6 +2,12 @@
 {
   services.nginx = {
     enable = true;
+
+    recommendedProxySettings = true;
+    recommendedOptimisation = true;
+    recommendedGzipSettings = true;
+    recommendedTlsSettings = true;
+
     virtualHosts = {
       "rappet.xyz" = {
         forceSSL = true;
