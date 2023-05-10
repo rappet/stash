@@ -1,10 +1,9 @@
-{ config, pkgs }:
+{ config, pkgs, ... }:
 
 {
-  services.postgreSqlBackup = {
+  services.postgresqlBackup = {
     enable = true;
-    compressionLevel = 14;
+    compressionLevel = 9;
     compression = "zstd";
-    backupAll = true;
   };
 }
