@@ -29,6 +29,7 @@ in
   environment.systemPackages = with pkgs; [
     htop
     ripgrep
+    bat
     wget
     neovim
     pciutils
