@@ -15,6 +15,7 @@ rec {
       HTTP_PORT = ports.gitea-http;
       ROOT_URL = "https://${domain}/";
       DOMAIN = domain;
+      DISABLE_SSH = true;
     };
     settings.service = {
       DISABLE_REGISTRATION = true;
