@@ -14,4 +14,5 @@ in
   "nitter-auth.age".publicKeys = users ++ [ services ];
   "libreddit-auth.age".publicKeys = users ++ [ services ];
   "apu-dyndns-password.age".publicKeys = users ++ [ apu ];
+  "hedgedoc-env.age".publicKeys = users ++ [ services ];
 }

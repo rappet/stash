@@ -47,3 +47,4 @@ grafana		CNAME	services
 prometheus	CNAME	services
 mqtt		CNAME	services
 git		CNAME	services
+md		CNAME	services

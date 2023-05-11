@@ -12,4 +12,5 @@
   promtail_http = 10010;
 
   gitea-http = 10011;
+  hedgedoc-http = 10012;
 }

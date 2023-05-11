@@ -14,6 +14,7 @@
     ../../services/prometheus.nix
     ../../services/loki.nix
     ../../services/gitea.nix
+    ../../services/hedgedoc.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
