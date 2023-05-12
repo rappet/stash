@@ -25,6 +25,11 @@ rec {
         provideXFR = he-xfr;
         notify = he-notify;
       };
+      "rotkohl.foo" = {
+        data = builtins.readFile ./zones/rotkohl.foo.zone;
+        provideXFR = he-xfr;
+        notify = he-notify;
+      };
     };
   };
 }
