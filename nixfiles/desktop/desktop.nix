@@ -28,6 +28,8 @@ in
     thunderbird
     element-desktop
     nheko
+    mumble
+    quasselClient
 
     qjackctl
 
