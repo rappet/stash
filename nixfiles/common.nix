@@ -31,7 +31,6 @@ in
     ripgrep
     bat
     wget
-    neovim
     pciutils
     usbutils
     file
@@ -60,6 +59,18 @@ in
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    defaultEditor = true;
+  };
+
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh = {
