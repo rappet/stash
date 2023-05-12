@@ -29,6 +29,9 @@
 
   boot.initrd.luks.devices.data.device = "/dev/disk/by-uuid/46206b09-7818-46f6-a205-1feea36bdb1e";
 
+  boot.extraModprobeConfig = "options kvm_intel nested=1";
+  virtualisation.libvirtd.enable = true;
+
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/477eddca-bb72-4150-8391-534cb023b387";
     fsType = "xfs";
@@ -54,5 +57,12 @@
 
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
+
+  nix.settings.trusted-users = [ "rappet" ];
+
+  programs.dconf.enable = true;
+  environment.systemPackages = with pkgs; [ virt-manager ];
+
+  users.users.rappet.extraGroups = [ "libvirtd" ];
 }
 
