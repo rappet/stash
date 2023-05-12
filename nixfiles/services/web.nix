@@ -13,6 +13,18 @@
         forceSSL = true;
         enableACME = true;
         root = "${blog.packages.${system}.blog}";
+
+        locations."/share" = {
+          # /var/www/share
+          root = "/var/www";
+        };
+        locations."/public" = {
+          # /var/www/public
+          root = "/var/www";
+          extraConfig = ''
+            autoindex on;
+          '';
+        };
       };
 
       "rotkohl.foo" = {
@@ -22,6 +34,8 @@
       };
     };
   };
+
+  users.groups.web-share.members = [ "nginx" ];
 
   security.acme = {
     acceptTerms = true;

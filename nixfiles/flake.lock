@@ -29,14 +29,19 @@
         ]
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-NdeIOEwMH9YQfaOPmsdaugZd38I8dyjyjKlYGNN+fTY=",
-        "path": "../projects/web/blog",
-        "type": "path"
+        "dir": "projects/web/blog",
+        "lastModified": 1683932072,
+        "narHash": "sha256-Zj1FyuXwE8yaG74QewviWIku/HYY9imzSaX0apMZzNM=",
+        "owner": "rappet",
+        "repo": "stash",
+        "rev": "d25beff0fff762e02afe27b210050feb12f61361",
+        "type": "github"
       },
       "original": {
-        "path": "../projects/web/blog",
-        "type": "path"
+        "dir": "projects/web/blog",
+        "owner": "rappet",
+        "repo": "stash",
+        "type": "github"
       }
     },
     "darwin": {

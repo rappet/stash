@@ -16,7 +16,7 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    blog.url = "path:../projects/web/blog";
+    blog.url = "github:rappet/stash?dir=projects/web/blog";
     blog.inputs.nixpkgs.follows = "nixpkgs";
   };
 

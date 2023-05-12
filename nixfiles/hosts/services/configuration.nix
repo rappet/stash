@@ -35,4 +35,12 @@
     };
     extraHosts = "167.235.255.49 ns1.rappet.xyz";
   };
+
+  users.users.apple-upload = {
+    isNormalUser = true;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlnhuyIavKvmi+F6vXQugaAmYZ6/R0rsuu7Bilhbpt9 Kurzbefehle auf rappets iPhone"
+    ];
+    extraGroups = [ "web-share" ];
+  };
 }
