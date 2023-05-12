@@ -20,3 +20,5 @@ $ORIGIN rotkohl.foo.
 
 *		CNAME	rotkohl.foo.
 www		CNAME	rotkohl.foo.
+
+rotkohl.foo. CAA 128 issue "letsencrypt.org"

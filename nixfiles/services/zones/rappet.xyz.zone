@@ -48,3 +48,5 @@ prometheus	CNAME	services
 mqtt		CNAME	services
 git		CNAME	services
 md		CNAME	services
+
+rappet.xyz. CAA 128 issue "letsencrypt.org"
