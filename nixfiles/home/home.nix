@@ -11,6 +11,10 @@ let
     rich
   ];
   python-with-my-packages = pkgs.python3.withPackages my-python-packages;
+  ffmpeg-full-unfree = pkgs.ffmpeg-full.overrideAttrs (old: rec {
+    nonfreeLicensing = true;
+    fdkaacExtlib = true;
+  });
   common-packages = with pkgs; [
     # CLI
     thefuck
@@ -51,7 +55,7 @@ let
     texlive.combined.scheme-full
     pandoc
     # Media
-    ffmpeg-full
+    ffmpeg-full-unfree
     yt-dlp
     # Python
     python-with-my-packages
