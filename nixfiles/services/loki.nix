@@ -3,13 +3,13 @@
 let
   ports = import ./ports.nix;
 in
-  {
-    services.loki = {
-      enable = true;
-      configuration = {
-        auth_enabled = false;
-        server = {
-          http_listen_port = ports.loki_http;
+{
+  services.loki = {
+    enable = true;
+    configuration = {
+      auth_enabled = false;
+      server = {
+        http_listen_port = ports.loki_http;
         #grpc_listen_port = ports.grpc_http;
       };
 

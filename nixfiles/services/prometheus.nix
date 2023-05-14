@@ -3,7 +3,8 @@
 let
   domain = "prometheus.rappet.xyz";
   ports = import ./ports.nix;
-in{
+in
+{
   services.prometheus = {
     enable = true;
     port = ports.prometheus;

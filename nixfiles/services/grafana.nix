@@ -3,7 +3,8 @@
 let
   domain = "grafana.rappet.xyz";
   ports = import ./ports.nix;
-in{
+in
+{
   services.grafana = {
     enable = true;
     settings.server = {
