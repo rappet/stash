@@ -13,4 +13,6 @@
 
   gitea-http = 10011;
   hedgedoc-http = 10012;
+
+  etebase-http = 10013;
 }

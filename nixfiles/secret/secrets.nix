@@ -15,4 +15,5 @@ in
   "libreddit-auth.age".publicKeys = users ++ [ services ];
   "apu-dyndns-password.age".publicKeys = users ++ [ apu ];
   "hedgedoc-env.age".publicKeys = users ++ [ services ];
+  "etebase-django-secret.age".publicKeys = users ++ [ services ];
 }

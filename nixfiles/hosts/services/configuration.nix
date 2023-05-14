@@ -15,6 +15,7 @@
     ../../services/loki.nix
     ../../services/gitea.nix
     ../../services/hedgedoc.nix
+    ../../services/etesync.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
