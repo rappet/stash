@@ -38,7 +38,8 @@ rec {
 
   services.nginx.virtualHosts.${domain} = {
     forceSSL = true;
-    enableACME = true;
+    sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
+    sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
     locations."/" = {
       proxyPass = "http://[::1]:${toString config.services.gitea.settings.server.HTTP_PORT}";
     };

@@ -1,7 +1,7 @@
 $TTL 300
 $ORIGIN rappet.xyz.
 @ IN SOA ns1.rappet.xyz. dns.rappet.de. (
-        2023050701
+        2023051402
         3H      ; refresh (>=10000)
         1H      ; retry (>=1800)
         1W      ; expire
@@ -14,6 +14,8 @@ $ORIGIN rappet.xyz.
 @		86400	NS	ns3.he.net.
 @		86400	NS	ns4.he.net.
 @		86400	NS	ns5.he.net.
+
+_acme-challenge		86400	NS	ns1.rappet.xyz.
 
 @		A	167.235.255.49
 @		AAAA	2a01:4f8:c012:b412::1

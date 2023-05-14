@@ -20,7 +20,8 @@ rec {
 
   services.nginx.virtualHosts.${domain} = {
     forceSSL = true;
-    enableACME = true;
+    sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
+    sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
     locations."/" = {
       proxyPass = "http://localhost:${toString config.services.etebase-server.port}";
     };

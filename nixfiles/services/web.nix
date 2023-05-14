@@ -11,7 +11,8 @@
     virtualHosts = {
       "rappet.xyz" = {
         forceSSL = true;
-        enableACME = true;
+        sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
+        sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
         root = "${blog.packages.${system}.blog}";
 
         locations."/share" = {
@@ -33,6 +34,20 @@
         locations."/".return = "302 https://wiki.chaosdorf.de/Rotkohl_Programmier_Nacht";
       };
     };
+  };
+
+  system.activationScripts.knot-acme-zones = ''
+    cat ${./zones/_acme-challenge.rappet.xyz.zone} > /var/lib/knot/_acme-challenge.rappet.xyz.zone
+  '';
+
+  security.acme.certs."rappet.xyz" = {
+    group = "nginx";
+    dnsProvider = "rfc2136";
+    credentialsFile = "${pkgs.writeText "rfc2136" ''
+      RFC2136_NAMESERVER=127.0.0.1
+    ''}";
+    domain = "rappet.xyz";
+    extraDomainNames = [ "*.rappet.xyz" ];
   };
 
   users.groups.web-share.members = [ "nginx" ];

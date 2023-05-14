@@ -9,7 +9,7 @@
     ../../services/mumble.nix
     ../../services/headscale.nix
     ../../services/quassel.nix
-    ../../services/dns-nsd.nix
+    ../../services/dns.nix
     ../../services/grafana.nix
     ../../services/prometheus.nix
     ../../services/loki.nix

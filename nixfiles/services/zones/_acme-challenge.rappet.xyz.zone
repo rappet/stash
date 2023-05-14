@@ -1,0 +1,13 @@
+$TTL 300
+$ORIGIN _acme-challenge.rappet.xyz.
+@ IN SOA ns1.rappet.xyz. dns.rappet.de. (
+        2023051401
+        3H      ; refresh (>=10000)
+        1H      ; retry (>=1800)
+        1W      ; expire
+        1H      ; minimum
+        )
+
+@		86400	NS	ns1.rappet.xyz.
+
+@	A	192.0.2.23
