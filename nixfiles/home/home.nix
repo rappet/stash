@@ -64,6 +64,8 @@ let
     # Fonts
     fira-code
     fira-code-symbols
+    # mosh
+    mosh
   ];
   linux-packages = with pkgs; if stdenv.isLinux then [
     mold

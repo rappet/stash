@@ -44,4 +44,5 @@
     ];
     extraGroups = [ "web-share" ];
   };
+  programs.mosh.enable = true;
 }
