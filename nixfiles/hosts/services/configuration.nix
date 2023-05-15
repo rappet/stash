@@ -16,6 +16,7 @@
     ../../services/gitea.nix
     ../../services/hedgedoc.nix
     ../../services/etesync.nix
+    ../../services/vaultwarden.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
