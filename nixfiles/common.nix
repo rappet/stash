@@ -37,6 +37,8 @@ in
     ncdu
     fd
     duperemove
+    rclone
+    restic
   ];
 
   users.users.rappet = {
