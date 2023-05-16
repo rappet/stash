@@ -74,6 +74,8 @@ in
     clock24 = true;
   };
 
+  programs.mosh.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
