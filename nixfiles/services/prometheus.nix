@@ -24,6 +24,13 @@ in
           targets = [ "services.rappet.xyz:${toString config.services.prometheus.exporters.node.port}" ];
         }];
       }
+      {
+        job_name = "bird";
+        static_configs = [{
+          targets = [ "193.148.249.188:9324" ];
+          labels.host = "fra1-de";
+        }];
+      }
     ];
   };
 

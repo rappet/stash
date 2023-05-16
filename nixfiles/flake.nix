@@ -64,6 +64,15 @@
         ];
         specialArgs = { system = "x86_64-linux"; };
       };
+
+      "fra1-de" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/fra1-de/configuration.nix
+          agenix.nixosModules.default
+        ];
+        specialArgs = { system = "x86_64-linux"; };
+      };
     };
 
     deploy.nodes = {
@@ -80,6 +89,14 @@
         profiles.system = {
           sshUser = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.apu;
+          remoteBuild = true;
+        };
+      };
+      fra1-de = {
+        hostname = "fra1-de.bb.rappet.xyz";
+        profiles.system = {
+          sshUser = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.fra1-de;
           remoteBuild = true;
         };
       };

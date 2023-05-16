@@ -1,0 +1,12 @@
+Action:
+207968:[ASN]:X Prepend 207968 X times to ASN
+207968:[ASN]:9 Do not announce to ASN
+
+207968:207968:1 Announce to upstream + peer
+207968:207968:2 Announce to peer
+
+Informational:
+207968:1:1 Learned from downstream
+207968:1:2 Learned from peer
+207968:1:3 Learned from upstream
+207968:1:4 Learned from routeserver
