@@ -27,6 +27,7 @@ let
     gnupg
     pinentry-gnome
     glow
+    age
     # Networking
     bgpq4
     nmap
