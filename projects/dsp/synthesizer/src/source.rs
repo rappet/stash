@@ -140,19 +140,85 @@ impl<const LENGTH: usize> SampleSource<LENGTH> for SequencerGatePart<LENGTH> {
     }
 }
 
-#[allow(dead_code)]
+#[derive(Debug, Clone, Copy)]
 pub struct AdsrParameter {
-    pub attack_time: f32,
-    pub decay_time: f32,
+    pub attack_time: usize,
+    pub decay_time: usize,
     pub sustain_level: f32,
-    pub release_time: f32,
+    pub release_time: usize,
 }
 
-#[allow(dead_code)]
-enum AdsrPhase {
-    Idle,
-    Attack,
-    Decay,
-    Sustain,
-    Release,
+pub struct AdsrEnvelope<const LENGTH: usize, Gate> {
+    pub gate: Gate,
+    progress: usize,
+    gate_status: bool,
+    parameters: AdsrParameter,
+}
+
+impl<const LENGTH: usize, Gate> AdsrEnvelope<LENGTH, Gate> {
+    pub const fn new(gate: Gate, parameters: AdsrParameter) -> Self {
+        Self {
+            gate,
+            progress: 0,
+            gate_status: false,
+            parameters,
+        }
+    }
+}
+
+impl<const LENGTH: usize, Gate: SampleSource<LENGTH>> SampleSource<LENGTH>
+    for AdsrEnvelope<LENGTH, Gate>
+{
+    fn get_samples(&mut self) -> [f32; LENGTH] {
+        let mut output_buffer = [0.0; LENGTH];
+        let gate_buffer = self.gate.get_samples();
+
+        for (gate, sample) in gate_buffer
+            .into_iter()
+            .map(|gate| gate > 0.5)
+            .zip(output_buffer.iter_mut())
+        {
+            if self.gate_status == gate {
+                self.progress = self.progress.wrapping_add(1);
+            } else {
+                self.gate_status = gate;
+                self.progress = 0;
+            }
+
+            *sample = if gate {
+                if self.progress < self.parameters.attack_time {
+                    // attack
+                    let progress = self.progress as f32;
+                    let attack_time = self.parameters.attack_time as f32;
+                    progress / attack_time
+                } else if self.progress
+                    < self
+                        .parameters
+                        .attack_time
+                        .saturating_add(self.parameters.decay_time)
+                {
+                    // decay
+                    let relative_progress =
+                        self.progress.saturating_sub(self.parameters.attack_time) as f32
+                            / self.parameters.decay_time as f32;
+                    1.0 * (1.0 - relative_progress)
+                        + self.parameters.sustain_level * relative_progress
+                } else {
+                    // sustain
+                    self.parameters.sustain_level
+                }
+            } else {
+                if self.progress < self.parameters.decay_time {
+                    let progress = self.progress as f32;
+                    let decay_time = self.parameters.decay_time as f32;
+                    self.parameters.sustain_level
+                        - (progress / decay_time) * self.parameters.sustain_level
+                } else {
+                    0.0
+                }
+            }
+        }
+
+        output_buffer
+    }
 }

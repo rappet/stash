@@ -8,7 +8,7 @@ use dsp_lib::streaming::{ConstSampleSource, Mixer, Multiplier, SampleSource};
 
 use std::{fs::File, usize};
 
-use source::{Sequencer, ValueControlledOszilator};
+use source::{AdsrEnvelope, AdsrParameter, Sequencer, ValueControlledOszilator};
 use wav::{BitDepth, Header, WAV_FORMAT_IEEE_FLOAT};
 
 mod source;
@@ -22,18 +22,28 @@ fn main() {
 
     let (tone, gate) = Sequencer::<FRAME_SIZE>::new(
         vec![0.0 / 12.0, 1.0 / 12.0, 2.0 / 12.0, 3.0 / 12.0],
-        1. / 4.,
-        0.9,
+        1. / 2.,
+        0.7,
         SAMPLE_RATE_CD,
     )
     .parts();
 
     let wobble =
-        ValueControlledOszilator::new(ConstSampleSource::new(-4.0), sample_rate_f32).amplify(0.03);
+        ValueControlledOszilator::new(ConstSampleSource::new(-4.3), sample_rate_f32).amplify(0.03);
+
+    let adsr = AdsrEnvelope::new(
+        gate,
+        AdsrParameter {
+            attack_time: usize::try_from(SAMPLE_RATE_CD).unwrap() / 32,
+            decay_time: usize::try_from(SAMPLE_RATE_CD).unwrap() / 16,
+            sustain_level: 0.4,
+            release_time: usize::try_from(SAMPLE_RATE_CD).unwrap() / 2,
+        },
+    );
 
     let mut source = Multiplier::new(
         ValueControlledOszilator::new(Mixer::new(tone, wobble), sample_rate_f32),
-        gate,
+        adsr,
     );
 
     #[allow(clippy::as_conversions, clippy::integer_arithmetic)]
