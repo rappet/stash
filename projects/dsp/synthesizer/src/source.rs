@@ -1,8 +1,12 @@
 //! Buffered sources of samples
 
+use atomic_float::AtomicF32;
+
 use dsp_lib::streaming::SampleSource;
 
-use std::{cell::RefCell, f32::consts::TAU, rc::Rc};
+use alloc::sync::Arc;
+use core::{f32::consts::TAU, sync::atomic::Ordering};
+use spin::Mutex;
 
 const NOTE_A4_FREQUENCY: f32 = 440.0;
 
@@ -69,7 +73,7 @@ impl<const LENGTH: usize> Sequencer<LENGTH> {
     }
 
     pub fn parts(self) -> (SequencerTonePart<LENGTH>, SequencerGatePart<LENGTH>) {
-        let shared = Rc::new(RefCell::new(self));
+        let shared = Arc::new(Mutex::new(self));
         (
             SequencerTonePart {
                 sequencer: shared.clone(),
@@ -109,13 +113,13 @@ impl<const LENGTH: usize> Sequencer<LENGTH> {
 }
 
 pub struct SequencerTonePart<const LENGHT: usize> {
-    sequencer: Rc<RefCell<Sequencer<LENGHT>>>,
+    sequencer: Arc<Mutex<Sequencer<LENGHT>>>,
     frame: usize,
 }
 
 impl<const LENGTH: usize> SampleSource<LENGTH> for SequencerTonePart<LENGTH> {
     fn get_samples(&mut self) -> [f32; LENGTH] {
-        let mut sequencer = self.sequencer.borrow_mut();
+        let mut sequencer = self.sequencer.try_lock().unwrap();
         self.frame = self.frame.wrapping_add(1);
         if sequencer.frame_count != self.frame {
             sequencer.forward();
@@ -125,18 +129,37 @@ impl<const LENGTH: usize> SampleSource<LENGTH> for SequencerTonePart<LENGTH> {
 }
 
 pub struct SequencerGatePart<const LENGTH: usize> {
-    sequencer: Rc<RefCell<Sequencer<LENGTH>>>,
+    sequencer: Arc<Mutex<Sequencer<LENGTH>>>,
     frame: usize,
 }
 
 impl<const LENGTH: usize> SampleSource<LENGTH> for SequencerGatePart<LENGTH> {
     fn get_samples(&mut self) -> [f32; LENGTH] {
-        let mut sequencer = self.sequencer.borrow_mut();
+        let mut sequencer = self.sequencer.try_lock().unwrap();
         self.frame = self.frame.wrapping_add(1);
         if sequencer.frame_count != self.frame {
             sequencer.forward();
         }
         sequencer.gate_buffer
+    }
+}
+
+pub struct AtomicSampleSource {
+    value: Arc<AtomicF32>,
+}
+
+impl AtomicSampleSource {
+    pub fn new(value: Arc<AtomicF32>) -> Self {
+        Self { value }
+    }
+}
+
+impl<const LENGTH: usize> SampleSource<LENGTH> for AtomicSampleSource {
+    fn get_samples(&mut self) -> [f32; LENGTH] {
+        let sample = self.value.load(Ordering::Relaxed);
+        let mut samples = [0f32; LENGTH];
+        samples.iter_mut().for_each(|s| *s = sample);
+        samples
     }
 }
 
