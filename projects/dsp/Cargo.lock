@@ -1167,6 +1167,7 @@ dependencies = [
  "atomic_float",
  "cpal",
  "dsp_lib",
+ "minifb",
  "spin",
 ]
 

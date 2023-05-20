@@ -8,7 +8,7 @@ use alloc::sync::Arc;
 use core::{f32::consts::TAU, sync::atomic::Ordering};
 use spin::Mutex;
 
-const NOTE_A4_FREQUENCY: f32 = 440.0;
+const NOTE_A4_FREQUENCY: f32 = 220.0;
 
 pub struct ValueControlledOszilator<const LENGTH: usize, Source> {
     pub pitch: Source,

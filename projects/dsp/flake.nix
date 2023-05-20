@@ -20,6 +20,9 @@
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
               libiconv
+              cargo
+              rustc
+              rust-analyzer
             ] ++ apple_pkgs;
           };
         }
