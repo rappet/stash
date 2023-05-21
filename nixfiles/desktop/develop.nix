@@ -21,6 +21,7 @@ in
     podman-compose
 
     picocom
+    kicad
 
     obsidian
   ] ++ x86_64_packages;
