@@ -63,21 +63,27 @@ fn main() {
     let gate_val = Arc::new(0.0.into());
     let gate = AtomicSampleSource::new(Arc::clone(&gate_val));
 
-    let wobble = ValueControlledOszilator::new(ConstSampleSource::<32>::new(-4.3), sample_rate_f32)
-        .amplify(0.03);
+    //let wobble = ValueControlledOszilator::<64, _>::new(AtomicSampleSource::new(Arc::clone(&tone_val)), sample_rate_f32)
+    //    .amplify(0.4);
 
     let adsr = AdsrEnvelope::new(
         gate,
         AdsrParameter {
-            attack_time: usize::try_from(SAMPLE_RATE).unwrap() / 32,
-            decay_time: usize::try_from(SAMPLE_RATE).unwrap() / 16,
-            sustain_level: 0.4,
-            release_time: usize::try_from(SAMPLE_RATE).unwrap() / 2,
+            attack: 0.01,
+            decay: 0.0001,
+            sustain: 0.4,
+            release: 0.01,
         },
     );
 
-    let mut source = Arc::new(Mutex::new(Multiplier::new(
-        ValueControlledOszilator::new(Mixer::new(tone, wobble), sample_rate_f32),
+    let mut source = Arc::new(Mutex::new(Multiplier::<64, _, _>::new(
+        Mixer::new(
+            ValueControlledOszilator::new(tone.clone(), sample_rate_f32),
+            ValueControlledOszilator::new(
+                Mixer::new(tone.clone(), ConstSampleSource::new(0.05)),
+                sample_rate_f32,
+            ),
+        ),
         adsr,
     )));
 

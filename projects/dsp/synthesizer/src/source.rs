@@ -144,6 +144,7 @@ impl<const LENGTH: usize> SampleSource<LENGTH> for SequencerGatePart<LENGTH> {
     }
 }
 
+#[derive(Clone)]
 pub struct AtomicSampleSource {
     value: Arc<AtomicF32>,
 }
@@ -165,16 +166,16 @@ impl<const LENGTH: usize> SampleSource<LENGTH> for AtomicSampleSource {
 
 #[derive(Debug, Clone, Copy)]
 pub struct AdsrParameter {
-    pub attack_time: usize,
-    pub decay_time: usize,
-    pub sustain_level: f32,
-    pub release_time: usize,
+    pub attack: f32,
+    pub decay: f32,
+    pub sustain: f32,
+    pub release: f32,
 }
 
 pub struct AdsrEnvelope<const LENGTH: usize, Gate> {
     pub gate: Gate,
-    progress: usize,
-    gate_status: bool,
+    value: f32,
+    attack_finished: bool,
     parameters: AdsrParameter,
 }
 
@@ -182,8 +183,8 @@ impl<const LENGTH: usize, Gate> AdsrEnvelope<LENGTH, Gate> {
     pub const fn new(gate: Gate, parameters: AdsrParameter) -> Self {
         Self {
             gate,
-            progress: 0,
-            gate_status: false,
+            value: 0.0,
+            attack_finished: false,
             parameters,
         }
     }
@@ -196,50 +197,28 @@ impl<const LENGTH: usize, Gate: SampleSource<LENGTH>> SampleSource<LENGTH>
         let mut output_buffer = [0.0; LENGTH];
         let gate_buffer = self.gate.get_samples();
 
+        let AdsrParameter{attack, decay, sustain, release} = self.parameters;
+
         for (gate, sample) in gate_buffer
             .into_iter()
             .map(|gate| gate > 0.5)
             .zip(output_buffer.iter_mut())
         {
-            if self.gate_status == gate {
-                self.progress = self.progress.wrapping_add(1);
+            if gate {
+                if self.attack_finished {
+                    self.value = (1.0 - decay) * self.value + decay * sustain;
+                } else {
+                    self.value = (1.0 - attack) * self.value + attack;
+                    if self.value > 0.95 {
+                        self.attack_finished = true;
+                    }
+                }
             } else {
-                self.gate_status = gate;
-                self.progress = 0;
+                self.attack_finished = false;
+                self.value = (1.0 - release) * self.value;
             }
 
-            *sample = if gate {
-                if self.progress < self.parameters.attack_time {
-                    // attack
-                    let progress = self.progress as f32;
-                    let attack_time = self.parameters.attack_time as f32;
-                    progress / attack_time
-                } else if self.progress
-                    < self
-                        .parameters
-                        .attack_time
-                        .saturating_add(self.parameters.decay_time)
-                {
-                    // decay
-                    let relative_progress =
-                        self.progress.saturating_sub(self.parameters.attack_time) as f32
-                            / self.parameters.decay_time as f32;
-                    1.0 * (1.0 - relative_progress)
-                        + self.parameters.sustain_level * relative_progress
-                } else {
-                    // sustain
-                    self.parameters.sustain_level
-                }
-            } else {
-                if self.progress < self.parameters.decay_time {
-                    let progress = self.progress as f32;
-                    let decay_time = self.parameters.decay_time as f32;
-                    self.parameters.sustain_level
-                        - (progress / decay_time) * self.parameters.sustain_level
-                } else {
-                    0.0
-                }
-            }
+            *sample = self.value;
         }
 
         output_buffer
