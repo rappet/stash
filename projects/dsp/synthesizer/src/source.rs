@@ -10,26 +10,58 @@ use spin::Mutex;
 
 const NOTE_A4_FREQUENCY: f32 = 220.0;
 
-pub struct ValueControlledOszilator<const LENGTH: usize, Source> {
+pub struct ValueControlledOszilator<const LENGTH: usize, Source, W: Wave> {
     pub pitch: Source,
     pub sample_rate: f32,
     /// Wrapping progress of the oszilator.
     /// Value range is [0..1) representing one period.
     progress: f32,
+    wave: W,
 }
 
-impl<const LENGTH: usize, Source: SampleSource<LENGTH>> ValueControlledOszilator<LENGTH, Source> {
-    pub const fn new(pitch: Source, sample_rate: f32) -> Self {
+impl<const LENGTH: usize, Source: SampleSource<LENGTH>, W: Wave>
+    ValueControlledOszilator<LENGTH, Source, W>
+{
+    pub const fn new(pitch: Source, sample_rate: f32, wave: W) -> Self {
         Self {
             pitch,
             sample_rate,
             progress: 0.0,
+            wave,
         }
     }
 }
 
-impl<const LENGTH: usize, Source: SampleSource<LENGTH>> SampleSource<LENGTH>
-    for ValueControlledOszilator<LENGTH, Source>
+pub trait Wave {
+    /// Get one sample
+    ///
+    /// # Parameters
+    /// Progress between 0.0 and 1.0
+    ///
+    /// # Returns
+    /// Value between -1.0 and 1.0
+    fn get_sample(&self, progress: f32) -> f32;
+}
+
+#[derive(Default, Clone, Copy)]
+pub struct SinWave;
+
+impl Wave for SinWave {
+    #[inline]
+    fn get_sample(&self, progress: f32) -> f32 {
+        f32::sin(progress * TAU)
+    }
+}
+
+impl<F: Fn(f32) -> f32> Wave for F {
+    #[inline]
+    fn get_sample(&self, progress: f32) -> f32 {
+        self(progress)
+    }
+}
+
+impl<const LENGTH: usize, Source: SampleSource<LENGTH>, W: Wave> SampleSource<LENGTH>
+    for ValueControlledOszilator<LENGTH, Source, W>
 {
     fn get_samples(&mut self) -> [f32; LENGTH] {
         let mut output_buffer = [0.0; LENGTH];
@@ -39,7 +71,7 @@ impl<const LENGTH: usize, Source: SampleSource<LENGTH>> SampleSource<LENGTH>
             let frequency = f32::exp2(*pitch) * NOTE_A4_FREQUENCY;
             let step = frequency / self.sample_rate;
             self.progress = (self.progress + step) % 1.0;
-            *sample = f32::sin(self.progress * TAU);
+            *sample = self.wave.get_sample(self.progress);
         }
         output_buffer
     }
@@ -145,17 +177,17 @@ impl<const LENGTH: usize> SampleSource<LENGTH> for SequencerGatePart<LENGTH> {
 }
 
 #[derive(Clone)]
-pub struct AtomicSampleSource {
+pub struct AtomicSamples {
     value: Arc<AtomicF32>,
 }
 
-impl AtomicSampleSource {
+impl AtomicSamples {
     pub fn new(value: Arc<AtomicF32>) -> Self {
         Self { value }
     }
 }
 
-impl<const LENGTH: usize> SampleSource<LENGTH> for AtomicSampleSource {
+impl<const LENGTH: usize> SampleSource<LENGTH> for AtomicSamples {
     fn get_samples(&mut self) -> [f32; LENGTH] {
         let sample = self.value.load(Ordering::Relaxed);
         let mut samples = [0f32; LENGTH];
@@ -197,7 +229,12 @@ impl<const LENGTH: usize, Gate: SampleSource<LENGTH>> SampleSource<LENGTH>
         let mut output_buffer = [0.0; LENGTH];
         let gate_buffer = self.gate.get_samples();
 
-        let AdsrParameter{attack, decay, sustain, release} = self.parameters;
+        let AdsrParameter {
+            attack,
+            decay,
+            sustain,
+            release,
+        } = self.parameters;
 
         for (gate, sample) in gate_buffer
             .into_iter()

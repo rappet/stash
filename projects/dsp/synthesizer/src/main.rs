@@ -21,9 +21,9 @@ use std::{
 
 use atomic_float::AtomicF32;
 use minifb::{Key, Window, WindowOptions};
-use source::{
-    AdsrEnvelope, AdsrParameter, AtomicSampleSource, Sequencer, ValueControlledOszilator,
-};
+use source::{AdsrEnvelope, AdsrParameter, AtomicSamples, Sequencer, ValueControlledOszilator};
+
+use crate::source::SinWave;
 
 mod audio_output;
 mod source;
@@ -58,13 +58,14 @@ fn main() {
     let sample_rate_f32 = SAMPLE_RATE as f32;
 
     let tone_val = Arc::new(0.0.into());
-    let tone = AtomicSampleSource::new(Arc::clone(&tone_val));
+    let tone = AtomicSamples::new(Arc::clone(&tone_val));
 
     let gate_val = Arc::new(0.0.into());
-    let gate = AtomicSampleSource::new(Arc::clone(&gate_val));
+    let gate = AtomicSamples::new(Arc::clone(&gate_val));
 
-    //let wobble = ValueControlledOszilator::<64, _>::new(AtomicSampleSource::new(Arc::clone(&tone_val)), sample_rate_f32)
-    //    .amplify(0.4);
+    let wobble =
+        ValueControlledOszilator::new(ConstSampleSource::new(0.3), sample_rate_f32, SinWave)
+            .amplify(0.1);
 
     let adsr = AdsrEnvelope::new(
         gate,
@@ -72,23 +73,30 @@ fn main() {
             attack: 0.01,
             decay: 0.0001,
             sustain: 0.4,
-            release: 0.01,
+            release: 0.0001,
         },
     );
 
-    let mut source = Arc::new(Mutex::new(Multiplier::<64, _, _>::new(
-        Mixer::new(
-            ValueControlledOszilator::new(tone.clone(), sample_rate_f32),
-            ValueControlledOszilator::new(
-                Mixer::new(tone.clone(), ConstSampleSource::new(0.05)),
-                sample_rate_f32,
-            ),
-        ),
+    let source = Arc::new(Mutex::new(Multiplier::<64, _, _>::new(
+        ValueControlledOszilator::new(Mixer::new(tone.clone(), wobble), sample_rate_f32, |v| {
+            //f32::sin(v * 3.141 * 2.)
+            //1.0 - v * 2.0
+
+            if v < 0.5 {
+                (v - 0.25) * 4.
+            } else {
+                (v - 0.75) * -4.
+            }
+        }),
+        //ValueControlledOszilator::new(
+        //    Mixer::new(tone.clone(), ConstSampleSource::new(0.05)),
+        //    sample_rate_f32,
+        //),
         adsr,
     )));
 
-    let mut queue = Arc::new(Mutex::new(VecDeque::with_capacity(1024)));
-    let mut audio_output = AudioOutput::start(move |buffer| {
+    let queue = Arc::new(Mutex::new(VecDeque::with_capacity(1024)));
+    let audio_output = AudioOutput::start(move |buffer| {
         let mut queue = queue.lock().unwrap();
 
         while queue.len() < buffer.len() {
@@ -125,7 +133,13 @@ fn main() {
         }
 
         gate_val.store(
-            if let Some(cv) = window.get_keys().into_iter().filter_map(key_to_tone).next() {
+            if let Some(cv) = window
+                .get_keys()
+                .into_iter()
+                .filter_map(key_to_tone)
+                .map(|v| v - 1.0)
+                .next()
+            {
                 tone_val.store(cv, Ordering::Relaxed);
                 1.0
             } else {
