@@ -1,11 +1,12 @@
 use anyhow::{Context, Result};
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
-use cpal::{FromSample, Sample, SampleFormat, SampleRate, Stream};
-use std::iter::repeat;
+use cpal::{BufferSize, Sample, SampleFormat, SampleRate, Stream};
 
 const SAMPLE_RATE: u32 = 44_100;
 
 pub struct AudioOutput {
+    // drop would stop the stream
+    #[allow(unused)]
     output_stream: Stream,
 }
 
@@ -30,6 +31,7 @@ impl AudioOutput {
         let mut output_config = supported_output_config.config();
         output_config.channels = 1;
         output_config.sample_rate = SampleRate(SAMPLE_RATE);
+        output_config.buffer_size = BufferSize::Fixed(64);
 
         println!("Output config: {output_config:?}");
 
@@ -61,10 +63,6 @@ impl AudioOutput {
 
         Ok(Self { output_stream })
     }
-
-    pub fn stop(self) {
-        self.output_stream.pause().unwrap();
-    }
 }
 
 fn create_write_callback<CB, T>(
@@ -75,7 +73,7 @@ where
     T: Sample + cpal::FromSample<i16> + cpal::FromSample<f32>,
 {
     move |buffer, _info| {
-        let mut write_scratch_buff = [0f32; 4096];
+        let mut write_scratch_buff = [0f32; 9192];
         let write_scratch = &mut write_scratch_buff[0..buffer.len()];
         write_callback(write_scratch);
         for (read, write) in write_scratch.iter().copied().zip(buffer.iter_mut()) {

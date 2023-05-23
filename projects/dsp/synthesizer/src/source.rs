@@ -90,6 +90,18 @@ pub struct Sequencer<const LENGTH: usize> {
 }
 
 impl<const LENGTH: usize> Sequencer<LENGTH> {
+    /// Create a sequencer
+    ///
+    /// # Arguments
+    ///
+    /// * `sequence` of tones to be played
+    ///
+    /// * `note_length` length of a whole single note
+    ///
+    /// * `gate_fraction` fraction of the note where the gate is one
+    ///
+    /// * `sample_rate` sample rate in Hz
+    ///
     pub fn new(sequence: Vec<f32>, note_length: f32, gate_fraction: f32, sample_rate: u32) -> Self {
         Self {
             sequence,
@@ -104,6 +116,7 @@ impl<const LENGTH: usize> Sequencer<LENGTH> {
         }
     }
 
+    /// Split to two parts. Both parts should be polled together after eachother.
     pub fn parts(self) -> (SequencerTonePart<LENGTH>, SequencerGatePart<LENGTH>) {
         let shared = Arc::new(Mutex::new(self));
         (
