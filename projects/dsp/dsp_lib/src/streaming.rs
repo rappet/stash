@@ -10,6 +10,7 @@ pub trait SampleSource<const LENGTH: usize>: Sized {
         Multiplier::new(self, ConstSampleSource::new(value))
     }
 
+    /// Mix both sources together
     fn mix<Other: SampleSource<LENGTH>>(self, other: Other) -> Mixer<LENGTH, Self, Other> {
         Mixer::new(self, other)
     }
@@ -22,6 +23,7 @@ pub struct ConstSampleSource<const LENGTH: usize> {
 
 impl<const LENGHT: usize> ConstSampleSource<LENGHT> {
     #[must_use]
+    /// Create a new source with a const DC value
     pub const fn new(value: f32) -> Self {
         Self { value }
     }
@@ -41,6 +43,7 @@ pub struct Multiplier<const LENGTH: usize, Source, Amplification> {
 }
 
 impl<const LENGTH: usize, Source, Amplification> Multiplier<LENGTH, Source, Amplification> {
+    /// Create a new vaule multiplier
     pub const fn new(source: Source, amplification: Amplification) -> Self {
         Self {
             source,
@@ -82,6 +85,7 @@ where
     A: SampleSource<LENGTH>,
     B: SampleSource<LENGTH>,
 {
+    /// Create a new sample mixer
     pub const fn new(a: A, b: B) -> Self {
         Self { a, b }
     }

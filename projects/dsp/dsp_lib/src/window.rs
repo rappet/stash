@@ -57,6 +57,9 @@ pub mod functions {
     use std::f32::consts::PI;
 
     #[must_use]
+    /// Hann window function, the [Hamming] window might be a better option.
+    ///
+    /// [Hamming]: `hamming`
     pub fn hann(x: f32) -> f32 {
         0.5_f32.mul_add(-f32::cos(x * 2.0 * PI), 0.5)
     }
