@@ -12,6 +12,7 @@ cpal = { version = "0.15.2", default-features = false, features = [ "jack" ] }
 minifb = "0.24.0"
 spin = "0.9.8"
 embedded-graphics = "0.8.0"
+fixed = "1.23.1"
 
 [dependencies.dsp_lib]
 path = "../dsp_lib"

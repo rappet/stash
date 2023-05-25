@@ -8,17 +8,20 @@ extern crate alloc;
 
 use audio_output::AudioOutput;
 use dsp_lib::streaming::{ConstSampleSource, Mixer, Multiplier, SampleSource};
+use fixed::types::I16F16;
 
-use std::{collections::VecDeque, sync::atomic::Ordering, sync::Arc, sync::Mutex, usize};
+use std::{collections::VecDeque, sync::Arc, sync::Mutex, usize};
 
 use minifb::{Key, Window, WindowOptions};
 use source::{AdsrEnvelope, AdsrParameter, AtomicSamples, ValueControlledOszilator};
 
 use crate::display::{draw, Screen};
+use crate::parameter::ControlVoltage;
 use crate::source::SinWave;
 
 mod audio_output;
 mod display;
+mod parameter;
 mod source;
 
 const SAMPLE_RATE: u32 = 44_100;
@@ -49,10 +52,10 @@ fn main() {
     #[allow(clippy::as_conversions, clippy::cast_precision_loss)]
     let sample_rate_f32 = SAMPLE_RATE as f32;
 
-    let tone_val = Arc::new(0.0.into());
+    let tone_val = Arc::default();
     let tone = AtomicSamples::new(Arc::clone(&tone_val));
 
-    let gate_val = Arc::new(0.0.into());
+    let gate_val = Arc::default();
     let gate = AtomicSamples::new(Arc::clone(&gate_val));
 
     let wobble =
@@ -146,12 +149,11 @@ fn main() {
                 .map(|v| v - 1.0)
                 .next()
             {
-                tone_val.store(cv, Ordering::Relaxed);
-                1.0
+                tone_val.store(ControlVoltage(I16F16::from_num(cv)));
+                ControlVoltage(I16F16::from_num(1))
             } else {
-                0.0
+                ControlVoltage(I16F16::from_num(0))
             },
-            Ordering::Relaxed,
         );
 
         draw(&mut screen, &display_dequeue.lock().unwrap());

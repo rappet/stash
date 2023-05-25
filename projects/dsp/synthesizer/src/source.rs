@@ -1,12 +1,13 @@
 //! Buffered sources of samples
 
-use atomic_float::AtomicF32;
-
 use dsp_lib::streaming::SampleSource;
 
 use alloc::sync::Arc;
-use core::{f32::consts::TAU, sync::atomic::Ordering};
+use core::f32::consts::TAU;
+use fixed::traits::LossyFrom;
 use spin::Mutex;
+
+use crate::parameter::{ControlVoltage, Parameter};
 
 const NOTE_A4_FREQUENCY: f32 = 220.0;
 
@@ -191,18 +192,18 @@ impl<const LENGTH: usize> SampleSource<LENGTH> for SequencerGatePart<LENGTH> {
 
 #[derive(Clone)]
 pub struct AtomicSamples {
-    value: Arc<AtomicF32>,
+    value: Arc<Parameter<ControlVoltage>>,
 }
 
 impl AtomicSamples {
-    pub fn new(value: Arc<AtomicF32>) -> Self {
+    pub fn new(value: Arc<Parameter<ControlVoltage>>) -> Self {
         Self { value }
     }
 }
 
 impl<const LENGTH: usize> SampleSource<LENGTH> for AtomicSamples {
     fn get_samples(&mut self) -> [f32; LENGTH] {
-        let sample = self.value.load(Ordering::Relaxed);
+        let sample = f32::lossy_from(self.value.load().0);
         let mut samples = [0f32; LENGTH];
         samples.iter_mut().for_each(|s| *s = sample);
         samples
