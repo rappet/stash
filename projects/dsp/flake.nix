@@ -34,6 +34,7 @@
               cargo
               rustc
               rust-analyzer
+              clippy
               pkgconfig
             ] ++ apple_pkgs;
             LD_LIBRARY_PATH = "${lib.makeLibraryPath buildInputs}";

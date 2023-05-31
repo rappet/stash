@@ -7,22 +7,23 @@
 extern crate alloc;
 
 use audio_output::AudioOutput;
-use dsp_lib::streaming::{ConstSampleSource, Mixer, Multiplier, SampleSource};
+use dsp_lib::streaming::SampleSource;
 use fixed::types::I16F16;
 
 use std::{collections::VecDeque, sync::Arc, sync::Mutex, usize};
 
 use minifb::{Key, Window, WindowOptions};
-use source::{AdsrEnvelope, AdsrParameter, AtomicSamples, ValueControlledOszilator};
+use source::AdsrParameter;
 
 use crate::display::{draw, Screen};
-use crate::parameter::ControlVoltage;
-use crate::source::SinWave;
+use crate::parameter::{ControlValue, Parameter};
+use crate::synthesizer::{Synthesizer, SynthesizerParams};
 
 mod audio_output;
 mod display;
 mod parameter;
 mod source;
+mod synthesizer;
 
 const SAMPLE_RATE: u32 = 44_100;
 
@@ -49,56 +50,21 @@ fn key_to_tone(key: Key) -> Option<f32> {
 }
 
 fn main() {
-    #[allow(clippy::as_conversions, clippy::cast_precision_loss)]
-    let sample_rate_f32 = SAMPLE_RATE as f32;
+    const WIDTH: usize = 128;
+    const HEIGHT: usize = 64;
 
-    let tone_val = Arc::default();
-    let tone = AtomicSamples::new(Arc::clone(&tone_val));
+    let params = SynthesizerParams {
+        tone: Arc::default(),
+        gate: Arc::default(),
+        adsr: Arc::new(AdsrParameter {
+            attack: Parameter::new(0.01),
+            decay: Parameter::new(0.0001),
+            sustain: Parameter::new(0.4),
+            release: Parameter::new(0.0001),
+        }),
+    };
 
-    let gate_val = Arc::default();
-    let gate = AtomicSamples::new(Arc::clone(&gate_val));
-
-    let wobble =
-        ValueControlledOszilator::new(ConstSampleSource::new(-8.0), sample_rate_f32, SinWave)
-            .amplify(0.02);
-
-    let adsr = AdsrEnvelope::new(
-        gate,
-        AdsrParameter {
-            attack: 0.01,
-            decay: 0.0001,
-            sustain: 0.4,
-            release: 0.0001,
-        },
-    );
-
-    let source = Arc::new(Mutex::new(Multiplier::<16, _, _>::new(
-        Multiplier::new(
-            ValueControlledOszilator::new(Mixer::new(tone.clone(), wobble), sample_rate_f32, |v| {
-                //f32::sin(v * 3.141 * 2.)
-                //f32::cos(v * 3.141)
-                //-1.0 + v * 2.0
-
-                if v < 0.5 {
-                    1.0 - v * 2.0
-                } else {
-                    -1.0 + (v - 0.5) * 2.0
-                }
-
-                //if v < 0.5 {
-                //    (v - 0.25) * 4.
-                //} else {
-                //    (v - 0.75) * -4.
-                //}
-            }),
-            //ValueControlledOszilator::new(
-            //    Mixer::new(tone.clone(), ConstSampleSource::new(0.05)),
-            //    sample_rate_f32,
-            //),
-            adsr,
-        ),
-        ConstSampleSource::new(0.5),
-    )));
+    let synthesizer = Arc::new(Mutex::new(Synthesizer::new(params.clone(), SAMPLE_RATE)));
 
     let queue = Arc::new(Mutex::new(VecDeque::with_capacity(1024)));
     let display_dequeue_audio = Arc::new(Mutex::new(VecDeque::with_capacity(1024)));
@@ -108,7 +74,7 @@ fn main() {
         let mut display_dequeue = display_dequeue_audio.lock().unwrap();
 
         while queue.len() < buffer.len() {
-            let samples = source.lock().unwrap().get_samples();
+            let samples: [_; 64] = synthesizer.lock().unwrap().get_samples();
             queue.extend(samples.into_iter());
             while display_dequeue.len() >= display_dequeue.capacity() / 2 {
                 std::mem::drop(display_dequeue.pop_front());
@@ -122,9 +88,6 @@ fn main() {
     })
     .unwrap();
 
-    const WIDTH: usize = 128;
-    const HEIGHT: usize = 64;
-
     let mut screen = Screen::new(WIDTH, HEIGHT);
 
     let mut window = Window::new(
@@ -136,12 +99,12 @@ fn main() {
             ..WindowOptions::default()
         },
     )
-    .unwrap_or_else(|e| panic!("{:?}", e));
+    .unwrap_or_else(|e| panic!("{e:?}"));
 
     window.limit_update_rate(Some(std::time::Duration::from_micros(16600)));
 
     while window.is_open() && !window.is_key_down(Key::Escape) {
-        gate_val.store(
+        params.gate.store(
             if let Some(cv) = window
                 .get_keys()
                 .into_iter()
@@ -149,10 +112,10 @@ fn main() {
                 .map(|v| v - 1.0)
                 .next()
             {
-                tone_val.store(ControlVoltage(I16F16::from_num(cv)));
-                ControlVoltage(I16F16::from_num(1))
+                params.tone.store(ControlValue(I16F16::from_num(cv)));
+                ControlValue(I16F16::from_num(1))
             } else {
-                ControlVoltage(I16F16::from_num(0))
+                ControlValue(I16F16::from_num(0))
             },
         );
 

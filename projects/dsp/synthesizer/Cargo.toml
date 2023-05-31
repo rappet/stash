@@ -7,7 +7,6 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.71"
-atomic_float = "0.1.0"
 cpal = { version = "0.15.2", default-features = false, features = [ "jack" ] }
 minifb = "0.24.0"
 spin = "0.9.8"

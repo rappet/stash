@@ -1,19 +1,9 @@
 //! Streaming of time series samples
 
 /// A source of samples that can always provide samples
-pub trait SampleSource<const LENGTH: usize>: Sized {
+pub trait SampleSource<const LENGTH: usize> {
     /// Fills the provided buffer with samples
     fn get_samples(&mut self) -> [f32; LENGTH];
-
-    /// Wrap the `SampleSource` with an amplififier of const value
-    fn amplify(self, value: f32) -> Multiplier<LENGTH, Self, ConstSampleSource<LENGTH>> {
-        Multiplier::new(self, ConstSampleSource::new(value))
-    }
-
-    /// Mix both sources together
-    fn mix<Other: SampleSource<LENGTH>>(self, other: Other) -> Mixer<LENGTH, Self, Other> {
-        Mixer::new(self, other)
-    }
 }
 
 /// A source of constant values

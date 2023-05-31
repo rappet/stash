@@ -7,7 +7,7 @@ use core::f32::consts::TAU;
 use fixed::traits::LossyFrom;
 use spin::Mutex;
 
-use crate::parameter::{ControlVoltage, Parameter};
+use crate::parameter::{ControlValue, Parameter};
 
 const NOTE_A4_FREQUENCY: f32 = 220.0;
 
@@ -192,11 +192,11 @@ impl<const LENGTH: usize> SampleSource<LENGTH> for SequencerGatePart<LENGTH> {
 
 #[derive(Clone)]
 pub struct AtomicSamples {
-    value: Arc<Parameter<ControlVoltage>>,
+    value: Arc<Parameter<ControlValue>>,
 }
 
 impl AtomicSamples {
-    pub fn new(value: Arc<Parameter<ControlVoltage>>) -> Self {
+    pub fn new(value: Arc<Parameter<ControlValue>>) -> Self {
         Self { value }
     }
 }
@@ -210,23 +210,23 @@ impl<const LENGTH: usize> SampleSource<LENGTH> for AtomicSamples {
     }
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug)]
 pub struct AdsrParameter {
-    pub attack: f32,
-    pub decay: f32,
-    pub sustain: f32,
-    pub release: f32,
+    pub attack: Parameter<ControlValue>,
+    pub decay: Parameter<ControlValue>,
+    pub sustain: Parameter<ControlValue>,
+    pub release: Parameter<ControlValue>,
 }
 
 pub struct AdsrEnvelope<const LENGTH: usize, Gate> {
     pub gate: Gate,
     value: f32,
     attack_finished: bool,
-    parameters: AdsrParameter,
+    parameters: Arc<AdsrParameter>,
 }
 
 impl<const LENGTH: usize, Gate> AdsrEnvelope<LENGTH, Gate> {
-    pub const fn new(gate: Gate, parameters: AdsrParameter) -> Self {
+    pub const fn new(gate: Gate, parameters: Arc<AdsrParameter>) -> Self {
         Self {
             gate,
             value: 0.0,
@@ -243,12 +243,10 @@ impl<const LENGTH: usize, Gate: SampleSource<LENGTH>> SampleSource<LENGTH>
         let mut output_buffer = [0.0; LENGTH];
         let gate_buffer = self.gate.get_samples();
 
-        let AdsrParameter {
-            attack,
-            decay,
-            sustain,
-            release,
-        } = self.parameters;
+        let attack: f32 = self.parameters.attack.load().0.to_num();
+        let decay: f32 = self.parameters.decay.load().0.to_num();
+        let sustain: f32 = self.parameters.sustain.load().0.to_num();
+        let release: f32 = self.parameters.release.load().0.to_num();
 
         for (gate, sample) in gate_buffer
             .into_iter()

@@ -1,3 +1,6 @@
+#![allow(clippy::as_conversions, clippy::integer_arithmetic)]
+#![allow(clippy::unreadable_literal)]
+
 use embedded_graphics::{
     mono_font::{
         iso_8859_1::{FONT_6X10, FONT_7X13_BOLD},
@@ -101,17 +104,22 @@ pub fn draw(display: &mut Screen, display_dequeue: &VecDeque<f32>) {
 
     let fonts_height =
         title_font.character_size.height as i32 + subtitle_font.character_size.height as i32;
-    let offset = fonts_height + (display.height as i32 - fonts_height as i32) / 2;
+    let offset = fonts_height + (display.height as i32 - fonts_height) / 2;
 
-    let lines: Vec<_> = display_dequeue
+    let step_size = 2;
+
+    let samples = display_dequeue
         .iter()
-        .step_by(2)
+        .step_by(step_size)
         .take(128)
-        .map(|v| (*v * 48.) as i32)
+        .map(|v| (*v * 48.) as i32);
+    let points: Vec<_> = samples
+        .into_iter()
         .enumerate()
-        .map(|(i, v)| Point::new(i as i32, v))
+        .map(|(i, v)| Point::new(i as i32, -v))
         .collect();
-    Polyline::new(&lines)
+
+    Polyline::new(&points)
         .translate(Point::new(0, offset))
         .draw_styled(&line_style, display)
         .expect("drawing to display works");
