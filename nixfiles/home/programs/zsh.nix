@@ -8,4 +8,7 @@
     plugins = [ "git" "thefuck" ];
     theme = "robbyrussell";
   };
+  initExtra = ''
+    export PATH="$HOME/.cargo/bin:$PATH";
+  '';
 }
