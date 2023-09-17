@@ -13,7 +13,7 @@ rec {
       domain = domain;
       protocolUseSSL = true;
 
-      allowAnonymous = false;
+      allowAnonymous = true;
       allowAnonymousEdits = true;
       allowEmailRegister = false;
       allowFreeURL = true;
