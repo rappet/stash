@@ -33,24 +33,9 @@ let
     nmap
     tshark
     inetutils
-    # C/C++ Building
-    pkgconfig
-    cmake
-    libiconv
-    gcc
-    gnumake
-    # Rust
-    rustc
-    cargo
-    clippy
-    rustfmt
-    rust-analyzer
     # Nix
     nixpkgs-fmt
     rnix-lsp
-    # Web
-    nodejs
-    yarn
     # Publishing
     graphviz
     texlive.combined.scheme-full
@@ -58,24 +43,15 @@ let
     # Media
     ffmpeg-full-unfree
     yt-dlp
-    # Python
-    python-with-my-packages
     # Database
     clickhouse-cli
-    # Fonts
-    fira-code
-    fira-code-symbols
-    # mosh
     mosh
   ];
   linux-packages = with pkgs; if stdenv.isLinux then [
     mold
     binutils
   ] else [ ];
-  mac-packages = with pkgs; if stdenv.isDarwin then [
-    zld
-  ] else [ ];
-  packages = common-packages ++ linux-packages ++ mac-packages;
+  packages = common-packages ++ linux-packages;
 in
 {
   imports = [
