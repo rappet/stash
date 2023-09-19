@@ -17,6 +17,7 @@
     ../../services/hedgedoc.nix
     ../../services/etesync.nix
     ../../services/vaultwarden.nix
+    ../../services/mosquitto.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
