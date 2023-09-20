@@ -9,4 +9,12 @@ pub struct Cli {
     /// Address to listen on (`0.0.0.0`/`::` or `127.0.0.1`/`::1`)
     #[arg(short = 'a', long, value_name = "HTTP_ADDRESS", default_value = "::1")]
     pub http_address: String,
+    /// Path to the SQLite database file
+    #[arg(
+        short = 'd',
+        long,
+        value_name = "DATABASE_FILE",
+        default_value = "database.sqlite"
+    )]
+    pub database_file: String,
 }

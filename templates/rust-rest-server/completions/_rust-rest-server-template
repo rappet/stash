@@ -19,6 +19,8 @@ _rust-rest-server-template() {
 '--http-port=[Port of the HTTP server]:HTTP_PORT: ' \
 '-a+[Address to listen on (\`0.0.0.0\`/\`\:\:\` or \`127.0.0.1\`/\`\:\:1\`)]:HTTP_ADDRESS: ' \
 '--http-address=[Address to listen on (\`0.0.0.0\`/\`\:\:\` or \`127.0.0.1\`/\`\:\:1\`)]:HTTP_ADDRESS: ' \
+'-d+[Path to the SQLite database file]:DATABASE_FILE: ' \
+'--database-file=[Path to the SQLite database file]:DATABASE_FILE: ' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \

@@ -22,6 +22,8 @@ set edit:completion:arg-completer[rust-rest-server-template] = {|@words|
             cand --http-port 'Port of the HTTP server'
             cand -a 'Address to listen on (`0.0.0.0`/`::` or `127.0.0.1`/`::1`)'
             cand --http-address 'Address to listen on (`0.0.0.0`/`::` or `127.0.0.1`/`::1`)'
+            cand -d 'Path to the SQLite database file'
+            cand --database-file 'Path to the SQLite database file'
             cand -h 'Print help'
             cand --help 'Print help'
             cand -V 'Print version'

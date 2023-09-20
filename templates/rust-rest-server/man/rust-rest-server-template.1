@@ -4,7 +4,7 @@
 .SH NAME
 rust\-rest\-server\-template \- A REST server template
 .SH SYNOPSIS
-\fBrust\-rest\-server\-template\fR [\fB\-p\fR|\fB\-\-http\-port\fR] [\fB\-a\fR|\fB\-\-http\-address\fR] [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] 
+\fBrust\-rest\-server\-template\fR [\fB\-p\fR|\fB\-\-http\-port\fR] [\fB\-a\fR|\fB\-\-http\-address\fR] [\fB\-d\fR|\fB\-\-database\-file\fR] [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] 
 .SH DESCRIPTION
 A REST server template
 .SH OPTIONS
@@ -14,6 +14,9 @@ Port of the HTTP server
 .TP
 \fB\-a\fR, \fB\-\-http\-address\fR=\fIHTTP_ADDRESS\fR [default: ::1]
 Address to listen on (`0.0.0.0`/`::` or `127.0.0.1`/`::1`)
+.TP
+\fB\-d\fR, \fB\-\-database\-file\fR=\fIDATABASE_FILE\fR [default: database.sqlite]
+Path to the SQLite database file
 .TP
 \fB\-h\fR, \fB\-\-help\fR
 Print help

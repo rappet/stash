@@ -19,7 +19,7 @@ _rust-rest-server-template() {
 
     case "${cmd}" in
         rust__rest__server__template)
-            opts="-p -a -h -V --http-port --http-address --help --version"
+            opts="-p -a -d -h -V --http-port --http-address --database-file --help --version"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -38,6 +38,14 @@ _rust-rest-server-template() {
                     return 0
                     ;;
                 -a)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                    ;;
+                --database-file)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                    ;;
+                -d)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
                     ;;
