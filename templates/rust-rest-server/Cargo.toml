@@ -13,8 +13,6 @@ license = "MIT"
 actix-web = { version = "4.3.1", default-features = false, features = ["macros", "cookies"] }
 anyhow = "1.0.70"
 clap = { version = "4.2.4", features = ["derive"] }
-env_logger = "0.10.0"
-log = "0.4.17"
 paperclip = { version = "0.8.0", features = ["actix4", "swagger-ui"] }
 serde = { version = "1.0.163", features = ["derive"] }
 serde_json = "1.0.96"
