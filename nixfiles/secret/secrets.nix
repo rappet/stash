@@ -3,7 +3,8 @@ let
   ibook = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMz+WvOHfl9Er2QIdQsP/z4Qifk8uj75RfNpVa2WVDr";
   katze = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO5JIcEqbIaq/pBCbaU1AV3V2Mor1ZdgKoO3O9vJqW4f";
   ibook-nixos = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJh6LcV2AdljIQBFYWE7tRUvEfTfbNqFM3J5N8cmz50Z";
-  users = [ ibook katze ibook-nixos ];
+  framework = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyGxZI3l3PBv+zO6ZxgfP1hiMiQWwNevVtgfuUeBFDI";
+  users = [ ibook katze ibook-nixos framework ];
 
   services = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC7niOGmgx7tsK4zGRosgSgSNoOhgQ5pdc1zWTnLQOGM";
   apu = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL0DXtBKuiY0nylLoAvf65fr8VW9F0LijUIko4Q1sl9t";
