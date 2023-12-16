@@ -26,7 +26,6 @@ in
   environment.systemPackages = with pkgs; [
     firefox-wayland
     thunderbird
-    element-desktop
     nheko
     mumble
     quasselClient
@@ -36,12 +35,9 @@ in
     krita
     inkscape
     vlc
-    superTux
-    superTuxKart
 
     wayland
     dracula-theme
-
 
     home-manager
   ] ++ x86_64_packages;

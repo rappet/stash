@@ -14,16 +14,12 @@ in
   environment.systemPackages = with pkgs; [
     qemu
 
-    vscode
-
     wireshark
     podman-tui
     podman-compose
 
     picocom
     kicad
-
-    obsidian
   ] ++ x86_64_packages;
 
   programs.wireshark.enable = true;
