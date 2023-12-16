@@ -7,6 +7,7 @@ in
 rec {
   services.gitea = {
     enable = true;
+    package = pkgs.forgejo;
     database = {
       type = "postgres";
       host = "/run/postgresql/";
