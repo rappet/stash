@@ -6,7 +6,7 @@
     ../../common.nix
     ../../services/mdns.nix
     ../../services/samba.nix
-    ../../services/hass.nix
+    #../../services/hass.nix
   ];
 
   # Use the GRUB 2 boot loader.
