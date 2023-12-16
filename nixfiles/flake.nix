@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
-
-    darwin.url = "github:lnl7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
 
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
@@ -21,13 +17,6 @@
   };
 
   outputs = inputs: with inputs; {
-    darwinConfigurations."ibook" = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        ./hosts/ibook/darwin-configuration.nix
-      ];
-    };
-
     nixosConfigurations = {
       "katze" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -85,11 +74,10 @@
         };
       };
       apu = {
-        hostname = "apu.rappet.xyz";
+        hostname = "apu.local";
         profiles.system = {
           sshUser = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.apu;
-          remoteBuild = true;
         };
       };
       fra1-de = {
@@ -97,13 +85,12 @@
         profiles.system = {
           sshUser = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.fra1-de;
-          remoteBuild = true;
         };
       };
     };
 
     #checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   } // flake-utils.lib.eachDefaultSystem (system: {
-    formatter = nixpkgs-darwin.legacyPackages.${system}.nixpkgs-fmt;
+    formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
   });
 }
