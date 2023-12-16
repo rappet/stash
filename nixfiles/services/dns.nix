@@ -7,7 +7,7 @@
   };
 
   services.knot.enable = true;
-  services.knot.extraConfig = ''
+  services.knot.settingsFile = pkgs.writeText "knot.conf" ''
     server:
       listen: 0.0.0.0@53
       listen: ::@53

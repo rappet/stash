@@ -27,9 +27,7 @@ rec {
     enable = true;
     ensureUsers = [{
       name = "gitea";
-      ensurePermissions = {
-        "DATABASE gitea" = "ALL PRIVILEGES";
-      };
+      ensureDBOwnership = true;
     }];
     ensureDatabases = [ "gitea" ];
   };

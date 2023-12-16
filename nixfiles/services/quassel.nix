@@ -16,9 +16,7 @@ rec {
     enable = true;
     ensureUsers = [{
       name = "quassel";
-      ensurePermissions = {
-        "DATABASE quassel" = "ALL PRIVILEGES";
-      };
+      ensureDBOwnership = true;
     }];
     ensureDatabases = [ "quassel" ];
   };

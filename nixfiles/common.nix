@@ -93,5 +93,5 @@ in
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 }
