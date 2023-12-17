@@ -18,6 +18,7 @@
     ../../services/etesync.nix
     ../../services/vaultwarden.nix
     ../../services/mosquitto.nix
+    ../../services/jellyfin.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
@@ -40,7 +41,7 @@
     nat = {
       enable = true;
       internalInterfaces = [ "ve-+" ];
-      externalInterfaces = "enp1s0";
+      externalInterface = "enp1s0";
       enableIPv6 = true;
     };
   };
