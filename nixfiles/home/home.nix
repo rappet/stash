@@ -156,6 +156,6 @@ in
   services.gpg-agent =
     if pkgs.stdenv.isLinux then {
       enable = true;
-      pinentryFlavor = "qt";
+      pinentryFlavor = "gnome3";
     } else { };
 }
