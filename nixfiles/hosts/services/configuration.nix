@@ -19,6 +19,7 @@
     ../../services/vaultwarden.nix
     ../../services/mosquitto.nix
     ../../services/jellyfin.nix
+    ../../services/smb-media.nix
   ];
 
   boot.tmp.cleanOnBoot = true;

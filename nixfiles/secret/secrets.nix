@@ -18,4 +18,5 @@ in
   "hedgedoc-env.age".publicKeys = users ++ [ services ];
   "etebase-django-secret.age".publicKeys = users ++ [ services ];
   "mqtt-shelly-auth.age".publicKeys = users ++ [ services ];
+  "smb-media.age".publicKeys = users ++ [ services ];
 }
