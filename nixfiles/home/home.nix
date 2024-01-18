@@ -138,6 +138,13 @@ in
       enable = true;
       nix-direnv.enable = true;
     };
+    z-lua = {
+      enable = true;
+      enableAliases = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+    };
   };
 
   home.sessionVariables = {
