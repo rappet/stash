@@ -45,7 +45,7 @@
         "force user" = "nobody";
       };
       homes = {
-        path = "/smbhome/%S";
+        path = "/var/smbhome/%S";
         browseable = "no";
         "read only" = "no";
         "guest ok" = "no";
