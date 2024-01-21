@@ -19,6 +19,7 @@
     ../../services/mosquitto.nix
     ../../services/jellyfin.nix
     ../../services/smb-media.nix
+    ../../services/owncast.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
