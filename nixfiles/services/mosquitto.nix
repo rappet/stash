@@ -20,6 +20,12 @@ in
           ];
           passwordFile = config.age.secrets.mqtt-shelly-auth.path;
         };
+        users.monitor = {
+          acl = [
+            "read #"
+          ];
+          passwordFile = config.age.secrets.mqtt-monitor.path;
+        };
       }
     ];
   };
@@ -31,6 +37,12 @@ in
 
   age.secrets.mqtt-shelly-auth = {
     file = ../secret/mqtt-shelly-auth.age;
+    owner = "mosquitto";
+    group = "mosquitto";
+  };
+
+  age.secrets.mqtt-monitor = {
+    file = ../secret/mqtt-monitor.age;
     owner = "mosquitto";
     group = "mosquitto";
   };
