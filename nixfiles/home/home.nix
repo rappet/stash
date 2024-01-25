@@ -77,14 +77,17 @@ in
   accounts.email = import ./email.nix;
 
   programs = {
-    bash.enable = true;
+    bash = {
+      enable = true;
+      historySize = 100000;
+    };
     zsh = import ./programs/zsh.nix;
     fish.enable = true;
     home-manager.enable = true;
     neovim-config.enable = true;
     helix = {
       enable = true;
-      languages = [
+      languages.language = [
         {
           name = "rust";
           auto-format = true;
@@ -127,8 +130,8 @@ in
       theme = theme;
     };
     fzf.enable = true;
-    exa.enable = true;
-    exa.enableAliases = true;
+    eza.enable = true;
+    eza.enableAliases = true;
     neomutt.enable = true;
     mbsync.enable = true;
     man = {
