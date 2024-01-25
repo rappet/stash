@@ -148,6 +148,21 @@ in
       enableFishIntegration = true;
       enableZshIntegration = true;
     };
+    ssh = {
+      enable = true;
+      matchBlocks = {
+        storagebox = {
+	        hostname = "u215491.your-storagebox.de";
+	        user = "u215491";
+	        port = 23;
+        };
+        chaosdorf = {
+          host = "chaosdorf";
+	        hostname = "shells.chaosdorf.de";
+	        user = "rappet";
+        };
+      };
+    };
   };
 
   home.sessionVariables = {
