@@ -26,7 +26,10 @@
   zramSwap.enable = true;
   networking.hostName = "services";
   networking.domain = "rappet.xyz";
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    ports = [ 2222 ];
+  };
   security.sudo.wheelNeedsPassword = false;
 
   networking = {

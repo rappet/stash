@@ -67,6 +67,7 @@
     deploy.nodes = {
       services = {
         hostname = "services.rappet.xyz";
+        sshOpts = [ "-p" "2222" ];
         profiles.system = {
           sshUser = "root";
           path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.services;

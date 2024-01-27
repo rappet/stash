@@ -161,6 +161,10 @@ in
 	        hostname = "shells.chaosdorf.de";
 	        user = "rappet";
         };
+        services = {
+          hostname = "services.rappet.xyz";
+          port = 2222;
+        };
       };
     };
   };
