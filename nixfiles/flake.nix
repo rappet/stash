@@ -18,24 +18,6 @@
 
   outputs = inputs: with inputs; {
     nixosConfigurations = {
-      "katze" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/katze/configuration.nix
-          agenix.nixosModules.default
-        ];
-        specialArgs = { system = "x86_64-linux"; };
-      };
-
-      "x230" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/x230/configuration.nix
-          agenix.nixosModules.default
-        ];
-        specialArgs = { system = "x86_64-linux"; };
-      };
-
       "services" = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
