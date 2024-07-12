@@ -25,7 +25,7 @@ let
     ripgrep
     bottom
     gnupg
-    pinentry-gnome
+    pinentry-gnome3
     glow
     age
     # Networking
@@ -196,6 +196,6 @@ in
   services.gpg-agent =
     if pkgs.stdenv.isLinux then {
       enable = true;
-      pinentryFlavor = "gnome3";
+      pinentryPackage = pkgs.pinentry-gnome3;
     } else { };
 }
