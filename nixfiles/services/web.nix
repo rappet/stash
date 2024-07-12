@@ -28,11 +28,6 @@
         };
       };
 
-      "rotkohl.foo" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/".return = "302 https://wiki.chaosdorf.de/Rotkohl_Programmier_Nacht";
-      };
     };
   };
 

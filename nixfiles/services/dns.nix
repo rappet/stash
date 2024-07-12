@@ -38,9 +38,6 @@
         template: he_slave
       - domain: _acme-challenge.rappet.xyz
         template: rfc2136
-      - domain: rotkohl.foo
-        file: ${./zones/rotkohl.foo.zone}
-        template: he_slave
 
     log:
       - target: syslog
