@@ -171,6 +171,13 @@ in
         };
       };
     };
+    topgrade = {
+      enable = true;
+      settings = {
+        misc = {};
+        linux.home_manager_arguments = ["--flake" "/home/rappet/stash/nixfiles/home"];
+      };
+    };
   };
 
   home.sessionVariables = {
