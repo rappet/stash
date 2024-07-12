@@ -10,7 +10,7 @@
   difftastic.enable = true;
   lfs.enable = true;
   extraConfig = {
-    core.editor = "vi";
+    core.editor = "nvim";
     pull.rebase = true;
   };
 }
