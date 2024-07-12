@@ -131,7 +131,11 @@ in
     };
     fzf.enable = true;
     eza.enable = true;
-    eza.enableAliases = true;
+    eza = {
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+    };
     neomutt.enable = true;
     mbsync.enable = true;
     man = {
