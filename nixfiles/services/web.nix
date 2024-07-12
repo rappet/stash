@@ -8,6 +8,8 @@
     recommendedGzipSettings = true;
     recommendedTlsSettings = true;
 
+    clientMaxBodySize = "5G";
+
     virtualHosts = {
       "rappet.xyz" = {
         forceSSL = true;
