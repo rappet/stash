@@ -64,7 +64,7 @@
         };
       };
       fra1-de = {
-        hostname = "fra1-de.bb.rappet.xyz";
+        hostname = "193.148.249.188";
         profiles.system = {
           sshUser = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.fra1-de;
