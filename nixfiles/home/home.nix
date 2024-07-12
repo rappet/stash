@@ -35,7 +35,6 @@ let
     inetutils
     # Nix
     nixpkgs-fmt
-    rnix-lsp
     # Publishing
     graphviz
     texlive.combined.scheme-full
