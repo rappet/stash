@@ -166,7 +166,6 @@ in
         };
         services = {
           hostname = "services.rappet.xyz";
-          port = 2222;
         };
       };
     };
