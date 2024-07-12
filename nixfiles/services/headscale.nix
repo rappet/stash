@@ -11,6 +11,16 @@ in
       logtail.enabled = false;
       server_url = "https://${domain}";
       dns_config.baseDomain = "hn.rappet.xyz";
+      dns_config.nameservers = [
+        "9.9.9.9"
+        "149.112.112.112"
+        "2620:fe::fe"
+        "2620:fe::9"
+        "8.8.8.8"
+        "8.8.4.4"
+        "2001:4860:4860:0:0:0:0:8888"
+        "2001:4860:4860:0:0:0:0:8844"
+      ];
     };
   };
 

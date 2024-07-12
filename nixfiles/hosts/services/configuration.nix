@@ -45,6 +45,7 @@
       externalInterface = "enp1s0";
       enableIPv6 = true;
     };
+    nameservers = [ "1.1.1.1" "9.9.9.9" ];
   };
 
   users.users.apple-upload = {
