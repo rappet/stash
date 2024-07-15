@@ -54,7 +54,7 @@ let
 in
 {
   imports = [
-    ./sway.nix
+    #./sway.nix
     ./modules/neovim
   ];
 
