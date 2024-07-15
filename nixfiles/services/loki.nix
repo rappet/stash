@@ -23,6 +23,8 @@ in
         path_prefix = "/tmp/loki";
       };
 
+      limits_config.allow_structured_metadata = false;
+
       schema_config.configs = [{
         from = "2023-05-09";
         store = "boltdb-shipper";
