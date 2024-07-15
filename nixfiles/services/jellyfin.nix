@@ -36,10 +36,10 @@ in
             enable = true;
             allowedTCPPorts = [ 80 ];
           };
-        # Use systemd-resolved inside the container
-        # Workaround for bug https://github.com/NixOS/nixpkgs/issues/162686
-        useHostResolvConf = lib.mkForce false;
-      };
+          # Use systemd-resolved inside the container
+          # Workaround for bug https://github.com/NixOS/nixpkgs/issues/162686
+          useHostResolvConf = lib.mkForce false;
+        };
 
       services.resolved.enable = true;
     };
@@ -63,7 +63,8 @@ networking.firewall = {
   interfaces."podman+".allowedTCPPorts = [ 53 ];
   allowedUDPPorts = [ 53 ];
 };
-services.resolved.enable = true;
+
+#services.resolved.enable = true;
 
   #virtualisation.oci-containers.containers.jellyfin = {
   #  image = "docker.io/jellyfin/jellyfin:latest";
