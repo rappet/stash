@@ -21,4 +21,5 @@ in
   "mqtt-monitor.age".publicKeys = users ++ [ services ];
   "mqtt-zigbee.age".publicKeys = users ++ [ services ];
   "smb-media.age".publicKeys = users ++ [ services ];
+  "woodpecker-env.age".publicKeys = users ++ [ services ];
 }

@@ -16,4 +16,5 @@
   etebase-http = 10013;
   vaultwarden-http = 10014;
   owncast-http = 10015;
+  woodpecker-http = 10016;
 }
