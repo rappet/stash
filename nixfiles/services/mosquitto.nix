@@ -26,6 +26,12 @@ in
           ];
           passwordFile = config.age.secrets.mqtt-monitor.path;
         };
+        users.zigbee = {
+          acl = [
+            "readwrite #"
+          ];
+          passwordFile = config.age.secrets.mqtt-zigbee.path;
+        };
       }
     ];
   };
@@ -43,6 +49,12 @@ in
 
   age.secrets.mqtt-monitor = {
     file = ../secret/mqtt-monitor.age;
+    owner = "mosquitto";
+    group = "mosquitto";
+  };
+
+  age.secrets.mqtt-zigbee = {
+    file = ../secret/mqtt-zigbee.age;
     owner = "mosquitto";
     group = "mosquitto";
   };

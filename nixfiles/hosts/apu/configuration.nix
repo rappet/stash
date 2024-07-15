@@ -46,4 +46,23 @@
   };
 
   networking.hostName = "apu";
+
+  services.zigbee2mqtt = {
+    enable = true;
+    settings = {
+      permit_join = true;
+      homeassistant = true;
+      frontend.port = 8080;
+      serial.port = "/dev/ttyACM0";
+      mqtt = {
+        server = "mqtt://mqtt.rappet.xyz:1883";
+        user = "zigbee";
+        password = "shjdbjbdljkqghdiuq";
+      };
+    };
+  };
+
+  networking.firewall = {
+    allowedTCPPorts = [ 8080 ];
+  };
 }

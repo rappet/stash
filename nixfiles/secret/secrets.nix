@@ -19,5 +19,6 @@ in
   "etebase-django-secret.age".publicKeys = users ++ [ services ];
   "mqtt-shelly-auth.age".publicKeys = users ++ [ services ];
   "mqtt-monitor.age".publicKeys = users ++ [ services ];
+  "mqtt-zigbee.age".publicKeys = users ++ [ services ];
   "smb-media.age".publicKeys = users ++ [ services ];
 }
