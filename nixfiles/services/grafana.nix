@@ -10,7 +10,7 @@ in
     settings.server = {
       domain = domain;
       http_port = ports.grafana;
-      http_addr = "[::1]";
+      http_addr = "127.0.0.1";
     };
     provision.datasources.settings.datasources = [
       {
