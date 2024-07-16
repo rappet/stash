@@ -55,7 +55,6 @@ in
 {
   imports = [
     #./sway.nix
-    ./modules/neovim
   ];
 
 
