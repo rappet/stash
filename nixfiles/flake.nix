@@ -24,7 +24,7 @@
           ./hosts/services/configuration.nix
           agenix.nixosModules.default
         ];
-        specialArgs = { system = "aarch64-linux"; blog = blog; };
+        specialArgs = { system = "aarch64-linux"; blog = blog; inputs = inputs; };
       };
 
       "apu" = nixpkgs.lib.nixosSystem {

@@ -14,7 +14,7 @@
     ../../services/loki.nix
     ../../services/gitea.nix
     ../../services/hedgedoc.nix
-    ../../services/etesync.nix
+    #../../services/etesync.nix
     ../../services/vaultwarden.nix
     ../../services/mosquitto.nix
     ../../services/jellyfin.nix
