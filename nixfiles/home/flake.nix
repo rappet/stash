@@ -23,8 +23,9 @@
           legacyPackages.homeConfigurations.rappet = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [
-              ./modules/neovim
-              ./home.nix
+              ./neovim
+              ./cli
+              ./params
             ];
           };
 

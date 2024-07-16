@@ -15,56 +15,25 @@ let
     nonfreeLicensing = true;
     fdkaacExtlib = true;
   });
-  common-packages = with pkgs; [
-    # CLI
-    thefuck
-    neofetch
-    mc
-    binwalk
-    xxd
-    ripgrep
-    bottom
-    gnupg
-    pinentry-gnome3
-    glow
-    age
-    # Networking
-    bgpq4
-    nmap
-    tshark
-    inetutils
-    # Nix
-    nixpkgs-fmt
-    # Publishing
-    graphviz
-    texlive.combined.scheme-full
-    pandoc
-    # Media
-    ffmpeg-full-unfree
-    yt-dlp
-    # Database
-    clickhouse-cli
-    mosh
-  ];
   linux-packages = with pkgs; if stdenv.isLinux then [
     mold
     binutils
   ] else [ ];
-  packages = common-packages ++ linux-packages;
+  packages = linux-packages ++ [ ffmpeg-full-unfree ];
 in
 {
   imports = [
     #./sway.nix
   ];
 
-
+  home-cli-config.enable = true;
 
   home.username = "rappet";
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/rappet" else "/home/rappet";
   home.stateVersion = "22.05";
   home.packages = packages;
 
-  # temporary hack for NixOS nstableu
+  # temporary hack for NixOS unstable
   nixpkgs.overlays = [
     (self: super: {
       fcitx-engines = pkgs.fcitx5;
@@ -75,80 +44,25 @@ in
   accounts.email = import ./email.nix;
 
   programs = {
-    bash = {
-      enable = true;
-      historySize = 100000;
+    git = {
+      userName = "Raphael Peters";
+      userEmail = "rappet@rappet.de";
+      signing = {
+        key = gpg-key;
+        signByDefault = true;
+      };
     };
-    zsh = import ./programs/zsh.nix;
-    fish.enable = true;
-    home-manager.enable = true;
-    neovim-config.enable = true;
-    helix = {
-      enable = true;
-      languages.language = [
-        {
-          name = "rust";
-          auto-format = true;
+    password-store.settings.PASSWORD_STORE_KEY = gpg-key;
+    password-store.settings.FOO = "bar";
 
-        }
-      ];
-      settings = {
-        theme = "gruvbox";
-        editor = {
-          cursor-shape = {
-            normal = "block";
-            insert = "bar";
-            select = "underline";
-          };
-        };
-      };
-    };
-    git = import ./programs/git.nix { gpg-key = gpg-key; };
-    password-store = {
-      enable = true;
-      settings = {
-        PASSWORD_STORE_DIR = "$HOME/.password-store";
-        PASSWORD_STORE_KEY = gpg-key;
-        PASSWORD_STORE_CLIP_TIME = "60";
-      };
-    };
-    starship = import ./programs/starship.nix;
-    tmux = import ./programs/tmux.nix { pkgs = pkgs; };
-    bat = {
-      enable = true;
-      config = {
-        pager = "less -FR";
-      };
-    };
+    neovim-config.enable = true;
+
     alacritty = import ./programs/alacritty.nix {
       theme = theme;
     };
     kitty = import ./programs/kitty.nix {
       pkgs = pkgs;
       theme = theme;
-    };
-    fzf.enable = true;
-    eza.enable = true;
-    eza = {
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
-    };
-    neomutt.enable = true;
-    mbsync.enable = true;
-    man = {
-      enable = true;
-    };
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
-    z-lua = {
-      enable = true;
-      enableAliases = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
     };
     ssh = {
       enable = true;
