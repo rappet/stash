@@ -104,4 +104,32 @@
     # what firewall?
     # openFirewall = true;
   };
+
+  networking.firewall = {
+    allowedUDPPorts = [ 51820 ];
+  };
+
+  networking.wireguard = {
+    enable = true;
+    interfaces.wg0 = {
+      ips = [ "2a0e:46c6:0:1::1" ];
+      listenPort = 51820;
+      privateKeyFile = "/root/wireguard-keys/private";
+      mtu = 1432;
+
+      peers = [
+        {
+          # thinkcentre
+          publicKey = "Q03DQgQvETlzyg/r2ICzBjLHzfX9Z76SDentriesEE0=";
+          allowedIPs = [ "2a0e:46c6:0:100::/60" ];
+        }
+        {
+          # framework
+          publicKey = "LbrjQAvVKt9MrcD+6NQ+3KcYCdtVw7RFblveaTB1xHA=";
+          allowedIPs = [ "2a0e:46c6:0:200::/60" ];
+        }
+      ];
+    };
+  };
+
 }
