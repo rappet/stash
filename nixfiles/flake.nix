@@ -26,16 +26,6 @@
         ];
         specialArgs = { system = "aarch64-linux"; blog = blog; inputs = inputs; };
       };
-
-      "apu" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/apu/configuration.nix
-          agenix.nixosModules.default
-        ];
-        specialArgs = { system = "x86_64-linux"; };
-      };
-
       "fra1-de" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -54,13 +44,6 @@
           sshUser = "root";
           path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.services;
           remoteBuild = true;
-        };
-      };
-      apu = {
-        hostname = "apu";
-        profiles.system = {
-          sshUser = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.apu;
         };
       };
       fra1-de = {

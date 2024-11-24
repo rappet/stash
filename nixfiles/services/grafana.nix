@@ -31,7 +31,7 @@ in
     sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
     sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
     locations."/" = {
-      proxyPass = "http://[::1]:${toString config.services.grafana.settings.server.http_port}";
+      proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}";
       recommendedProxySettings = true;
     };
   };

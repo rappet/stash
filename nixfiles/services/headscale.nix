@@ -10,8 +10,8 @@ in
     settings = {
       logtail.enabled = false;
       server_url = "https://${domain}";
-      dns_config.baseDomain = "hn.rappet.xyz";
-      dns_config.nameservers = [
+      dns.base_domain = "hn.rappet.xyz";
+      dns.nameservers.global = [
         "9.9.9.9"
         "149.112.112.112"
         "2620:fe::fe"

@@ -11,27 +11,27 @@
   services.samba = {
     enable = true;
     securityType = "user";
-    extraConfig = ''
-      workgroup = WORKGROUP
-      server string = apu
-      netbios name = apu
-      security = user 
+    settings = {
+      workgroup = "WORKGROUP";
+      "server string" = "apu";
+      "netbios name" = "apu";
+      security = "user";
       #use sendfile = yes
       #max protocol = smb2
       # note: localhost is the ipv6 localhost ::1
-      hosts allow = 192.168.0. 127.0.0.1 localhost
-      hosts deny = 0.0.0.0/0
-      guest account = nobody
-      map to guest = bad user
+      "hosts allow" = "192.168.0. 127.0.0.1 localhost";
+      "hosts deny" = "0.0.0.0/0";
+      "guest account" = "nobody";
+      "map to guest" = "bad user";
 
-      vfs objects = fruit streams_xattr  
-      fruit:metadata = stream
-      fruit:posix_rename = yes 
-      fruit:veto_appledouble = no
-      fruit:nfs_aces = no
-      fruit:wipe_intentionally_left_blank_rfork = yes 
-      fruit:delete_empty_adfiles = yes
-    '';
+      "vfs objects" = "fruit streams_xattr";
+      #"fruit:metadata" = "stream";
+      #"fruit:posix_rename" = "yes";
+      #"fruit:veto_appledouble" = "no";
+      #"fruit:nfs_aces" = "no";
+      #"fruit:delete_empty_adfiles" = "yes";
+      #"fruit:wipe_intentionally_left_blank_rfork" = "yes";
+    };
     shares = {
       public = {
         path = "/media";
