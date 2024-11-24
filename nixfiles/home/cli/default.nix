@@ -48,6 +48,9 @@ in
       # Database
       clickhouse-cli
       mosh
+      # Cloud
+      kubectl
+      kubernetes-helm
     ];
 
     programs = {
