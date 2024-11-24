@@ -36,6 +36,9 @@
       - domain: rappet.xyz
         file: ${./zones/rappet.xyz.zone}
         template: he_slave
+      - domain: 0.0.6.c.6.4.e.0.a.2.ip6.arpa
+        file: ${./zones/0.0.6.c.6.4.e.0.a.2.ip6.arpa.zone}
+        template: he_slave
       - domain: _acme-challenge.rappet.xyz
         template: rfc2136
 

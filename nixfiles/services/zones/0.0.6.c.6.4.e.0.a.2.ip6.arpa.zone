@@ -1,0 +1,19 @@
+$TTL 300
+$ORIGIN 0.0.6.c.6.4.e.0.a.2.ip6.arpa.
+@ IN SOA ns1.rappet.xyz. dns.rappet.de. (
+        2024112402
+        3H      ; refresh (>=10000)
+        1H      ; retry (>=1800)
+        1W      ; expire
+        1H      ; minimum
+        )
+
+@		86400	NS	ns1.rappet.xyz.
+@		86400	NS	ns2.rappet.xyz.
+
+;      ;       ;       ;       ;       ;
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1.0.0.0.0.0	3600	IN	PTR wg0.fra1-de.bb.rappet.xyz.
+
+2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0	3600	IN	PTR fra1-de.bb.rappet.xyz.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1.0.0.0	3600	IN	PTR thinkcentre.rappet.xyz.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.2.0.0.0	3600	IN	PTR framework.rappet.xyz.
