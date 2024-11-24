@@ -63,3 +63,5 @@ git		CNAME	services
 md		CNAME	services
 
 rappet.xyz. CAA 128 issue "letsencrypt.org"
+
+_atproto	TXT	did=did:plc:46of4bei7bqe2ef6vvrpa2gf
