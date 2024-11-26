@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-hello-world
+spec:
+  selector:
+    matchLabels:
+      app: nginx-hello-world
+  template:
+    metadata:
+      labels:
+        app: nginx-hello-world
+    spec:
+      containers:
+      - name: nginx-hello-world
+        image: nginx:1.27.2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
