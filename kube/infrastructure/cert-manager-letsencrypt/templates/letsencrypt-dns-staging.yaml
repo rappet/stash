@@ -28,6 +28,3 @@ spec:
               passwordSecretKeyRef:
                 name: inwx-credentials
                 key: password
-              otpKeySecretKeyRef:
-                name: inwx-credentials
-                key: otpKey
