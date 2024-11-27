@@ -5,10 +5,9 @@ metadata:
 spec:
   secretName: rappet-home.de
   issuerRef:
-    name: letsencrypt-dns-staging
+    name: letsencrypt-dns-prod
     kind: ClusterIssuer
     group: cert-manager.io
   commonName: "*.rappet-home.de"
   dnsNames:
-    - "rappet-home.de"
     - "*.rappet-home.de"
