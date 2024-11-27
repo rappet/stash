@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: rappet-home.de
+spec:
+  secretName: rappet-home.de
+  issuerRef:
+    name: letsencrypt-dns-staging
+    kind: ClusterIssuer
+    group: cert-manager.io
+  commonName: "*.rappet-home.de"
+  dnsNames:
+    - "rappet-home.de"
+    - "*.rappet-home.de"
