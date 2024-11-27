@@ -1,22 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-hello-world
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-dns-prod"
+  name: argocd-server
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
         - "*.rappet-home.de"
   rules:
-  - host: {{ .Values.domain }}
+  - host: "argocd.rappet-home.de"
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: nginx-hello-world
+            name: argocd-server
             port: 
               number: 80

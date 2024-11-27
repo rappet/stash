@@ -1,1 +1,6 @@
-controller.hostNetwork: true
+controller:
+  hostNetwork: true
+ingress-nginx:
+  controller:
+    extraArgs:
+      default-ssl-certificate: "ingress-nginx/rappet-home.de"

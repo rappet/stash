@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: rappet-home.de
+spec:
+  secretName: rappet-home.de
+  issuerRef:
+    name: letsencrypt-dns-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
+  commonName: "*.rappet-home.de"
+  dnsNames:
+    - "*.rappet-home.de"
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
