@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: cert-manager-webhook-inwx
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,9 +11,9 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    chart: cert-manager
-    repoURL: https://charts.jetstack.io
-    targetRevision: 1.16.2
+    chart: cert-manager-webhook-inwx
+    repoURL: https://smueller18.gitlab.io/helm-charts
+    targetRevision: 0.5.0
     helm:
       valuesObject:
         crds:

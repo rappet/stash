@@ -1,4 +1,0 @@
-# Install manually :(
-crds:
-  enabled: true
-  keep: true
