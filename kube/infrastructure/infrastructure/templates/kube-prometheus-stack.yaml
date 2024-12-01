@@ -41,3 +41,17 @@ spec:
             tls:
               - hosts:
                   - "*.rappet-home.de"
+        grafana:
+          enabled: true
+          defaultDashboardsEditable: false
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            hosts:
+              - grafana.rappet-home.de
+            paths:
+              - /
+            pathType: ImplementationSpecific
+            tls:
+              - hosts:
+                  - "*.rappet-home.de"
