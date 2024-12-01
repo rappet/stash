@@ -1,6 +1,15 @@
 controller:
   hostNetwork: true
+  podAnnotations:
+    "prometheus.io/scrape": "true"
+    "prometheus.io/port": "10254"
 ingress-nginx:
   controller:
     extraArgs:
       default-ssl-certificate: "ingress-nginx/rappet-home.de"
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        additionalLabels:
+          release: "prometheus"
