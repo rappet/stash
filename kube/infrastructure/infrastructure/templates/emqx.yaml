@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: emqx
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: emqx-operator-system
+    server: {{ .Values.spec.destination.server }}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  project: default
+  source:
+    chart: emqx-operator
+    repoURL: https://repos.emqx.io/charts
+    targetRevision: 2.2.25
+    helm:
+      valuesObject:
+        installCRDs: true
