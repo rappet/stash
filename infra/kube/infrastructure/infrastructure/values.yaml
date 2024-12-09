@@ -4,3 +4,27 @@ spec:
   source:
     repoURL: https://github.com/rappet/stash
     targetRevision: HEAD
+  project: default
+
+ingressNginx:
+  enabled: false
+
+certManager:
+  enabled: true
+  letsEncrypt:
+    enabled: true
+  inwx:
+    enabled: true
+
+reflector:
+  # currently not used
+  enabled: false
+
+prometheus:
+  enabled: true
+
+postgres:
+  enabled: true
+
+emqx:
+  enabled: false

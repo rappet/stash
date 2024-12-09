@@ -1,3 +1,4 @@
+{{- if .Values.prometheus.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -13,7 +14,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-  project: default
+  project: {{ .Values.spec.project | quote }}
   source:
     chart: kube-prometheus-stack
     repoURL: https://prometheus-community.github.io/helm-charts
@@ -57,3 +58,4 @@ spec:
             tls:
               - hosts:
                   - "*.rappet-home.de"
+{{- end }}

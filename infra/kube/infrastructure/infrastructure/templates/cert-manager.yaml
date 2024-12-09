@@ -1,3 +1,4 @@
+{{- if .Values.certManager.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -9,7 +10,10 @@ spec:
   destination:
     namespace: cert-manager
     server: {{ .Values.spec.destination.server }}
-  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  project: {{ .Values.spec.project | quote }}
   source:
     chart: cert-manager
     repoURL: https://charts.jetstack.io
@@ -19,3 +23,4 @@ spec:
         crds:
           enabled: true
           keep: true
+{{- end }}

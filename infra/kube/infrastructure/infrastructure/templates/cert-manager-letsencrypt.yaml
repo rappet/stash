@@ -1,3 +1,4 @@
+{{- if .Values.certManager.letsEncrypt.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -9,8 +10,9 @@ spec:
   destination:
     namespace: cert-manager-letsencrypt
     server: {{ .Values.spec.destination.server }}
-  project: default
+  project: {{ .Values.spec.project | quote }}
   source:
     path: infra/kube/infrastructure/cert-manager-letsencrypt
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
+{{- end }}

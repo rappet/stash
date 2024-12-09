@@ -1,3 +1,4 @@
+{{- if .Values.certManager.inwx.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -9,7 +10,7 @@ spec:
   destination:
     namespace: cert-manager
     server: {{ .Values.spec.destination.server }}
-  project: default
+  project: {{ .Values.spec.project | quote }}
   source:
     chart: cert-manager-webhook-inwx
     repoURL: https://smueller18.gitlab.io/helm-charts
@@ -19,3 +20,4 @@ spec:
         crds:
           enabled: true
           keep: true
+{{- end }}

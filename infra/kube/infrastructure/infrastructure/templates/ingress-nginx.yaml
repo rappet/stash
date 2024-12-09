@@ -1,3 +1,4 @@
+{{- if .Values.ingressNginx.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -9,8 +10,12 @@ spec:
   destination:
     namespace: ingress-nginx
     server: {{ .Values.spec.destination.server }}
-  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  project: {{ .Values.spec.project | quote }}
   source:
     path: infra/kube/infrastructure/ingress-nginx
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
+{{- end }}

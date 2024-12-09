@@ -1,3 +1,4 @@
+{{- if .Values.postgres.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -9,8 +10,12 @@ spec:
   destination:
     namespace: postgres-operator
     server: {{ .Values.spec.destination.server }}
-  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  project: {{ .Values.spec.project | quote }}
   source:
     chart: postgres-operator
     repoURL: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
     targetRevision: 1.13.0
+{{- end }}
