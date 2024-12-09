@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress-nginx
+  name: cert-manager-letsencrypt
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: ingress-nginx
+    namespace: cert-manager-letsencrypt
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: kube/infrastructure/ingress-nginx
+    path: infra/kube/infrastructure/cert-manager-letsencrypt
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
