@@ -35,27 +35,33 @@ spec:
                       storage: 2Gi
           ingress:
             enabled: true
-            ingressClassName: nginx
+            ingressClassName: {{.Values.ingressClassName | quote}}
+            annotations:
+              cert-manager.io/cluster-issuer: {{.Values.clusterIssuer | quote}}
             hosts:
-              - prometheus.rappet-home.de
+              - {{.Values.prometheus.prometheusDomain | quote}}
             paths:
               - /
             pathType: ImplementationSpecific
             tls:
               - hosts:
-                  - "*.rappet-home.de"
+                  - {{.Values.prometheus.prometheusDomain | quote}}
+                secretName: tls-certificate-prometheus
         grafana:
           enabled: true
           defaultDashboardsEditable: false
           ingress:
             enabled: true
-            ingressClassName: nginx
+            ingressClassName: {{.Values.ingressClassName | quote}}
+            annotations:
+              cert-manager.io/cluster-issuer: {{.Values.clusterIssuer | quote}}
             hosts:
-              - grafana.rappet-home.de
+              - {{.Values.prometheus.grafanaDomain}}
             paths:
               - /
             pathType: ImplementationSpecific
             tls:
               - hosts:
-                  - "*.rappet-home.de"
+                  - {{.Values.prometheus.grafanaDomain}}
+                secretName: tls-certificate-grafana
 {{- end }}

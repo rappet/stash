@@ -6,6 +6,9 @@ spec:
     targetRevision: HEAD
   project: default
 
+ingressClassName: traefik
+clusterIssuer: letsencrypt-dns-prod
+
 ingressNginx:
   enabled: false
 
@@ -24,6 +27,8 @@ reflector:
 
 prometheus:
   enabled: true
+  prometheusDomain: prometheus.rappet.xyz
+  grafanaDomain: grafana.rappet.xyz
 
 postgres:
   enabled: true
