@@ -1,0 +1,21 @@
+{{- if .Values.certManager.hetzner.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-webhook-hetzner
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: cert-manager
+    server: {{ .Values.spec.destination.server }}
+  project: {{ .Values.spec.project | quote }}
+  source:
+    chart: cert-manager-webhook-hetzner
+    repoURL: https://vadimkim.github.io/cert-manager-webhook-hetzner
+    targetRevision: 1.3.1
+    helm:
+      valuesObject:
+        groupName: rappet.xyz
+{{- end }}

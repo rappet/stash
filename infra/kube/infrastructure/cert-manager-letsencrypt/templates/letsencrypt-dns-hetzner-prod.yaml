@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-dns-hetzner-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: acme@rappet.de
+    privateKeySecretRef:
+      name: letsencrypt-dns-hetzner-staging
+    solvers:
+      - dns01:
+          webhook:
+            groupName: rappet.xyz
+            solverName: hetzner
+            config:
+              secretName: hetzner-secret
+              zoneName: rappet.xyz
+              apiUrl: https://dns.hetzner.com/api/v1
