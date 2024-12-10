@@ -1,2 +1,4 @@
-domain: demo.rappet-home.de
-certDomain: "*.rappet-home.de"
+domain: demo.rappet.xyz
+certDomain: demo.rappet.xyz
+clusterIssuer: letsencrypt-dns-hetzner-staging
+ingressClassName: traefik

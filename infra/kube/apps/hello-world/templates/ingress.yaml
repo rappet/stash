@@ -3,12 +3,13 @@ kind: Ingress
 metadata:
   name: nginx-hello-world
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-dns-prod"
+    cert-manager.io/cluster-issuer: "{{.Values.clusterIssuer}}"
 spec:
-  ingressClassName: nginx
+  ingressClassName: {{.Values.ingressClassName}}
   tls:
     - hosts:
-        - "*.rappet-home.de"
+        - "{{.Values.domain}}"
+      secretName: tls-certificate
   rules:
   - host: {{ .Values.domain }}
     http:
