@@ -1,4 +1,4 @@
-{ config, pkgs, blog, system, ... }:
+{ config, pkgs, system, ... }:
 {
   services.nginx = {
     enable = true;
@@ -15,7 +15,6 @@
         forceSSL = true;
         sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
         sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
-        root = "${blog.packages.${system}.blog}";
 
         locations."/share" = {
           # /var/www/share

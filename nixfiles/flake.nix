@@ -11,9 +11,6 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-utils.url = "github:numtide/flake-utils";
-
-    blog.url = "github:rappet/stash?dir=projects/web/blog";
-    blog.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: with inputs; {
@@ -24,7 +21,7 @@
           ./hosts/services/configuration.nix
           agenix.nixosModules.default
         ];
-        specialArgs = { system = "aarch64-linux"; blog = blog; inputs = inputs; };
+        specialArgs = { system = "aarch64-linux"; inputs = inputs; };
       };
       "fra1-de" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
