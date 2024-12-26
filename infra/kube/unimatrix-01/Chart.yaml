@@ -1,0 +1,7 @@
+apiVersion: v2
+name: unimatrix-01
+description: Unimatrix 01 top config
+
+type: application
+version: 0.1.0
+appVersion: "1.0"

@@ -1,9 +1,33 @@
 # Unimatrix-01 (management cluster)
 
-This is a small three node cluster deployed using the [Kube-Hetzner](https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner) stack on Hetzner Cloud.
-Building it in NixOS would be fun, but I do not have the time for that.
+This is my geographical distributed cluster.
+I host some nodes in the cloud and some at home.
+The cluster uses Tailscale VPN to mesh between multiple nodes
+and also to expose internal services to my personal devices.
 
-I use it for everything that is management related and for web stuff which is important and should not be subject to some experiments :)
+## Deployment
+
+K3S on Fedora. Check [the Firewall Requirements for K3S](https://docs.k3s.io/installation/requirements?os=rhel).
+
+Before installing, setup up the config file at `/etc/rancher/k3s/config.yaml`
+
+```yaml
+# /etc/rancher/k3s/config.yaml
+tls-san:
+  - "unimatrix-01.rappet.xyz"
+cluster-init: true
+# we use SQLite for the single node cluster as it makes backups simpler
+cluster-cidr: 10.42.0.0/16,2a0e:46c6:0:7900::/56
+service-cidr: 10.43.0.0/16,2a0e:46c6:0:7a00::/108
+flannel-ipv6-masq: true
+selinux: true
+```
+
+Installation can be done as described by their docs:
+
+```shell
+curl -sfL https://get.k3s.io | sh -
+```
 
 ## Management related stuff
 
