@@ -1,18 +1,16 @@
-{{- if .Values.certManager.letsEncrypt.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager-letsencrypt
+  name: cert-manager-clusterissuers
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: cert-manager-letsencrypt
+    namespace: cert-manager
     server: {{ .Values.spec.destination.server }}
   project: {{ .Values.spec.project | quote }}
   source:
-    path: infra/kube/infrastructure/cert-manager-letsencrypt
+    path: infra/kube/cert-manager-clusterissuers
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
-{{- end }}

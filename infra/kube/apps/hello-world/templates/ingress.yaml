@@ -4,6 +4,7 @@ metadata:
   name: nginx-hello-world
   annotations:
     cert-manager.io/cluster-issuer: "{{.Values.clusterIssuer}}"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   ingressClassName: {{.Values.ingressClassName}}
   tls:
