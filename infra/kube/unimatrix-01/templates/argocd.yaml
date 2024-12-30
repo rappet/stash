@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+    server: {{ .Values.spec.destination.server }}
+  project: {{ .Values.spec.project | quote }}
+  source:
+    chart: argo-cd
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 7.7.11
+    helm:
+      valuesObject:
+        global:
+          domain: argocd.rappet.xyz
+
+        configs:
+          params:
+            server.insecure: true
+
+        server:
+          certificate:
+            enabled: true
+            issuer:
+              name: letsencrypt-dns-hetzner-staging
+              kind: ClusterIssuer
+          ingress:
+            enabled: true
+            ingressClassName: traefik
+            annotations:
+            extraTls:
+              - hosts:
+                  - argocd.example.com
+                # Based on the ingress controller used secret might be optional
+                secretName: argocd-server-tls
