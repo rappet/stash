@@ -1,3 +1,6 @@
 [submodule "projects/hardware/badges/ferris-badge"]
 	path = projects/hardware/badges/ferris-badge
 	url = ../ferris-badge.git
+[submodule "projects/hardware/badges/hackoween-badge"]
+	path = projects/hardware/badges/hackoween-badge
+	url = ../hackoween-badge.git
