@@ -1,0 +1,3 @@
+[submodule "projects/hardware/badges/ferris-badge"]
+	path = projects/hardware/badges/ferris-badge
+	url = ../ferris-badge.git
