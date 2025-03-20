@@ -1,18 +1,18 @@
-{ pkgs, ... }: {
+{ modulesPath, pkgs, ... }: {
   imports = [
-    ./hardware-configuration.nix
+    #./hardware-configuration.nix
     ../../common.nix
     ../../services/web.nix
     ../../services/postgresql-backup.nix
-    ../../services/libreddit.nix
-    ../../services/mumble.nix
+    #../../services/libreddit.nix
+    #../../services/mumble.nix
     ../../services/headscale.nix
     ../../services/quassel.nix
     ../../services/dns.nix
     ../../services/grafana.nix
     ../../services/prometheus.nix
     ../../services/loki.nix
-    ../../services/gitea.nix
+    #../../services/gitea.nix
     ../../services/hedgedoc.nix
     #../../services/etesync.nix
     ../../services/vaultwarden.nix
@@ -20,25 +20,36 @@
     ../../services/jellyfin.nix
     ../../services/smb-media.nix
     ../../services/owncast.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
+    (modulesPath + "/profiles/qemu-guest.nix")
+    ./disk-config.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
-  networking.hostName = "services";
-  networking.domain = "rappet.xyz";
   services.openssh.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
+  boot.loader.grub = {
+    # no need to set devices, disko will add all devices that have a EF02 partition to the list already
+    # devices = [ ];
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+  };
+
   networking = {
+    hostName = "services";
+    domain = "rappet.xyz";
+    hostId = "85337bbb";
     interfaces.enp1s0.ipv6.addresses = [{
-      address = "2a01:4f8:c012:b412::1";
+      address = "2a01:4f8:1c1a:a55::1";
       prefixLength = 128;
     }];
     defaultGateway6 = {
       address = "fe80::1";
       interface = "enp1s0";
     };
-    extraHosts = "167.235.255.49 ns1.rappet.xyz";
+    extraHosts = "91.99.19.52 ns1.rappet.xyz";
     nat = {
       enable = true;
       internalInterfaces = [ "ve-+" ];
@@ -54,5 +65,9 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlnhuyIavKvmi+F6vXQugaAmYZ6/R0rsuu7Bilhbpt9 Kurzbefehle auf rappets iPhone"
     ];
     extraGroups = [ "web-share" ];
+  };
+
+  services.zfs = {
+    autoScrub.enable = true;
   };
 }

@@ -7,6 +7,9 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
 
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -18,6 +21,7 @@
       "services" = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
+          disko.nixosModules.disko
           ./hosts/services/configuration.nix
           agenix.nixosModules.default
         ];
