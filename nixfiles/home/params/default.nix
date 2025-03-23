@@ -11,15 +11,11 @@ let
     rich
   ];
   python-with-my-packages = pkgs.python3.withPackages my-python-packages;
-  ffmpeg-full-unfree = pkgs.ffmpeg-full.overrideAttrs (old: rec {
-    nonfreeLicensing = true;
-    fdkaacExtlib = true;
-  });
   linux-packages = with pkgs; if stdenv.isLinux then [
     mold
     binutils
   ] else [ ];
-  packages = linux-packages ++ [ ffmpeg-full-unfree ];
+  packages = linux-packages;
 in
 {
   imports = [
@@ -57,13 +53,6 @@ in
 
     neovim-config.enable = true;
 
-    alacritty = import ./programs/alacritty.nix {
-      theme = theme;
-    };
-    kitty = import ./programs/kitty.nix {
-      pkgs = pkgs;
-      theme = theme;
-    };
     ssh = {
       enable = true;
       matchBlocks = {
