@@ -70,7 +70,8 @@
 
 
 
-  services.bird2 = {
+  services.bird = {
+    package = pkgs.bird2;
     enable = true;
     config = ''
       include "${./bird/prefix_lists/exportnet4.conf}";
@@ -87,18 +88,18 @@
     '';
   };
 
-  services.birdwatcher = {
-    enable = true;
-    settings = ''
-      ${builtins.readFile ./bird/birdwatcher.conf}
-
-    [bird]
-    listen = "0.0.0.0:29184"
-    config = "/etc/bird/bird2.conf"
-    birdc  = "${pkgs.bird}/bin/birdc"
-    ttl = 5 # time to live (in minutes) for caching of cli output
-    '';
-  };
+  #services.birdwatcher = {
+  #  enable = true;
+  #  settings = ''
+  #    ${builtins.readFile ./bird/birdwatcher.conf}
+  #
+  #  [bird]
+  #  listen = "0.0.0.0:29184"
+  #  config = "/etc/bird/bird2.conf"
+  #  birdc  = "${pkgs.bird}/bin/birdc"
+  #  ttl = 5 # time to live (in minutes) for caching of cli output
+  #  '';
+  #};
 
   services.prometheus.exporters.bird = {
     enable = true;
