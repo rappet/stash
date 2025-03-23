@@ -6,14 +6,13 @@ let
   framework = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyGxZI3l3PBv+zO6ZxgfP1hiMiQWwNevVtgfuUeBFDI";
   users = [ ibook katze ibook-nixos framework ];
 
-  services = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC7niOGmgx7tsK4zGRosgSgSNoOhgQ5pdc1zWTnLQOGM";
+  services = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGiBQs4tZGKGXPkc/HmpazTl5LrB8O+ka1Eao446/FOD";
   apu = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL0DXtBKuiY0nylLoAvf65fr8VW9F0LijUIko4Q1sl9t";
   servers = [ services ];
 in
 {
   "murmur-env.age".publicKeys = users ++ [ services ];
   "nitter-auth.age".publicKeys = users ++ [ services ];
-  "libreddit-auth.age".publicKeys = users ++ [ services ];
   "apu-dyndns-password.age".publicKeys = users ++ [ apu ];
   "hedgedoc-env.age".publicKeys = users ++ [ services ];
   "etebase-django-secret.age".publicKeys = users ++ [ services ];
@@ -22,4 +21,5 @@ in
   "mqtt-zigbee.age".publicKeys = users ++ [ services ];
   "smb-media.age".publicKeys = users ++ [ services ];
   "woodpecker-env.age".publicKeys = users ++ [ services ];
+  "letsencrypt-hetzner.age".publicKeys = users ++ [ services ];
 }
