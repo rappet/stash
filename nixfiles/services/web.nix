@@ -31,7 +31,15 @@
           '';
         };
       };
+      "phanpy.rappet.xyz" = {
+        forceSSL = true;
+        sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
+        sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
 
+        locations."/" = {
+          root = "/var/www/phanpy.rappet.xyz";
+        };
+      };
     };
   };
 
