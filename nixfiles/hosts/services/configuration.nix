@@ -70,4 +70,22 @@
   services.zfs = {
     autoScrub.enable = true;
   };
+
+  services.sanoid = {
+    enable = true;
+
+    datasets = {
+      "root".use_template = [ "data" ];
+    };
+
+    templates.data = {
+      frequently = 0;
+      hourly = 36;
+      daily = 30;
+      monthly = 3;
+      yearly = 0;
+      autosnap = true;
+      autoprune = true;
+    };
+  };
 }
