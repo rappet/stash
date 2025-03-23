@@ -57,14 +57,14 @@ in
       enable = true;
       matchBlocks = {
         storagebox = {
-	        hostname = "u215491.your-storagebox.de";
-	        user = "u215491";
-	        port = 23;
+          hostname = "u215491.your-storagebox.de";
+          user = "u215491";
+          port = 23;
         };
         chaosdorf = {
           host = "chaosdorf";
-	        hostname = "shells.chaosdorf.de";
-	        user = "rappet";
+          hostname = "shells.chaosdorf.de";
+          user = "rappet";
         };
         services = {
           hostname = "services.rappet.xyz";
@@ -74,8 +74,8 @@ in
     topgrade = {
       enable = true;
       settings = {
-        misc = {};
-        linux.home_manager_arguments = ["--flake" "/home/rappet/stash/nixfiles/home"];
+        misc = { };
+        linux.home_manager_arguments = [ "--flake" "/home/rappet/stash/nixfiles/home" ];
       };
     };
   };
