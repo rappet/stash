@@ -16,6 +16,9 @@
         sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
         sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
 
+        locations."/" = {
+          root = "/var/www/rappet.xyz";
+        };
         locations."/share" = {
           # /var/www/share
           root = "/var/www";
@@ -38,10 +41,8 @@
 
   security.acme.certs."rappet.xyz" = {
     group = "nginx";
-    dnsProvider = "rfc2136";
-    credentialsFile = "${pkgs.writeText "rfc2136" ''
-      RFC2136_NAMESERVER=127.0.0.1
-    ''}";
+    dnsProvider = "hetzner";
+    credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
     domain = "rappet.xyz";
     extraDomainNames = [ "*.rappet.xyz" ];
   };
@@ -51,6 +52,12 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = "certbot@rappet.de";
+  };
+
+  age.secrets.letsencrypt-hetzner = {
+    file = ../secret/letsencrypt-hetzner.age;
+    owner = "root";
+    group = "root";
   };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
