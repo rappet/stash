@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  domain = "vault.rappet.xyz";
+  domain = "vaultwarden.rappet.xyz";
   ports = import ./ports.nix;
 in
 rec {
