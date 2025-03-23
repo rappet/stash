@@ -23,7 +23,6 @@ in
       # CLI
       thefuck
       neofetch
-      mc
       binwalk
       xxd
       ripgrep
