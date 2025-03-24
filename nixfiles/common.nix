@@ -93,5 +93,18 @@ in
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
 
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:rappet/stash/main?dir=nixfiles";
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "--no-write-lock-file"
+      "-L" # print build logs
+    ];
+    dates = "6hours";
+    #randomizedDelaySec = "45min";
+  };
+
   system.stateVersion = "23.11";
 }
