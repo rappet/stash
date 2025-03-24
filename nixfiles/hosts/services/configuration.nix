@@ -20,6 +20,7 @@
     ../../services/jellyfin.nix
     ../../services/smb-media.nix
     ../../services/owncast.nix
+    ../../services/kanidm.nix
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix

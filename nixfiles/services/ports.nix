@@ -17,4 +17,6 @@
   vaultwarden-http = 10014;
   owncast-http = 10015;
   woodpecker-http = 10016;
+
+  kanidm-https = 10017;
 }
