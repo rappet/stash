@@ -75,7 +75,9 @@
     enable = true;
 
     datasets = {
-      "root".use_template = [ "data" ];
+      "zroot/root" = {
+        use_template = [ "data" ];
+      };
     };
 
     templates.data = {
