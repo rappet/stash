@@ -12,6 +12,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta name="fediverse:creator" content="@rappet@chaos.social">
                 <link rel="me" href="https://chaos.social/@rappet">Mastodon</link>
                 <AutoReload options=options.clone() />
                 <HydrationScripts options/>
