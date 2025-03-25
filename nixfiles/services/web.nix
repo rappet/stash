@@ -6,6 +6,7 @@
     recommendedProxySettings = true;
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
+    recommendedBrotliSettings = true;
     recommendedTlsSettings = true;
 
     clientMaxBodySize = "5G";
