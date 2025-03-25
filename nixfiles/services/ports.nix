@@ -19,4 +19,5 @@
   woodpecker-http = 10016;
 
   kanidm-https = 10017;
+  transmission = 9091;
 }

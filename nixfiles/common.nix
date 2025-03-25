@@ -102,8 +102,8 @@ in
       "--no-write-lock-file"
       "-L" # print build logs
     ];
-    dates = "6hours";
-    #randomizedDelaySec = "45min";
+    dates = "04:00";
+    randomizedDelaySec = "45min";
   };
 
   system.stateVersion = "23.11";
