@@ -1,4 +1,4 @@
-{ modulesPath, pkgs, ... }: {
+{ modulesPath, pkgs, inputs, system, ... }: {
   imports = [
     #./hardware-configuration.nix
     ../../common.nix
@@ -92,4 +92,25 @@
       autoprune = true;
     };
   };
+
+  systemd.services.rappet-xyz = {
+    description = "";
+    after = ["network.target"];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      User = "rappet-xyz";
+      Group = "rappet-xyz";
+      ExecStart = "${inputs.rappet-xyz.packages.${system}.rappet-xyz}/bin/rappet-xyz";
+    };
+  };
+
+  users.users.rappet-xyz = {
+    home = "/var/lib/rappet-xyz";
+    useDefaultShell = true;
+    group = "rappet-xyz";
+    isSystemUser = true;
+  };
+
+  users.groups.rappet-xyz = {};
 }

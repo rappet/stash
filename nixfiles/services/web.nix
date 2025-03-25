@@ -18,8 +18,11 @@
         sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
 
         locations."/" = {
-          root = "/var/www/rappet.xyz";
+          proxyPass = "http://localhost:3000";
         };
+        #locations."/" = {
+        #  root = "/var/www/rappet.xyz";
+        #};
         locations."/share" = {
           # /var/www/share
           root = "/var/www";

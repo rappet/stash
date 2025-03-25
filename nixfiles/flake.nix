@@ -14,6 +14,8 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-utils.url = "github:numtide/flake-utils";
+
+    rappet-xyz.url = "../projects/web/rappet-xyz";
   };
 
   outputs = inputs: with inputs; {
