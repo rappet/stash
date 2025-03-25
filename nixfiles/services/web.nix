@@ -44,10 +44,6 @@
     };
   };
 
-  system.activationScripts.knot-acme-zones = ''
-    cat ${./zones/_acme-challenge.rappet.xyz.zone} > /var/lib/knot/_acme-challenge.rappet.xyz.zone
-  '';
-
   security.acme.certs."rappet.xyz" = {
     group = "nginx";
     dnsProvider = "hetzner";
