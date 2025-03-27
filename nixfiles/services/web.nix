@@ -1,7 +1,15 @@
-{ config, pkgs, system, ... }:
+{ config, pkgs, system, inputs, ... }:
 {
+  services.haproxy = {
+    enable = true;
+    config = builtins.readFile ./haproxy.conf;
+  };
+
   services.nginx = {
     enable = true;
+
+    defaultHTTPListenPort = 8080;
+    defaultSSLListenPort = 8443;
 
     recommendedProxySettings = true;
     recommendedOptimisation = true;

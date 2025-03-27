@@ -17,20 +17,10 @@ in
     };
   };
 
-  services.nginx.virtualHosts."idm.rappet.xyz" = {
-      forceSSL = true;
-      sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
-      sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
-      locations."/" = {
-        #proxyPass = "http://[::1]:${toString ports.woodpecker-http}";
-        proxyPass = "https://idm.rappet.xyz:${toString ports.kanidm-https}";
-      };
-    };
-
   security.acme.certs."idm.rappet.xyz" = {
-      group = "kanidm";
-      dnsProvider = "hetzner";
-      credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
-      domain = "idm.rappet.xyz";
-    };
+    group = "kanidm";
+    dnsProvider = "hetzner";
+    credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
+    domain = "idm.rappet.xyz";
+  };
 }
