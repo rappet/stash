@@ -29,12 +29,12 @@ in
   };
 
   services.nginx.virtualHosts."transmission.rappet.xyz" = {
-      forceSSL = true;
-      sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
-      sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString ports.transmission}";
-        recommendedProxySettings = true;
-      };
+    forceSSL = true;
+    sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
+    sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString ports.transmission}";
+      recommendedProxySettings = true;
     };
+  };
 }

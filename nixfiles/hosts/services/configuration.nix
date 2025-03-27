@@ -95,7 +95,7 @@
 
   systemd.services.rappet-xyz = {
     description = "";
-    after = ["network.target"];
+    after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "simple";
@@ -112,5 +112,5 @@
     isSystemUser = true;
   };
 
-  users.groups.rappet-xyz = {};
+  users.groups.rappet-xyz = { };
 }
