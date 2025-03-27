@@ -28,6 +28,9 @@
         locations."/" = {
           proxyPass = "http://localhost:3000";
         };
+        locations."/pkg" = {
+          root = "${inputs.rappet-xyz.packages.${system}.rappet-xyz}/bin/site";
+        };
         #locations."/" = {
         #  root = "/var/www/rappet.xyz";
         #};
