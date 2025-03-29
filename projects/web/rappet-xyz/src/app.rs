@@ -15,7 +15,8 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 <meta name="fediverse:creator" content="@rappet@chaos.social"/>
                 <link rel="me" href="https://chaos.social/@rappet">Mastodon</link>
                 <AutoReload options=options.clone() />
-                <HydrationScripts options islands=true/>
+                <HydrationScripts options={options.clone()} islands=false/>
+                <HashedStylesheet options id="leptos" />
                 <MetaTags/>
             </head>
             <body>
@@ -31,10 +32,6 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-        // injects a stylesheet into the document <head>
-        // id=leptos means cargo-leptos will hot-reload this stylesheet
-        <Stylesheet id="leptos" href="/pkg/rappet-xyz.css"/>
-
         // sets the document title
         <Title text="rappet's blog and tools"/>
 
