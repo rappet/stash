@@ -23,4 +23,5 @@ in
   "woodpecker-env.age".publicKeys = users ++ [ services ];
   "letsencrypt-hetzner.age".publicKeys = users ++ [ services ];
   "transmission.age".publicKeys = users ++ [ services ];
+  "restic-backup-password.age".publicKeys = users ++ [ services ];
 }

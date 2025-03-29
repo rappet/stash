@@ -1,9 +1,10 @@
-{ modulesPath, pkgs, inputs, system, ... }: {
+{ modulesPath, pkgs, inputs, system, config, ... }: {
   imports = [
     #./hardware-configuration.nix
     ../../common.nix
     ../../services/web.nix
     ../../services/postgresql-backup.nix
+    ./backup.nix
     #../../services/libreddit.nix
     #../../services/mumble.nix
     ../../services/headscale.nix
