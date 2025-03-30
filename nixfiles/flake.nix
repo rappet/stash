@@ -24,8 +24,9 @@
         system = "aarch64-linux";
         modules = [
           disko.nixosModules.disko
-          ./hosts/services/configuration.nix
+          ./modules/reverse-proxy.nix
           agenix.nixosModules.default
+          ./hosts/services/configuration.nix
         ];
         specialArgs = { system = "aarch64-linux"; inputs = inputs; };
       };

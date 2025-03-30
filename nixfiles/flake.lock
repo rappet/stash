@@ -177,11 +177,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1743094758,
-        "narHash": "sha256-uQ8saAEITn41QXvGZzN20kPormxILtWGpFfGP5tIK28=",
+        "lastModified": 1743238039,
+        "narHash": "sha256-kRSDAdEsasqFU0pp1NMPcFLVVe/HCHjC12uo4ymyyGA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "16abbb9ffbaa0eb4fcd59c0d0137267e5b4fe304",
+        "rev": "5164b0c65c79a4d7ea64fee70aa1a523deaa60b9",
         "type": "github"
       },
       "original": {
@@ -264,12 +264,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-1Qiy0um/Ei3snc1EdtZbqCChygdWllJqoHnMEuPw9D0=",
-        "path": "/nix/store/kdhis63h5ykxgakhnr8lwv7d3vdlv3a1-source/projects/web/rappet-xyz",
+        "narHash": "sha256-hy4o3QsXhCYiJcllGYPsbZ/tsiSFuW1AT2cN6aX1MBI=",
+        "path": "/nix/store/6l9cgkvfldm971p1bmhlsdy1phh3izyf-source/projects/web/rappet-xyz",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/kdhis63h5ykxgakhnr8lwv7d3vdlv3a1-source/projects/web/rappet-xyz",
+        "path": "/nix/store/6l9cgkvfldm971p1bmhlsdy1phh3izyf-source/projects/web/rappet-xyz",
         "type": "path"
       }
     },

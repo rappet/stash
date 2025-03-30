@@ -5,18 +5,12 @@
     config = builtins.readFile ./haproxy.conf;
   };
 
-  services.nginx = {
+  reverse-proxy = {
     enable = true;
+    sniProxy.enabled = true;
+  };
 
-    defaultHTTPListenPort = 8080;
-    defaultSSLListenPort = 8443;
-
-    recommendedProxySettings = true;
-    recommendedOptimisation = true;
-    recommendedGzipSettings = true;
-    recommendedBrotliSettings = true;
-    recommendedTlsSettings = true;
-
+  services.nginx = {
     clientMaxBodySize = "5G";
 
     virtualHosts = {
