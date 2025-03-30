@@ -1,9 +1,10 @@
+use std::time::Duration;
 use leptos::prelude::*;
-use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
-use leptos_router::{
-    components::{Route, Router, Routes, A},
-    StaticSegment,
-};
+use leptos_meta::{provide_meta_context, HashedStylesheet, MetaTags, Stylesheet, Title};
+use leptos_router::{components::{Route, Router, Routes, A}, SsrMode, StaticSegment};
+use leptos_router::static_routes::StaticRoute;
+use leptos::server_fn::codec::GetUrl;
+use serde::{Deserialize, Serialize};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -38,11 +39,28 @@ pub fn App() -> impl IntoView {
         // content for this welcome page
         <Router>
             <Routes fallback=|| view!{<Shell>"Page not found."</Shell>}>
-                <Route path=StaticSegment("") view=HomePage/>
-                <Route path=StaticSegment("/about") view=AboutPage/>
+                <Route path=StaticSegment("") view=HomePage ssr=SsrMode::Async/>
+                <Route path=StaticSegment("/about") view=AboutPage ssr=SsrMode::Async/>
             </Routes>
         </Router>
     }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MdContent {
+    pub content: String,
+}
+
+#[server(
+    endpoint = "md-content",
+    input = GetUrl
+)]
+pub async fn load_md_html(title: String) -> Result<MdContent, ServerFnError> {
+    use comrak::{markdown_to_html, Options};
+    println!("loading");
+    let md = tokio::fs::read_to_string(format!("./public/{title}.md")).await?;
+    let html = markdown_to_html(&md, &Options::default());
+    Ok(MdContent { content: html })
 }
 
 /// Renders the home page of your application.
@@ -50,10 +68,9 @@ pub fn App() -> impl IntoView {
 fn HomePage() -> impl IntoView {
     view! {
         <Shell>
-            <article>
-                <h1>"rappet's blog and tools"</h1>
-                <p>"I'm working on it. Nothing interresting here..."</p>
-            </article>
+            <Await future=load_md_html("home".to_string()) let:data blocking=true>
+                <article inner_html={data.as_ref().map(|d| d.content.clone()).unwrap_or_default()}></article>
+            </Await>
         </Shell>
     }
 }
@@ -99,6 +116,6 @@ fn Header() -> impl IntoView {
 #[component]
 fn Footer() -> impl IntoView {
     view! {
-        <footer>"rappet 2024 - self written with Leptos"</footer>
+        <footer>"rappet 2024 - implemented in Leptos"</footer>
     }
 }

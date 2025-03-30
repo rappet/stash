@@ -9,7 +9,7 @@ See my [link to hackernews](https://news.ycombinator.com/).
 > 
 > Bleh Blup
 
-Some more
+Some more in the footnote [^footnote]
 
 paragraphs.
 
@@ -18,3 +18,5 @@ paragraphs.
 ## Smaller heading.
 
 Foo
+
+[^footnote]: https://news.ycombinator.org/

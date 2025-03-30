@@ -53,8 +53,23 @@ main {
 
 		&>p {
 			font-size: 120%;
-			padding: 0.5rem 0;
+			padding-bottom: 0.5rem;
 		}
+	}
+
+	a {
+		color: black;
+		text-decoration: underline;
+
+		&:hover {
+			color: #66c;
+		}
+	}
+
+	blockquote {
+		border-left: 3px solid #333;
+		background-color: #eee;
+		padding: 0.5rem 1rem;
 	}
 }
 
