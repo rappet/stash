@@ -264,12 +264,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-hy4o3QsXhCYiJcllGYPsbZ/tsiSFuW1AT2cN6aX1MBI=",
-        "path": "/nix/store/6l9cgkvfldm971p1bmhlsdy1phh3izyf-source/projects/web/rappet-xyz",
+        "narHash": "sha256-iyOK7i/jnh2AovWuUFJEg31/eW+pSz4pFGzWbzXHZqw=",
+        "path": "/nix/store/6bm6gpdl1hdihqdmj88bah8gwfmz7x1c-source/projects/web/rappet-xyz",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/6l9cgkvfldm971p1bmhlsdy1phh3izyf-source/projects/web/rappet-xyz",
+        "path": "/nix/store/6bm6gpdl1hdihqdmj88bah8gwfmz7x1c-source/projects/web/rappet-xyz",
         "type": "path"
       }
     },

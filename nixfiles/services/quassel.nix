@@ -21,8 +21,6 @@ rec {
     ensureDatabases = [ "quassel" ];
   };
 
-  services.postgresqlBackup.databases = [ "quassel" ];
-
   users.groups.quassel-cert.members = [ "quassel" "nginx" ];
   security.acme.certs."${domain}".group = "quassel-cert";
 

@@ -55,8 +55,6 @@ rec {
     ensureDatabases = [ "hedgedoc" ];
   };
 
-  services.postgresqlBackup.databases = [ "hedgedoc" ];
-
   services.nginx.virtualHosts.${domain} = {
     forceSSL = true;
     sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
