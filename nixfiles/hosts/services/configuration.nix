@@ -23,6 +23,7 @@
     ../../services/owncast.nix
     ../../services/kanidm.nix
     ../../services/transmission.nix
+    ../../services/authelia.nix
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix

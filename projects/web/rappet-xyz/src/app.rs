@@ -1,9 +1,10 @@
-use std::time::Duration;
 use leptos::prelude::*;
-use leptos_meta::{provide_meta_context, HashedStylesheet, MetaTags, Stylesheet, Title};
-use leptos_router::{components::{Route, Router, Routes, A}, SsrMode, StaticSegment};
-use leptos_router::static_routes::StaticRoute;
 use leptos::server_fn::codec::GetUrl;
+use leptos_meta::{provide_meta_context, HashedStylesheet, MetaTags, Title};
+use leptos_router::{
+    components::{Route, Router, Routes, A},
+    SsrMode, StaticSegment,
+};
 use serde::{Deserialize, Serialize};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
@@ -57,8 +58,9 @@ pub struct MdContent {
 )]
 pub async fn load_md_html(title: String) -> Result<MdContent, ServerFnError> {
     use comrak::{markdown_to_html, Options};
-    println!("loading");
-    let md = tokio::fs::read_to_string(format!("./public/{title}.md")).await?;
+    let md = crate::server_consts::MD_FILES
+        .get(&format!("{}.md", title))
+        .ok_or_else(|| ServerFnError::new(&format!("no markdown content named {title:?}")))?;
     let html = markdown_to_html(&md, &Options::default());
     Ok(MdContent { content: html })
 }
@@ -68,7 +70,7 @@ pub async fn load_md_html(title: String) -> Result<MdContent, ServerFnError> {
 fn HomePage() -> impl IntoView {
     view! {
         <Shell>
-            <Await future=load_md_html("home".to_string()) let:data blocking=true>
+            <Await future=load_md_html("various/home".to_string()) let:data blocking=true>
                 <article inner_html={data.as_ref().map(|d| d.content.clone()).unwrap_or_default()}></article>
             </Await>
         </Shell>

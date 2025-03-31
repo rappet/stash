@@ -24,4 +24,10 @@ in
   "letsencrypt-hetzner.age".publicKeys = users ++ [ services ];
   "transmission.age".publicKeys = users ++ [ services ];
   "restic-backup-password.age".publicKeys = users ++ [ services ];
+
+  "authelia-hmac-secret.age".publicKeys = users ++ [ services ];
+  "authelia-jwks.age".publicKeys = users ++ [ services ];
+  "authelia-jwt-secret.age".publicKeys = users ++ [ services ];
+  "authelia-session-secret.age".publicKeys = users ++ [ services ];
+  "authelia-storage-secret.age".publicKeys = users ++ [ services ];
 }
