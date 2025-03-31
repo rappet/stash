@@ -102,9 +102,12 @@ in
       "--no-write-lock-file"
       "-L" # print build logs
     ];
-    dates = "04:00";
-    randomizedDelaySec = "45min";
+    dates = "hourly";
     allowReboot = true;
+    rebootWindow = {
+      lower = "02:00";
+      upper = "06:00";
+    };
   };
 
   system.stateVersion = "23.11";
