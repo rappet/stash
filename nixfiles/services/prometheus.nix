@@ -31,6 +31,12 @@ in
           labels.host = "fra1-de";
         }];
       }
+      {
+        job_name = "haproxy";
+        static_configs = [{
+          targets = [ "services.rappet.xyz:${toString ports.haproxy-metrics-http}" ];
+        }];
+      }
     ];
   };
 

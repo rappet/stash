@@ -21,4 +21,5 @@
   kanidm-https = 10017;
   authelia-https = 10018;
   transmission = 9091;
+  haproxy-metrics-http = 10019;
 }
