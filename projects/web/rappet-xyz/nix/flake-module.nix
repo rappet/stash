@@ -41,6 +41,7 @@ in
               src = self; # The original, unfiltered source
               filter = path: type:
                 (lib.hasSuffix "\.html" path) ||
+                (lib.hasSuffix "\.md" path) ||
                 # Example of a folder for images, icons, etc
                 (lib.hasInfix "/assets/" path) ||
                 (lib.hasInfix "/style/" path) ||
