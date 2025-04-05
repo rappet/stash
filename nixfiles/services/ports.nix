@@ -22,4 +22,5 @@
   authelia-https = 10018;
   transmission = 9091;
   haproxy-metrics-http = 10019;
+  unbound-https = 10020;
 }

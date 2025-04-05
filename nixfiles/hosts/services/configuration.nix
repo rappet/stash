@@ -13,6 +13,7 @@
     ../../services/infrastructure/grafana.nix
     ../../services/infrastructure/prometheus.nix
     ../../services/infrastructure/loki.nix
+    ../../services/infrastructure/unbound.nix
     #../../services/infrastructure/gitea.nix
     ../../services/apps/hedgedoc.nix
     #../../services/infrastructure/etesync.nix
