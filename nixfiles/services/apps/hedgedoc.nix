@@ -2,7 +2,7 @@
 
 let
   domain = "md.rappet.xyz";
-  ports = import ./ports.nix;
+  ports = import ../ports.nix;
 in
 rec {
   services.hedgedoc = {
@@ -43,7 +43,7 @@ rec {
   };
 
   age.secrets.hedgedoc-env = {
-    file = ../secret/hedgedoc-env.age;
+    file = ../../secret/hedgedoc-env.age;
   };
 
   services.postgresql = {

@@ -2,7 +2,7 @@
 
 let
   domain = "prometheus.rappet.xyz";
-  ports = import ./ports.nix;
+  ports = import ../ports.nix;
 in
 {
   services.prometheus = {

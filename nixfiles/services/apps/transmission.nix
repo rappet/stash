@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  ports = import ./ports.nix;
+  ports = import ../ports.nix;
 in
 {
   services.transmission = {
@@ -23,7 +23,7 @@ in
   };
 
   age.secrets.transmission = {
-    file = ../secret/transmission.age;
+    file = ../../secret/transmission.age;
     owner = "transmission";
     group = "root";
   };

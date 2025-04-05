@@ -2,7 +2,7 @@
 
 let
   domain = "sync.rappet.xyz";
-  ports = import ./ports.nix;
+  ports = import ../ports.nix;
 in
 rec {
   services.etebase-server = {
@@ -13,7 +13,7 @@ rec {
   };
 
   age.secrets.etebase-django-secret = {
-    file = ../secret/etebase-django-secret.age;
+    file = ../../secret/etebase-django-secret.age;
     owner = "etebase-server";
     group = "etebase-server";
   };

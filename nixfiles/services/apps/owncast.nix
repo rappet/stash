@@ -2,7 +2,7 @@
 {
   services.owncast = {
     enable = true;
-    port = (import ./ports.nix).owncast-http;
+    port = (import ../ports.nix).owncast-http;
     openFirewall = true;
   };
 

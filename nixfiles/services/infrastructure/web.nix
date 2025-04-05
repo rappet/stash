@@ -68,7 +68,7 @@
   };
 
   age.secrets.letsencrypt-hetzner = {
-    file = ../secret/letsencrypt-hetzner.age;
+    file = ../../secret/letsencrypt-hetzner.age;
     owner = "root";
     group = "root";
   };

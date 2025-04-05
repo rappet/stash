@@ -6,7 +6,7 @@ in
   services.headscale = {
     enable = true;
     address = "[::]";
-    port = (import ./ports.nix).headscale;
+    port = (import ../ports.nix).headscale;
     settings = {
       logtail.enabled = false;
       server_url = "https://${domain}";

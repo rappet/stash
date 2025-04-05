@@ -16,7 +16,7 @@ in
     environmentFile = config.age.secrets.murmur-env.path;
   };
 
-  age.secrets.murmur-env.file = ../secret/murmur-env.age;
+  age.secrets.murmur-env.file = ../../secret/murmur-env.age;
 
 
   users.users.nginx.extraGroups = [ "murmur" ];

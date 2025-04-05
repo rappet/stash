@@ -2,7 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../common.nix
-    ../../services/dns.nix
+    ../../services/infrastructure/dns.nix
   ];
 
   boot.tmp.cleanOnBoot = true;

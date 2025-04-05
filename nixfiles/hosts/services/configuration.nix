@@ -2,28 +2,30 @@
   imports = [
     #./hardware-configuration.nix
     ../../common.nix
-    ../../services/web.nix
-    ../../services/postgresql-backup.nix
+    ../../services/infrastructure/web.nix
+    ../../services/infrastructure/postgresql-backup.nix
     ./backup.nix
-    #../../services/libreddit.nix
-    #../../services/mumble.nix
-    ../../services/headscale.nix
-    ../../services/quassel.nix
-    ../../services/dns.nix
-    ../../services/grafana.nix
-    ../../services/prometheus.nix
-    ../../services/loki.nix
-    #../../services/gitea.nix
-    ../../services/hedgedoc.nix
-    #../../services/etesync.nix
-    ../../services/vaultwarden.nix
+    #../../services/apps/libreddit.nix
+    #../../services/apps/mumble.nix
+    ../../services/apps/headscale.nix
+    ../../services/apps/quassel.nix
+    ../../services/infrastructure/dns.nix
+    ../../services/infrastructure/grafana.nix
+    ../../services/infrastructure/prometheus.nix
+    ../../services/infrastructure/loki.nix
+    #../../services/infrastructure/gitea.nix
+    ../../services/apps/hedgedoc.nix
+    #../../services/infrastructure/etesync.nix
+    ../../services/apps/vaultwarden.nix
     ../../services/mosquitto.nix
-    ../../services/jellyfin.nix
+    ../../services/apps/jellyfin.nix
     ../../services/smb-media.nix
-    ../../services/owncast.nix
-    ../../services/kanidm.nix
-    ../../services/transmission.nix
-    #../../services/authelia.nix
+    ../../services/apps/owncast.nix
+    ../../services/infrastructure/kanidm.nix
+    ../../services/apps/transmission.nix
+    #../../services/infrastructure/authelia.nix
+
+
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix

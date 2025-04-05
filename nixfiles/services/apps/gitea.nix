@@ -2,7 +2,7 @@
 
 let
   domain = "git.rappet.xyz";
-  ports = import ./ports.nix;
+  ports = import ../ports.nix;
 in
 rec {
   services.forgejo = {
@@ -81,7 +81,7 @@ rec {
   };
 
   age.secrets.woodpecker-env = {
-    file = ../secret/woodpecker-env.age;
+    file = ../../secret/woodpecker-env.age;
     owner = "root";
     group = "root";
   };

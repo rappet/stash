@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  ports = import ./ports.nix;
+  ports = import ../ports.nix;
 in
 {
   services.kanidm = {

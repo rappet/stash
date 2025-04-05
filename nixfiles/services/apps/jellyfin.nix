@@ -2,7 +2,7 @@
 
 let
   domain = "jellyfin.rappet.xyz";
-  ports = import ./ports.nix;
+  ports = import ../ports.nix;
 in
 rec {
   containers.jellyfin = {

@@ -2,7 +2,7 @@
 
 let
   domain = "grafana.rappet.xyz";
-  ports = import ./ports.nix;
+  ports = import ../ports.nix;
 in
 {
   services.grafana = {

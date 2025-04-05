@@ -2,7 +2,7 @@
 
 let
   domain = "sso.rappet.xyz";
-  ports = import ./ports.nix;
+  ports = import ../ports.nix;
 in
 rec {
   services.authelia.instances.rappet-xyz = {
@@ -86,7 +86,7 @@ rec {
     (name: {
       name = "authelia-${name}";
       value = {
-        file = ../secret/authelia-${name}.age;
+        file = ../../secret/authelia-${name}.age;
         owner = "authelia-rappet-xyz";
         group = "authelia-rappet-xyz";
       };
