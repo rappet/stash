@@ -16,8 +16,12 @@ in
         https-port = ports.unbound-https;
         tls-service-key = "${config.security.acme.certs."dns.rappet.xyz".directory}/key.pem";
         tls-service-pem = "${config.security.acme.certs."dns.rappet.xyz".directory}/fullchain.pem";
+
+        extended-statistics = "yes";
       };
     };
+
+    localControlSocketPath = "/run/unbound/unbound.socket";
   };
 
   networking.firewall.allowedTCPPorts = [ 853 ];
@@ -28,4 +32,24 @@ in
     credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
     domain = "dns.rappet.xyz";
   };
+
+  services.prometheus.exporters.unbound = {
+    enable = true;
+    port = ports.unbound-metrics;
+    unbound = {
+      host = "unix:///run/unbound/unbound.socket";
+      certificate = null;
+      ca = null;
+      key = null;
+    };
+  };
+
+  users.groups.prometheus.members = [ config.services.prometheus.exporters.unbound.user ];
+
+  services.prometheus.scrapeConfigs = [{
+    job_name = "unbound";
+    static_configs = [{
+      targets = [ "services.rappet.xyz:${toString ports.unbound-metrics}" ];
+    }];
+  }];
 }
