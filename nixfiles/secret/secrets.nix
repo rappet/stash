@@ -8,7 +8,8 @@ let
 
   services = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGiBQs4tZGKGXPkc/HmpazTl5LrB8O+ka1Eao446/FOD";
   apu = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL0DXtBKuiY0nylLoAvf65fr8VW9F0LijUIko4Q1sl9t";
-  servers = [ services ];
+  thinkcentre = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMaBGPHgYp8MA0f9PPElL/z4NiWKIgHqjO9ZQ3pgOUdu";
+  servers = [ services thinkcentre ];
 in
 {
   "murmur-env.age".publicKeys = users ++ [ services ];
@@ -19,11 +20,11 @@ in
   "mqtt-shelly-auth.age".publicKeys = users ++ [ services ];
   "mqtt-monitor.age".publicKeys = users ++ [ services ];
   "mqtt-zigbee.age".publicKeys = users ++ [ services ];
-  "smb-media.age".publicKeys = users ++ [ services ];
+  "smb-media.age".publicKeys = users ++ servers;
   "woodpecker-env.age".publicKeys = users ++ [ services ];
-  "letsencrypt-hetzner.age".publicKeys = users ++ [ services ];
-  "transmission.age".publicKeys = users ++ [ services ];
-  "restic-backup-password.age".publicKeys = users ++ [ services ];
+  "letsencrypt-hetzner.age".publicKeys = users ++ servers;
+  "transmission.age".publicKeys = users ++ servers;
+  "restic-backup-password.age".publicKeys = users ++ servers;
 
   "authelia-hmac-secret.age".publicKeys = users ++ [ services ];
   "authelia-jwks.age".publicKeys = users ++ [ services ];

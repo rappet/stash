@@ -265,11 +265,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-/lr79rv1O/Xlek6yfl5lHYj1xlYnSntsPP1kO6GKAl4=",
-        "path": "/nix/store/3ljj1q3xmi0hfqy67p4sl1dca8isyxg1-source/projects/web/rappet-xyz",
+        "path": "/nix/store/6a81ghp5jv7spa077g8alibbkxg5kkhm-source/projects/web/rappet-xyz",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/3ljj1q3xmi0hfqy67p4sl1dca8isyxg1-source/projects/web/rappet-xyz",
+        "path": "/nix/store/6a81ghp5jv7spa077g8alibbkxg5kkhm-source/projects/web/rappet-xyz",
         "type": "path"
       }
     },
