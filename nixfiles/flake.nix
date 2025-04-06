@@ -30,6 +30,17 @@
         ];
         specialArgs = { system = "aarch64-linux"; inputs = inputs; };
       };
+      "thinkcentre" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          disko.nixosModules.disko
+          ./modules/reverse-proxy.nix
+          agenix.nixosModules.default
+          ./hosts/thinkcentre/configuration.nix
+          ./hosts/thinkcentre/hardware-configuration.nix
+        ];
+        specialArgs = { system = "x86_64-linux"; inputs = inputs; };
+      };
       "fra1-de" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -43,10 +54,17 @@
     deploy.nodes = {
       services = {
         hostname = "services.rappet.xyz";
-        sshOpts = [ "-p" "22" ];
         profiles.system = {
           sshUser = "root";
           path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.services;
+          remoteBuild = true;
+        };
+      };
+      thinkcentre = {
+        hostname = "thinkcentre";
+        profiles.system = {
+          sshUser = "root";
+          path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.thinkcentre;
           remoteBuild = true;
         };
       };
