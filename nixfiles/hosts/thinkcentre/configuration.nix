@@ -59,4 +59,33 @@
       autoprune = true;
     };
   };
+
+  networking.firewall = {
+    allowedUDPPorts = [ 51820 ];
+  };
+
+
+  networking.wireguard = {
+      enable = true;
+      interfaces.wg0 = {
+        ips = [ "2a0e:46c6:0:100::1" ];
+        listenPort = 51820;
+        privateKeyFile = "/root/wireguard-keys/private";
+        mtu = 1432;
+
+        peers = [
+          # fra1-de
+          {
+            publicKey = "DxJmELlueuf/1YnlMA9FUuqI0GPPeF5yW1EMc5G8s1g=";
+            allowedIPs = [ "2a0e:46c6::/40" ];
+            persistentKeepalive = 25;
+          }
+          {
+            # framework
+            publicKey = "LbrjQAvVKt9MrcD+6NQ+3KcYCdtVw7RFblveaTB1xHA=";
+            allowedIPs = [ "2a0e:46c6:0:200::/60" ];
+          }
+        ];
+      };
+    };
 }

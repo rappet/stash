@@ -122,7 +122,7 @@
       peers = [
         {
           # thinkcentre
-          publicKey = "Q03DQgQvETlzyg/r2ICzBjLHzfX9Z76SDentriesEE0=";
+          publicKey = "xSG3PDLprnlUkPGCwAj7uTjxCmmR2M8M8cXsWBK1CVs=";
           allowedIPs = [ "2a0e:46c6:0:100::/60" ];
         }
         {
