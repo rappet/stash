@@ -79,6 +79,7 @@
             publicKey = "DxJmELlueuf/1YnlMA9FUuqI0GPPeF5yW1EMc5G8s1g=";
             allowedIPs = [ "2a0e:46c6::/40" ];
             persistentKeepalive = 25;
+            endpoint = "193.148.249.188:51820";
           }
           {
             # framework
