@@ -130,6 +130,13 @@
           publicKey = "LbrjQAvVKt9MrcD+6NQ+3KcYCdtVw7RFblveaTB1xHA=";
           allowedIPs = [ "2a0e:46c6:0:200::/60" ];
         }
+        {
+          # services
+          publicKey = "G+dlubY61jRxl/E4f9xfBeD4gO3E47084XxDV3Hhl2g=";
+          allowedIPs = [ "2a0e:46c6:0:300::/60" ];
+          persistentKeepalive = 25;
+          endpoint = "91.99.19.52:51820";
+        }
       ];
     };
   };
