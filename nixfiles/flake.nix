@@ -15,7 +15,7 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    rappet-xyz.url = "../projects/web/rappet-xyz";
+    rappet-xyz.url = "github:rappet/stash?dir=projects/web/rappet-xyz";
   };
 
   outputs = inputs: with inputs; {

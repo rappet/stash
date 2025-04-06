@@ -30,6 +30,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
+    ../../wg-mesh.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
@@ -110,6 +111,10 @@
     };
   };
 
+  services.nginx.virtualHosts."rappet-xyz".locations."/pkg" = {
+    root = "${inputs.rappet-xyz.packages.${system}.rappet-xyz}/bin/site";
+  };
+
   users.users.rappet-xyz = {
     home = "/var/lib/rappet-xyz";
     useDefaultShell = true;
@@ -118,40 +123,4 @@
   };
 
   users.groups.rappet-xyz = { };
-
-
-  networking.firewall = {
-    allowedUDPPorts = [ 51820 ];
-  };
-
-  networking.wireguard = {
-    enable = true;
-    interfaces.wg0 = {
-      ips = [ "2a0e:46c6:0:300::1" ];
-      listenPort = 51820;
-      privateKeyFile = "/root/wireguard-keys/private";
-      mtu = 1432;
-
-      peers = [
-        # fra1-de
-        {
-          publicKey = "DxJmELlueuf/1YnlMA9FUuqI0GPPeF5yW1EMc5G8s1g=";
-          allowedIPs = [ "2a0e:46c6::/40" ];
-          persistentKeepalive = 25;
-          endpoint = "193.148.249.188:51820";
-        }
-        {
-          # thinkcentre
-          publicKey = "xSG3PDLprnlUkPGCwAj7uTjxCmmR2M8M8cXsWBK1CVs=";
-          allowedIPs = [ "2a0e:46c6:0:100::/60" ];
-        }
-        {
-          # framework
-          publicKey = "LbrjQAvVKt9MrcD+6NQ+3KcYCdtVw7RFblveaTB1xHA=";
-          allowedIPs = [ "2a0e:46c6:0:200::/60" ];
-        }
-      ];
-    };
-  };
-
 }

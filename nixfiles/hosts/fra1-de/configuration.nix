@@ -3,6 +3,7 @@
     ./hardware-configuration.nix
     ../../common.nix
     ../../services/infrastructure/dns.nix
+    ../../wg-mesh.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
@@ -105,40 +106,6 @@
     enable = true;
     # what firewall?
     # openFirewall = true;
-  };
-
-  networking.firewall = {
-    allowedUDPPorts = [ 51820 ];
-  };
-
-  networking.wireguard = {
-    enable = true;
-    interfaces.wg0 = {
-      ips = [ "2a0e:46c6:0:1::1" ];
-      listenPort = 51820;
-      privateKeyFile = "/root/wireguard-keys/private";
-      mtu = 1432;
-
-      peers = [
-        {
-          # thinkcentre
-          publicKey = "xSG3PDLprnlUkPGCwAj7uTjxCmmR2M8M8cXsWBK1CVs=";
-          allowedIPs = [ "2a0e:46c6:0:100::/60" ];
-        }
-        {
-          # framework
-          publicKey = "LbrjQAvVKt9MrcD+6NQ+3KcYCdtVw7RFblveaTB1xHA=";
-          allowedIPs = [ "2a0e:46c6:0:200::/60" ];
-        }
-        {
-          # services
-          publicKey = "G+dlubY61jRxl/E4f9xfBeD4gO3E47084XxDV3Hhl2g=";
-          allowedIPs = [ "2a0e:46c6:0:300::/60" ];
-          persistentKeepalive = 25;
-          endpoint = "91.99.19.52:51820";
-        }
-      ];
-    };
   };
 
 }
