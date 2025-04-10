@@ -12,7 +12,7 @@ in
     exporters = {
       node = {
         enable = true;
-        enabledCollectors = [ "systemd" ];
+        enabledCollectors = [ "systemd" "ethtool"  ];
         port = ports.prometheus-node-exporter;
       };
     };
