@@ -18,6 +18,7 @@
         forceSSL = true;
         sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
         sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
+        default = true;
 
         locations."/" = {
           proxyPass = "http://localhost:3000";
