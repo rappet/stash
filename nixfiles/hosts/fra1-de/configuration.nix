@@ -71,7 +71,7 @@
 
 
 
-  services.bird = {
+  services.bird2 = {
     package = pkgs.bird2;
     enable = true;
     config = ''
