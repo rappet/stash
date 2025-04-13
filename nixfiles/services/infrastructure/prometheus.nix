@@ -15,6 +15,12 @@ in
         enabledCollectors = [ "systemd" "ethtool" ];
         port = ports.prometheus-node-exporter;
       };
+
+      postgres = {
+        enable = true;
+        port = ports.postgres-metrics;
+        runAsLocalSuperUser = true;
+      };
     };
 
     scrapeConfigs = [
@@ -35,6 +41,12 @@ in
         job_name = "haproxy";
         static_configs = [{
           targets = [ "services.rappet.xyz:${toString ports.haproxy-metrics-http}" ];
+        }];
+      }
+      {
+        job_name = "postgres";
+        static_configs = [{
+          targets = [ "services.rappet.xyz:${toString ports.postgres-metrics}" ];
         }];
       }
     ];

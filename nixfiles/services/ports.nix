@@ -24,4 +24,5 @@
   haproxy-metrics-http = 10019;
   unbound-https = 10020;
   unbound-metrics = 10021;
+  postgres-metrics = 10022;
 }
