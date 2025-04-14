@@ -66,7 +66,7 @@ in
                 "${public}:${lib.trivial.toHexString host.hostId}00::/56"
                 "${ula}:${lib.trivial.toHexString host.hostId}::/64"
                 "${ula}:${nodeId}::/64"
-              ];
+              ] ++ (if host.hostId == 2 && self.hostId == 1 then [ "::/1" ] else [ ]);
               endpoint = host.endpoint;
               persistentKeepalive = if host.endpoint != null then 25 else null;
             })
