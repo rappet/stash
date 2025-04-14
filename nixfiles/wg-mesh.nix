@@ -16,7 +16,7 @@ let
     }
     {
       name = "framework";
-      hostId = 16;
+      hostId = 0;
       publicKey = "LbrjQAvVKt9MrcD+6NQ+3KcYCdtVw7RFblveaTB1xHA=";
       endpoint = null;
     }
