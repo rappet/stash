@@ -69,7 +69,7 @@
 
   networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
 
-
+  networking.useDHCP = false;
 
   services.bird2 = {
     package = pkgs.bird2;
