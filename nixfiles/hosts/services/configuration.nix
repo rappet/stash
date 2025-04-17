@@ -25,6 +25,7 @@
     ../../services/infrastructure/kanidm.nix
     ../../services/apps/transmission.nix
     #../../services/infrastructure/authelia.nix
+    ../../services/apps/mastodon.nix
 
 
     (modulesPath + "/installer/scan/not-detected.nix")
