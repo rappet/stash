@@ -22,9 +22,9 @@ in
         job_name = "node";
         static_configs = [{
           targets = [
-            "services.internal:${toString config.services.prometheus.exporters.node.port}"
-            "thinkcentre.internal:${toString config.services.prometheus.exporters.node.port}"
-            "fra1-de.internal:${toString config.services.prometheus.exporters.node.port}"
+            "services.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
+            "thinkcentre.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
+            "fra1-de.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
           ];
         }];
       }

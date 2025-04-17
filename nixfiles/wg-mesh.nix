@@ -44,7 +44,7 @@ in
       "wg-mesh-hosts"
       (lib.strings.concatLines
         (map
-          (h: "${ula}:${lib.trivial.toHexString h.hostId}::1 ${h.name}.internal")
+          (h: "${ula}:${lib.trivial.toHexString h.hostId}::1 ${h.name}.rappet.xyz")
           hosts
         )
       )
