@@ -7,6 +7,7 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyGxZI3l3PBv+zO6ZxgfP1hiMiQWwNevVtgfuUeBFDI rappet@rappet-framework"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMbkmGVa8uzywkHE/VQEzDW4aQNdoJcYQ1gkvhcytTlZ rappet@thinkcentre"
   ];
+  ports = import ./services/ports.nix;
 in
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -104,6 +105,17 @@ in
     rebootWindow = {
       lower = "02:00";
       upper = "06:00";
+    };
+  };
+
+  services.prometheus.exporters = {
+    node = {
+      enable = true;
+      enabledCollectors = [ "systemd" "ethtool" ];
+      port = ports.prometheus-node-exporter;
+      # Security: Have fun scraping, I don't care
+      openFirewall = true;
+      listenAddress = "[::]";
     };
   };
 

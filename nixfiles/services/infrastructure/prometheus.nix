@@ -10,12 +10,6 @@ in
     port = ports.prometheus;
 
     exporters = {
-      node = {
-        enable = true;
-        enabledCollectors = [ "systemd" "ethtool" ];
-        port = ports.prometheus-node-exporter;
-      };
-
       postgres = {
         enable = true;
         port = ports.postgres-metrics;
@@ -27,7 +21,11 @@ in
       {
         job_name = "node";
         static_configs = [{
-          targets = [ "services.rappet.xyz:${toString config.services.prometheus.exporters.node.port}" ];
+          targets = [
+            "services.internal:${toString config.services.prometheus.exporters.node.port}"
+            "thinkcentre.internal:${toString config.services.prometheus.exporters.node.port}"
+            "fra1-de.internal:${toString config.services.prometheus.exporters.node.port}"
+          ];
         }];
       }
       {
