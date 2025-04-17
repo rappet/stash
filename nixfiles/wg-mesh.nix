@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ pkgs, config, lib, ... }:
 
 let
   hosts = [
@@ -38,6 +38,18 @@ in
   networking.firewall = {
     allowedUDPPorts = [ 51820 ];
   };
+
+  networking.hostFiles = [
+    (pkgs.writeText
+      "wg-mesh-hosts"
+      (lib.strings.concatLines
+        (map
+          (h: "${ula}:${lib.trivial.toHexString h.hostId}::1 ${h.name}.internal")
+          hosts
+        )
+      )
+    )
+  ];
 
   networking.wireguard = {
     enable = true;
