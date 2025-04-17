@@ -9,7 +9,8 @@ let
   services = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGiBQs4tZGKGXPkc/HmpazTl5LrB8O+ka1Eao446/FOD";
   apu = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL0DXtBKuiY0nylLoAvf65fr8VW9F0LijUIko4Q1sl9t";
   thinkcentre = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMaBGPHgYp8MA0f9PPElL/z4NiWKIgHqjO9ZQ3pgOUdu";
-  servers = [ services thinkcentre ];
+  fra1-de = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFJh1UtgpBvgElcJCuVNU5ykvV9LpAnlTRz3/h7E4IJn";
+  servers = [ services thinkcentre fra1-de ];
 in
 {
   "murmur-env.age".publicKeys = users ++ [ services ];
@@ -25,6 +26,7 @@ in
   "letsencrypt-hetzner.age".publicKeys = users ++ servers;
   "transmission.age".publicKeys = users ++ servers;
   "restic-backup-password.age".publicKeys = users ++ servers;
+  "garage-env.age".publicKeys = users ++ servers;
 
   "authelia-hmac-secret.age".publicKeys = users ++ [ services ];
   "authelia-jwks.age".publicKeys = users ++ [ services ];
