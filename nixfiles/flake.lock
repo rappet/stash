@@ -265,11 +265,11 @@
       },
       "locked": {
         "dir": "projects/web/rappet-xyz",
-        "lastModified": 1744573805,
-        "narHash": "sha256-PjDVufbfUqizrCnLXvBhGcFDd7i1v0gOBPd8iRPpy6E=",
+        "lastModified": 1744927745,
+        "narHash": "sha256-bttiO3KvB5EN6EStnuxFV/Bp2Oz/U46ZuSC8ul7ael8=",
         "owner": "rappet",
         "repo": "stash",
-        "rev": "e2f2b1fc2d301c2a4ddaf48ab021463967d81bf8",
+        "rev": "495bd4ceadeeaefc6d58e848f18c9f5ed0cefe58",
         "type": "github"
       },
       "original": {
