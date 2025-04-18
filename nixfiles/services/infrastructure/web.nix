@@ -47,6 +47,24 @@
           root = "/var/www/phanpy.rappet.xyz";
         };
       };
+      "s3.eimer.rappet.xyz" = {
+        forceSSL = true;
+        serverAliases = [ "*.s3.eimer.rappet.xyz" ];
+        sslCertificate = "/var/lib/acme/eimer.rappet.xyz/fullchain.pem";
+        sslCertificateKey = "/var/lib/acme/eimer.rappet.xyz/key.pem";
+        locations."/" = {
+          proxyPass = "http://[::1]:3900";
+        };
+      };
+      "web.eimer.rappet.xyz" = {
+        forceSSL = true;
+        serverAliases = [ "*.web.eimer.rappet.xyz" ];
+        sslCertificate = "/var/lib/acme/eimer.rappet.xyz/fullchain.pem";
+        sslCertificateKey = "/var/lib/acme/eimer.rappet.xyz/key.pem";
+        locations."/" = {
+          proxyPass = "http://[::1]:3902";
+        };
+      };
     };
   };
 
@@ -56,6 +74,14 @@
     credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
     domain = "rappet.xyz";
     extraDomainNames = [ "*.rappet.xyz" ];
+  };
+
+  security.acme.certs."eimer.rappet.xyz" = {
+    group = "nginx";
+    dnsProvider = "hetzner";
+    credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
+    domain = "eimer.rappet.xyz";
+    extraDomainNames = [ "*.s3.web.eimer.rappet.xyz" "*.web.eimer.rappet.xyz" "tools.rappet.xyz" ];
   };
 
   users.groups.web-share.members = [ "nginx" ];
