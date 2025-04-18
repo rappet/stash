@@ -49,7 +49,7 @@
       };
       "s3.eimer.rappet.xyz" = {
         forceSSL = true;
-        serverAliases = [ "*.s3.eimer.rappet.xyz" ];
+        serverAliases = [ "s3.eimer.rappet.xyz" "*.s3.eimer.rappet.xyz" ];
         sslCertificate = "/var/lib/acme/eimer.rappet.xyz/fullchain.pem";
         sslCertificateKey = "/var/lib/acme/eimer.rappet.xyz/key.pem";
         locations."/" = {
@@ -85,6 +85,7 @@
     credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
     domain = "eimer.rappet.xyz";
     extraDomainNames = [
+      "s3.eimer.rappet.xyz"
       "*.s3.eimer.rappet.xyz"
       "*.web.eimer.rappet.xyz"
       "tools.rappet.xyz"
