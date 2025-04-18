@@ -73,7 +73,10 @@
     dnsProvider = "hetzner";
     credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
     domain = "rappet.xyz";
-    extraDomainNames = [ "*.rappet.xyz" ];
+    extraDomainNames = [
+      "*.rappet.xyz"
+      "${config.networking.hostName}.rappet.xyz"
+    ];
   };
 
   security.acme.certs."eimer.rappet.xyz" = {
@@ -81,7 +84,12 @@
     dnsProvider = "hetzner";
     credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
     domain = "eimer.rappet.xyz";
-    extraDomainNames = [ "*.s3.web.eimer.rappet.xyz" "*.web.eimer.rappet.xyz" "tools.rappet.xyz" ];
+    extraDomainNames = [
+      "*.s3.eimer.rappet.xyz"
+      "*.web.eimer.rappet.xyz"
+      "tools.rappet.xyz"
+      "${config.networking.hostName}.rappet.xyz"
+    ];
   };
 
   users.groups.web-share.members = [ "nginx" ];
