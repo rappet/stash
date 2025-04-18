@@ -75,7 +75,7 @@
     domain = "rappet.xyz";
     extraDomainNames = [
       "*.rappet.xyz"
-      "${config.networking.hostName}.rappet.xyz"
+      "${config.networking.hostName}.lb.rappet.xyz"
     ];
   };
 
