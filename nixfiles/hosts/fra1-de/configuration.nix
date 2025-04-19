@@ -71,7 +71,7 @@
 
   networking.useDHCP = false;
 
-  services.bird2 = {
+  services.bird = {
     package = pkgs.bird2;
     enable = true;
     config = ''
