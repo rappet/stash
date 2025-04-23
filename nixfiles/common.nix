@@ -157,5 +157,7 @@ in
     group = "root";
   };
 
+  networking.nftables.enable = true;
+
   system.stateVersion = "23.11";
 }

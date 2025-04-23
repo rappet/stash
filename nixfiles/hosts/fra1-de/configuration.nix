@@ -14,8 +14,6 @@
   services.openssh.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
-  networking.firewall.enable = false;
-
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
     "net.ipv6.conf.all.forwarding" = 1;
@@ -104,8 +102,7 @@
 
   services.prometheus.exporters.bird = {
     enable = true;
-    # what firewall?
-    # openFirewall = true;
+    openFirewall = true;
   };
 
 }
