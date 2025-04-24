@@ -19,6 +19,8 @@
     "net.ipv6.conf.all.forwarding" = 1;
   };
 
+  networking.firewall.checkReversePath = false;
+
   networking.interfaces = {
     lo = {
       ipv6.addresses = [{
