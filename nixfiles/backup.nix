@@ -13,9 +13,19 @@
       "--keep-monthly 12"
     ];
     paths = [
-      "/var/lib"
-      "/var/backup"
-      "/var/www"
+      "/var"
+    ];
+    exclude = [
+        "/var/cache"
+        "/var/lock"
+        "/var/spool"
+        "/var/run"
+        "/var/tmp"
+
+        "/var/log"
+
+        "/var/media"
+        "/var/torrents"
     ];
     inhibitsSleep = true;
   };
