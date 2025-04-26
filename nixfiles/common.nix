@@ -163,5 +163,12 @@ in
 
   networking.nftables.enable = true;
 
+  programs.ssh.extraConfig = ''
+    Host storagebox
+      Port 23
+      User u215491
+      HostName u215491.your-storagebox.de
+    '';
+
   system.stateVersion = "23.11";
 }
