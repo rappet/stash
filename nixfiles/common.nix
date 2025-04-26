@@ -114,7 +114,7 @@ in
       "--no-write-lock-file"
       "-L" # print build logs
     ];
-    dates = "*:0/30";
+    dates = "*:0/10";
     allowReboot = true;
     rebootWindow = {
       lower = "02:00";
