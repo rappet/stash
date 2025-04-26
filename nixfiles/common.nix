@@ -95,6 +95,16 @@ in
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
 
+  #services.comin = {
+  #  enable = true;
+  #  remotes = [{
+  #    name = "origin";
+  #    url = "https://github.com/rappet/stash.git";
+  #    branches.main.name = "main";
+  #  }];
+  #  flakeSubdirectory = "nixfiles";
+  #};
+
   system.autoUpgrade = {
     enable = true;
     flake = "github:rappet/stash/main?dir=nixfiles";
