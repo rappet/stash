@@ -16,16 +16,16 @@
       "/var"
     ];
     exclude = [
-        "/var/cache"
-        "/var/lock"
-        "/var/spool"
-        "/var/run"
-        "/var/tmp"
+      "/var/cache"
+      "/var/lock"
+      "/var/spool"
+      "/var/run"
+      "/var/tmp"
 
-        "/var/log"
+      "/var/log"
 
-        "/var/media"
-        "/var/torrents"
+      "/var/media"
+      "/var/torrents"
     ];
     inhibitsSleep = true;
   };
