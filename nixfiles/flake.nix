@@ -19,37 +19,39 @@
   };
 
   outputs = inputs: with inputs; {
-    nixosConfigurations = {
-      "services" = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
+    nixosConfigurations =
+      let
+        baseModules = [
+          agenix.nixosModules.default
           disko.nixosModules.disko
-          ./modules/reverse-proxy.nix
-          agenix.nixosModules.default
-          ./hosts/services/configuration.nix
         ];
-        specialArgs = { system = "aarch64-linux"; inputs = inputs; };
+      in
+      {
+        "services" = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = baseModules ++ [
+            ./modules/reverse-proxy.nix
+            ./hosts/services/configuration.nix
+          ];
+          specialArgs = { system = "aarch64-linux"; inputs = inputs; };
+        };
+        "thinkcentre" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = baseModules ++ [
+            ./modules/reverse-proxy.nix
+            ./hosts/thinkcentre/configuration.nix
+            ./hosts/thinkcentre/hardware-configuration.nix
+          ];
+          specialArgs = { system = "x86_64-linux"; inputs = inputs; };
+        };
+        "fra1-de" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = baseModules ++ [
+            ./hosts/fra1-de/configuration.nix
+          ];
+          specialArgs = { system = "x86_64-linux"; };
+        };
       };
-      "thinkcentre" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          disko.nixosModules.disko
-          ./modules/reverse-proxy.nix
-          agenix.nixosModules.default
-          ./hosts/thinkcentre/configuration.nix
-          ./hosts/thinkcentre/hardware-configuration.nix
-        ];
-        specialArgs = { system = "x86_64-linux"; inputs = inputs; };
-      };
-      "fra1-de" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/fra1-de/configuration.nix
-          agenix.nixosModules.default
-        ];
-        specialArgs = { system = "x86_64-linux"; };
-      };
-    };
 
     deploy.nodes = {
       services = {
