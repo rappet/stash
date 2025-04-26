@@ -21,6 +21,6 @@
   };
 
   age.secrets.restic-backup-password = {
-    file = ../../secret/restic-backup-password.age;
+    file = ./secret/restic-backup-password.age;
   };
 }

@@ -4,7 +4,6 @@
     ../../common.nix
     ../../services/infrastructure/web.nix
     ../../services/infrastructure/postgresql-backup.nix
-    ./backup.nix
     #../../services/apps/libreddit.nix
     #../../services/apps/mumble.nix
     ../../services/apps/headscale.nix

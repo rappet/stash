@@ -10,6 +10,10 @@ let
   ports = import ./services/ports.nix;
 in
 {
+  imports = [
+    ./backup.nix
+  ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nix.gc = {
