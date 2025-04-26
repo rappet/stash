@@ -53,10 +53,8 @@ in
 
   networking.wireguard = {
     enable = true;
-    interfaces.wg0 = {
+    interfaces.wg-mesh = {
       ips = [
-        "${publicShort}::${lib.trivial.toHexString self.hostId}"
-        "${public}:${lib.trivial.toHexString self.hostId}00::1"
         "${ula}:${lib.trivial.toHexString self.hostId}::1"
         "${ula}:${selfNodeHash}::1"
       ];
