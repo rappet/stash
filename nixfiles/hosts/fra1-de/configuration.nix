@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../common.nix
@@ -19,7 +19,7 @@
     "net.ipv6.conf.all.forwarding" = 1;
   };
 
-  networking.firewall.checkReversePath = false;
+  networking.firewall.checkReversePath = lib.mkForce false;
 
   networking.interfaces = {
     lo = {
