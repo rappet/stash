@@ -123,4 +123,25 @@
   };
 
   users.groups.rappet-xyz = { };
+
+  nixpkgs.config.allowUnfree = true;
+
+  services.minecraft-server = {
+    enable = true;
+    package = pkgs.papermcServers.papermc-1_21_4;
+    eula = true;
+    declarative = true;
+    serverProperties = {
+      server-port = 25565;
+      difficulty = 3;
+      gamemode = 1;
+      max-players = 5;
+      motd = "NixOS Minecraft server!";
+      white-list = true;
+    };
+    openFirewall = true;
+    whitelist = {
+      rappet = "588377a5-362f-4ea1-8195-9cf97dd7a884";
+    };
+  };
 }
