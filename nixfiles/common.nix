@@ -109,6 +109,7 @@ in
     enable = true;
     flake = "github:rappet/stash/main?dir=nixfiles";
     flags = [
+      # deprecated (still works), alias for nix flakes update, replaced when system.autoUpgrade module is updated
       "--update-input"
       "nixpkgs"
       "--no-write-lock-file"
