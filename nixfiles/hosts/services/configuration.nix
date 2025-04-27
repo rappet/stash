@@ -33,6 +33,7 @@
     ../../services/apps/transmission.nix
     #../../services/infrastructure/authelia.nix
     ../../services/apps/mastodon.nix
+    ../../services/apps/minecraft-server.nix
 
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -140,38 +141,4 @@
   users.groups.rappet-xyz = { };
 
   nixpkgs.config.allowUnfree = true;
-
-  services.minecraft-server = {
-    enable = true;
-    package = pkgs.papermcServers.papermc-1_21_4;
-    eula = true;
-    declarative = true;
-    serverProperties = {
-      server-port = 25565;
-      difficulty = 3;
-      gamemode = 0;
-      max-players = 5;
-      motd = "rappet's survival server";
-      white-list = true;
-      level-name = "Survival";
-      view-distance = 16;
-      spawn-protection = 0;
-    };
-    openFirewall = true;
-    whitelist = {
-      rappet = "588377a5-362f-4ea1-8195-9cf97dd7a884";
-      Matttin = "684e849d-8186-4f57-90ed-41888024118a";
-      Auravendill = "e84ffee0-0e0b-4c16-be29-293a383d96c4";
-      Riki1675 = "29453242-c200-4b2d-a6e9-52ded64c5b43";
-    };
-  };
-
-  services.bluemap = {
-    enable = true;
-    eula = true;
-    host = "mc.rappet.xyz";
-    defaultWorld = "${config.services.minecraft-server.dataDir}/${config.services.minecraft-server.serverProperties.level-name}";
-    enableNginx = true;
-    onCalendar = "hourly";
-  };
 }
