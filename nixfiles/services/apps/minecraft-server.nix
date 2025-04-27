@@ -71,7 +71,7 @@ in
     host = "mc.rappet.xyz";
     defaultWorld = "${config.services.minecraft-server.dataDir}/${config.services.minecraft-server.serverProperties.level-name}";
     enableNginx = true;
-    onCalendar = "hourly";
+    onCalendar = "03:10:00";
   };
 
   systemd.services."render-bluemap-maps" = lib.mkForce {
