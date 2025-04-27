@@ -159,6 +159,8 @@
     openFirewall = true;
     whitelist = {
       rappet = "588377a5-362f-4ea1-8195-9cf97dd7a884";
+      Matttin = "684e849d-8186-4f57-90ed-41888024118a";
+      Auravendill = "e84ffee0-0e0b-4c16-be29-293a383d96c4";
     };
   };
 }
