@@ -139,6 +139,7 @@
       motd = "rappet's survival server";
       white-list = true;
       level-name = "Survival";
+      view-distance = 16;
     };
     openFirewall = true;
     whitelist = {
