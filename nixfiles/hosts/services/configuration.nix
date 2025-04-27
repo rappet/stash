@@ -155,6 +155,7 @@
       white-list = true;
       level-name = "Survival";
       view-distance = 16;
+      spawn-protection = 0;
     };
     openFirewall = true;
     whitelist = {
