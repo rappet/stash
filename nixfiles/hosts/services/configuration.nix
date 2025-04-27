@@ -165,4 +165,13 @@
       Riki1675 = "29453242-c200-4b2d-a6e9-52ded64c5b43";
     };
   };
+
+  services.bluemap = {
+    enable = true;
+    eula = true;
+    host = "mc.rappet.xyz";
+    defaultWorld = "${config.services.minecraft-server.dataDir}/${config.services.minecraft-server.serverProperties.level-name}";
+    enableNginx = true;
+    onCalendar = "hourly";
+  };
 }
