@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
-let domain = "headscale.rappet.xyz";
+let
+  domain = "headscale.rappet.xyz";
 in
 {
   services.headscale = {
@@ -29,8 +30,7 @@ in
     sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
     sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
     locations."/" = {
-      proxyPass =
-        "http://localhost:${toString config.services.headscale.port}";
+      proxyPass = "http://localhost:${toString config.services.headscale.port}";
       proxyWebsockets = true;
     };
   };

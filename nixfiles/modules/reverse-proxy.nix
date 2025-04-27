@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
@@ -20,18 +25,17 @@ in
     };
   };
 
-  config = mkIf cfg.enable
-    {
-      services.nginx = {
-        enable = true;
-        recommendedProxySettings = true;
-        recommendedOptimisation = true;
-        recommendedGzipSettings = true;
-        recommendedBrotliSettings = true;
-        recommendedTlsSettings = true;
+  config = mkIf cfg.enable {
+    services.nginx = {
+      enable = true;
+      recommendedProxySettings = true;
+      recommendedOptimisation = true;
+      recommendedGzipSettings = true;
+      recommendedBrotliSettings = true;
+      recommendedTlsSettings = true;
 
-        defaultHTTPListenPort = 8080;
-        defaultSSLListenPort = 8443;
-      };
+      defaultHTTPListenPort = 8080;
+      defaultSSLListenPort = 8443;
     };
+  };
 }

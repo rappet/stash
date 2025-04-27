@@ -1,4 +1,12 @@
-{ modulesPath, pkgs, inputs, system, config, ... }: {
+{
+  modulesPath,
+  pkgs,
+  inputs,
+  system,
+  config,
+  ...
+}:
+{
   services.restic.backups.var = {
     repository = "sftp:storagebox:backup-server";
     timerConfig = {

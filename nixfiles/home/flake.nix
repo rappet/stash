@@ -11,25 +11,27 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = inputs: with inputs;
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-          };
-        in
-        {
-          legacyPackages.homeConfigurations.rappet = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [
-              ./neovim
-              ./cli
-              ./params
-            ];
-          };
+  outputs =
+    inputs:
+    with inputs;
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+        };
+      in
+      {
+        legacyPackages.homeConfigurations.rappet = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./neovim
+            ./cli
+            ./params
+          ];
+        };
 
-          formatter = pkgs.nixpkgs-fmt;
-        }
-      );
+        formatter = pkgs.nixpkgs-fmt;
+      }
+    );
 }

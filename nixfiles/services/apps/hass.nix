@@ -17,7 +17,6 @@
     };
   };
 
-
   services.nginx = {
     enable = true;
 
@@ -38,6 +37,9 @@
     };
   };
 
-
-  networking.firewall.allowedTCPPorts = [ 80 443 8123 ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+    8123
+  ];
 }

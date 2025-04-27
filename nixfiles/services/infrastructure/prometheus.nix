@@ -20,32 +20,40 @@ in
     scrapeConfigs = [
       {
         job_name = "node";
-        static_configs = [{
-          targets = [
-            "services.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
-            "thinkcentre.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
-            "fra1-de.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
-          ];
-        }];
+        static_configs = [
+          {
+            targets = [
+              "services.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
+              "thinkcentre.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
+              "fra1-de.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
+            ];
+          }
+        ];
       }
       {
         job_name = "bird";
-        static_configs = [{
-          targets = [ "193.148.249.188:9324" ];
-          labels.host = "fra1-de";
-        }];
+        static_configs = [
+          {
+            targets = [ "193.148.249.188:9324" ];
+            labels.host = "fra1-de";
+          }
+        ];
       }
       {
         job_name = "haproxy";
-        static_configs = [{
-          targets = [ "services.rappet.xyz:${toString ports.haproxy-metrics-http}" ];
-        }];
+        static_configs = [
+          {
+            targets = [ "services.rappet.xyz:${toString ports.haproxy-metrics-http}" ];
+          }
+        ];
       }
       {
         job_name = "postgres";
-        static_configs = [{
-          targets = [ "services.rappet.xyz:${toString ports.postgres-metrics}" ];
-        }];
+        static_configs = [
+          {
+            targets = [ "services.rappet.xyz:${toString ports.postgres-metrics}" ];
+          }
+        ];
       }
     ];
   };
@@ -58,6 +66,5 @@ in
   #    recommendedProxySettings = true;
   #  };
   #};
-
 
 }

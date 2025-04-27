@@ -40,7 +40,6 @@ in
     allowedTCPPorts = [ 1883 ];
   };
 
-
   age.secrets.mqtt-shelly-auth = {
     file = ../secret/mqtt-shelly-auth.age;
     owner = "mosquitto";

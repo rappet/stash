@@ -25,16 +25,18 @@ in
 
       limits_config.allow_structured_metadata = false;
 
-      schema_config.configs = [{
-        from = "2023-05-09";
-        store = "boltdb-shipper";
-        object_store = "filesystem";
-        schema = "v11";
-        index = {
-          prefix = "index_";
-          period = "24h";
-        };
-      }];
+      schema_config.configs = [
+        {
+          from = "2023-05-09";
+          store = "boltdb-shipper";
+          object_store = "filesystem";
+          schema = "v11";
+          index = {
+            prefix = "index_";
+            period = "24h";
+          };
+        }
+      ];
     };
   };
 
@@ -46,9 +48,11 @@ in
         grpc_listen_port = 0;
       };
       positions.filename = "/tmp/positions.yml";
-      clients = [{
-        url = "http://localhost:${toString config.services.loki.configuration.server.http_listen_port}/loki/api/v1/push";
-      }];
+      clients = [
+        {
+          url = "http://localhost:${toString config.services.loki.configuration.server.http_listen_port}/loki/api/v1/push";
+        }
+      ];
       scrape_configs = [
         {
           job_name = "journal";
@@ -59,10 +63,12 @@ in
               host = config.networking.hostName;
             };
           };
-          relabel_configs = [{
-            source_labels = [ "__journal__systemd_unit" ];
-            target_label = "unit";
-          }];
+          relabel_configs = [
+            {
+              source_labels = [ "__journal__systemd_unit" ];
+              target_label = "unit";
+            }
+          ];
         }
       ];
     };

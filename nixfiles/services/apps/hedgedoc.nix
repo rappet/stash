@@ -48,10 +48,12 @@ rec {
 
   services.postgresql = {
     enable = true;
-    ensureUsers = [{
-      name = "hedgedoc";
-      ensureDBOwnership = true;
-    }];
+    ensureUsers = [
+      {
+        name = "hedgedoc";
+        ensureDBOwnership = true;
+      }
+    ];
     ensureDatabases = [ "hedgedoc" ];
   };
 

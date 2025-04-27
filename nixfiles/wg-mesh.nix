@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 let
   hosts = [
@@ -22,7 +27,13 @@ let
       endpoint = "91.99.19.52:51821";
     }
   ];
-  self = (builtins.listToAttrs (builtins.map (host: { name = host.name; value = host; }) hosts))."${config.networking.hostName}";
+  self =
+    (builtins.listToAttrs (
+      builtins.map (host: {
+        name = host.name;
+        value = host;
+      }) hosts
+    ))."${config.networking.hostName}";
   selfNodeHash = builtins.substring 0 4 (builtins.hashString "sha256" self.name);
   ula = "fdd1:6b5f:0b54";
   publicShort = "2a0e:46c6";
@@ -34,15 +45,11 @@ in
   };
 
   networking.hostFiles = [
-    (pkgs.writeText
-      "wg-mesh-hosts"
-      (lib.strings.concatLines
-        (map
-          (h: "${ula}:${lib.trivial.toHexString h.hostId}::1 ${h.name}.rappet.xyz")
-          hosts
-        )
+    (pkgs.writeText "wg-mesh-hosts" (
+      lib.strings.concatLines (
+        map (h: "${ula}:${lib.trivial.toHexString h.hostId}::1 ${h.name}.rappet.xyz") hosts
       )
-    )
+    ))
   ];
 
   networking.firewall.trustedInterfaces = [ "wg-mesh" ];
@@ -58,9 +65,10 @@ in
       privateKeyFile = "/root/wireguard-keys/private";
       mtu = 1432;
 
-      peers =
-        (map
-          (host:
+      peers = (
+        map
+          (
+            host:
             let
               nodeId = builtins.substring 0 4 (builtins.hashString "sha256" host.name);
             in
@@ -75,11 +83,14 @@ in
               ] ++ (if host.hostId == 2 && self.hostId == 1 then [ "::/1" ] else [ ]);
               endpoint = host.endpoint;
               persistentKeepalive = if host.endpoint != null then 25 else null;
-            })
-          (builtins.filter
-            (host: host.name != config.networking.hostName && (self.endpoint != null || host.endpoint != null))
-            hosts)
-        );
+            }
+          )
+          (
+            builtins.filter (
+              host: host.name != config.networking.hostName && (self.endpoint != null || host.endpoint != null)
+            ) hosts
+          )
+      );
     };
   };
 }

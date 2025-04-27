@@ -14,14 +14,19 @@ rec {
 
   services.postgresql = {
     enable = true;
-    ensureUsers = [{
-      name = "quassel";
-      ensureDBOwnership = true;
-    }];
+    ensureUsers = [
+      {
+        name = "quassel";
+        ensureDBOwnership = true;
+      }
+    ];
     ensureDatabases = [ "quassel" ];
   };
 
-  users.groups.quassel-cert.members = [ "quassel" "nginx" ];
+  users.groups.quassel-cert.members = [
+    "quassel"
+    "nginx"
+  ];
   security.acme.certs."${domain}".group = "quassel-cert";
 
   services.nginx.virtualHosts."${domain}" = {

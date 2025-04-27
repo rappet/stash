@@ -4,13 +4,22 @@ let
   katze = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO5JIcEqbIaq/pBCbaU1AV3V2Mor1ZdgKoO3O9vJqW4f";
   ibook-nixos = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJh6LcV2AdljIQBFYWE7tRUvEfTfbNqFM3J5N8cmz50Z";
   framework = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyGxZI3l3PBv+zO6ZxgfP1hiMiQWwNevVtgfuUeBFDI";
-  users = [ ibook katze ibook-nixos framework ];
+  users = [
+    ibook
+    katze
+    ibook-nixos
+    framework
+  ];
 
   services = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGiBQs4tZGKGXPkc/HmpazTl5LrB8O+ka1Eao446/FOD";
   apu = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL0DXtBKuiY0nylLoAvf65fr8VW9F0LijUIko4Q1sl9t";
   thinkcentre = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMaBGPHgYp8MA0f9PPElL/z4NiWKIgHqjO9ZQ3pgOUdu";
   fra1-de = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFJh1UtgpBvgElcJCuVNU5ykvV9LpAnlTRz3/h7E4IJn";
-  servers = [ services thinkcentre fra1-de ];
+  servers = [
+    services
+    thinkcentre
+    fra1-de
+  ];
 in
 {
   "murmur-env.age".publicKeys = users ++ [ services ];

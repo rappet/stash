@@ -1,4 +1,10 @@
-{ config, pkgs, system, inputs, ... }:
+{
+  config,
+  pkgs,
+  system,
+  inputs,
+  ...
+}:
 {
   services.haproxy = {
     enable = true;
@@ -49,7 +55,10 @@
       };
       "s3.eimer.rappet.xyz" = {
         forceSSL = true;
-        serverAliases = [ "s3.eimer.rappet.xyz" "*.s3.eimer.rappet.xyz" ];
+        serverAliases = [
+          "s3.eimer.rappet.xyz"
+          "*.s3.eimer.rappet.xyz"
+        ];
         sslCertificate = "/var/lib/acme/eimer.rappet.xyz/fullchain.pem";
         sslCertificateKey = "/var/lib/acme/eimer.rappet.xyz/key.pem";
         locations."/" = {
@@ -106,5 +115,8 @@
     group = "root";
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 }

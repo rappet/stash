@@ -1,5 +1,10 @@
 # common files for NixOS
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   ssh-keys = [
@@ -14,7 +19,10 @@ in
     ./backup.nix
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   nix.gc = {
     automatic = true;
@@ -24,7 +32,6 @@ in
   security = {
     polkit.enable = true;
   };
-
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -126,7 +133,10 @@ in
   services.prometheus.exporters = {
     node = {
       enable = true;
-      enabledCollectors = [ "systemd" "ethtool" ];
+      enabledCollectors = [
+        "systemd"
+        "ethtool"
+      ];
       port = ports.prometheus-node-exporter;
       # Security: Have fun scraping, I don't care
       openFirewall = true;
@@ -163,7 +173,10 @@ in
   };
 
   networking.firewall = {
-    allowedTCPPorts = [ 3901 3903 ];
+    allowedTCPPorts = [
+      3901
+      3903
+    ];
   };
 
   age.secrets.garage-env = {

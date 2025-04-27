@@ -1,4 +1,12 @@
-{ modulesPath, pkgs, inputs, system, config, ... }: {
+{
+  modulesPath,
+  pkgs,
+  inputs,
+  system,
+  config,
+  ...
+}:
+{
   imports = [
     #./hardware-configuration.nix
     ../../common.nix
@@ -26,7 +34,6 @@
     #../../services/infrastructure/authelia.nix
     ../../services/apps/mastodon.nix
 
-
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
@@ -49,10 +56,12 @@
     hostName = "services";
     domain = "rappet.xyz";
     hostId = "85337bbb";
-    interfaces.enp1s0.ipv6.addresses = [{
-      address = "2a01:4f8:1c1a:a55::1";
-      prefixLength = 128;
-    }];
+    interfaces.enp1s0.ipv6.addresses = [
+      {
+        address = "2a01:4f8:1c1a:a55::1";
+        prefixLength = 128;
+      }
+    ];
     defaultGateway6 = {
       address = "fe80::1";
       interface = "enp1s0";
@@ -64,7 +73,10 @@
       externalInterface = "enp1s0";
       enableIPv6 = true;
     };
-    nameservers = [ "1.1.1.1" "9.9.9.9" ];
+    nameservers = [
+      "1.1.1.1"
+      "9.9.9.9"
+    ];
   };
 
   users.users.apple-upload = {

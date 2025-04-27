@@ -18,7 +18,6 @@ in
 
   age.secrets.murmur-env.file = ../../secret/murmur-env.age;
 
-
   users.users.nginx.extraGroups = [ "murmur" ];
   security.acme.certs."${domain}".group = "murmur";
 

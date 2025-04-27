@@ -26,22 +26,36 @@
     "/var/btrfs_intern" = {
       device = "/dev/mapper/intern";
       fsType = "btrfs";
-      options = [ "noatime" "nodiratime" ];
+      options = [
+        "noatime"
+        "nodiratime"
+      ];
     };
     "/var/shared" = {
       device = "/dev/mapper/intern";
       fsType = "btrfs";
-      options = [ "noatime" "nodiratime" "subvol=@shared" ];
+      options = [
+        "noatime"
+        "nodiratime"
+        "subvol=@shared"
+      ];
     };
     "/var/smbhome" = {
       device = "/dev/mapper/intern";
       fsType = "btrfs";
-      options = [ "noatime" "nodiratime" "subvol=@smbhome" ];
+      options = [
+        "noatime"
+        "nodiratime"
+        "subvol=@smbhome"
+      ];
     };
     "/media" = {
       device = "/dev/mapper/vg--data-media";
       fsType = "xfs";
-      options = [ "noatime" "nodiratime" ];
+      options = [
+        "noatime"
+        "nodiratime"
+      ];
     };
   };
 

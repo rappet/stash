@@ -1,4 +1,12 @@
-{ modulesPath, pkgs, inputs, system, config, ... }: {
+{
+  modulesPath,
+  pkgs,
+  inputs,
+  system,
+  config,
+  ...
+}:
+{
   imports = [
     #./hardware-configuration.nix
     ../../common.nix
@@ -34,7 +42,10 @@
       externalInterface = "eno1";
       enableIPv6 = true;
     };
-    nameservers = [ "1.1.1.1" "9.9.9.9" ];
+    nameservers = [
+      "1.1.1.1"
+      "9.9.9.9"
+    ];
   };
 
   services.zfs = {

@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   imports = [
     ./hardware-configuration.nix
     ../../common.nix
@@ -23,42 +24,56 @@
 
   networking.interfaces = {
     lo = {
-      ipv6.addresses = [{
-        address = "2a0e:46c6::2";
-        prefixLength = 128;
-      }];
+      ipv6.addresses = [
+        {
+          address = "2a0e:46c6::2";
+          prefixLength = 128;
+        }
+      ];
     };
     ens18 = {
-      ipv4.addresses = [{
-        address = "193.148.249.188";
-        prefixLength = 24;
-      }];
-      ipv6.addresses = [{
-        address = "2a0c:9a40:1::609";
-        prefixLength = 48;
-      }];
+      ipv4.addresses = [
+        {
+          address = "193.148.249.188";
+          prefixLength = 24;
+        }
+      ];
+      ipv6.addresses = [
+        {
+          address = "2a0c:9a40:1::609";
+          prefixLength = 48;
+        }
+      ];
     };
     # KleyReX
     ens19 = {
-      ipv4.addresses = [{
-        address = "193.189.82.213";
-        prefixLength = 23;
-      }];
-      ipv6.addresses = [{
-        address = "2001:7f8:33::a120:7968:1";
-        prefixLength = 64;
-      }];
+      ipv4.addresses = [
+        {
+          address = "193.189.82.213";
+          prefixLength = 23;
+        }
+      ];
+      ipv6.addresses = [
+        {
+          address = "2001:7f8:33::a120:7968:1";
+          prefixLength = 64;
+        }
+      ];
     };
     # LocIX FRA
     ens20 = {
-      ipv4.addresses = [{
-        address = "185.1.166.140";
-        prefixLength = 23;
-      }];
-      ipv6.addresses = [{
-        address = "2001:7f8:f2:e1:0:a120:7968:1";
-        prefixLength = 64;
-      }];
+      ipv4.addresses = [
+        {
+          address = "185.1.166.140";
+          prefixLength = 23;
+        }
+      ];
+      ipv6.addresses = [
+        {
+          address = "2001:7f8:f2:e1:0:a120:7968:1";
+          prefixLength = 64;
+        }
+      ];
     };
   };
 
@@ -67,7 +82,10 @@
     interface = "ens18";
   };
 
-  networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
+  networking.nameservers = [
+    "1.1.1.1"
+    "9.9.9.9"
+  ];
 
   networking.useDHCP = false;
 
@@ -77,7 +95,7 @@
     config = ''
       include "${./bird/prefix_lists/exportnet4.conf}";
       include "${./bird/prefix_lists/exportnet6.conf}";
-  
+
       # common config
       ${builtins.readFile ./bird/common.conf}
 

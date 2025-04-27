@@ -1,20 +1,32 @@
-{ pkgs, lib, system, rust-cli, ... }:
+{
+  pkgs,
+  lib,
+  system,
+  rust-cli,
+  ...
+}:
 
 let
   theme = import ./theme.nix;
   gpg-key = "6116F3CD99CB533F07E4E1441829D5210E0EEC51";
-  my-python-packages = python-packages: with python-packages; [
-    pandas
-    numpy
-    matplotlib
-    requests
-    rich
-  ];
+  my-python-packages =
+    python-packages: with python-packages; [
+      pandas
+      numpy
+      matplotlib
+      requests
+      rich
+    ];
   python-with-my-packages = pkgs.python3.withPackages my-python-packages;
-  linux-packages = with pkgs; if stdenv.isLinux then [
-    mold
-    binutils
-  ] else [ ];
+  linux-packages =
+    with pkgs;
+    if stdenv.isLinux then
+      [
+        mold
+        binutils
+      ]
+    else
+      [ ];
   packages = linux-packages;
 in
 {
@@ -75,7 +87,10 @@ in
       enable = true;
       settings = {
         misc = { };
-        linux.home_manager_arguments = [ "--flake" "/home/rappet/stash/nixfiles/home" ];
+        linux.home_manager_arguments = [
+          "--flake"
+          "/home/rappet/stash/nixfiles/home"
+        ];
       };
     };
   };
@@ -85,17 +100,23 @@ in
   };
 
   xsession.windowManager.i3 =
-    if pkgs.stdenv.isLinux then {
-      enable = true;
-      config = {
-        modifier = "Mod1";
-        terminal = "$HOME/.nix-profile/bin/kitty";
-      };
-    } else { };
+    if pkgs.stdenv.isLinux then
+      {
+        enable = true;
+        config = {
+          modifier = "Mod1";
+          terminal = "$HOME/.nix-profile/bin/kitty";
+        };
+      }
+    else
+      { };
 
   services.gpg-agent =
-    if pkgs.stdenv.isLinux then {
-      enable = true;
-      pinentryPackage = pkgs.pinentry-gnome3;
-    } else { };
+    if pkgs.stdenv.isLinux then
+      {
+        enable = true;
+        pinentryPackage = pkgs.pinentry-gnome3;
+      }
+    else
+      { };
 }

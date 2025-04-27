@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   domain = "sso.rappet.xyz";
@@ -67,10 +72,12 @@ rec {
 
   services.postgresql = {
     enable = true;
-    ensureUsers = [{
-      name = "authelia";
-      ensureDBOwnership = true;
-    }];
+    ensureUsers = [
+      {
+        name = "authelia";
+        ensureDBOwnership = true;
+      }
+    ];
     ensureDatabases = [ "authelia" ];
   };
 
@@ -82,13 +89,22 @@ rec {
     domain = "${domain}";
   };
 
-  age.secrets = builtins.listToAttrs (builtins.map
-    (name: {
-      name = "authelia-${name}";
-      value = {
-        file = ../../secret/authelia-${name}.age;
-        owner = "authelia-rappet-xyz";
-        group = "authelia-rappet-xyz";
-      };
-    }) [ "hmac-secret" "jwks" "jwt-secret" "session-secret" "storage-secret" ]);
+  age.secrets = builtins.listToAttrs (
+    builtins.map
+      (name: {
+        name = "authelia-${name}";
+        value = {
+          file = ../../secret/authelia-${name}.age;
+          owner = "authelia-rappet-xyz";
+          group = "authelia-rappet-xyz";
+        };
+      })
+      [
+        "hmac-secret"
+        "jwks"
+        "jwt-secret"
+        "session-secret"
+        "storage-secret"
+      ]
+  );
 }
