@@ -79,6 +79,9 @@
     autoScrub.enable = true;
   };
 
+  # 2GB ARC cache max
+  boot.kernelParams = [ "zfs.zfs_arc_max=2147483648" ];
+
   services.sanoid = {
     enable = true;
 
