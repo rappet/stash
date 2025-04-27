@@ -45,6 +45,8 @@ in
     )
   ];
 
+  networking.firewall.trustedInterfaces = [ "wg-mesh" ];
+
   networking.wireguard = {
     enable = true;
     interfaces.wg-mesh = {

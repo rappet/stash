@@ -136,8 +136,9 @@
       difficulty = 3;
       gamemode = 1;
       max-players = 5;
-      motd = "NixOS Minecraft server!";
+      motd = "rappet's survival server";
       white-list = true;
+      level-name = "Survival";
     };
     openFirewall = true;
     whitelist = {
