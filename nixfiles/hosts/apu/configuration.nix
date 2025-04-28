@@ -1,82 +1,34 @@
-{ config, pkgs, ... }:
+{
+  modulesPath,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
-    ./hardware-configuration.nix
     ../../common.nix
     ../../services/mdns.nix
-    ../../services/samba.nix
-    #../../services/hass.nix
+    #../../services/samba.nix
+
+    (modulesPath + "/installer/scan/not-detected.nix")
+    ./disk-config.nix
   ];
 
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/sda";
-  };
+  services.openssh.enable = true;
+  security.sudo.wheelNeedsPassword = false;
 
-  boot.kernelParams = [ "console=ttyS0,115200n8" ];
-
-  environment.etc."crypttab".text = ''
-    intern       UUID=16e5afc0-6b57-4376-bc0d-b0aa389f3621 /root/internkey      luks,discard
-    extflashlvm  UUID=fdca7cbc-9423-4ec6-becd-8b7087954be2 /root/externflashkey luks,discard
-  '';
-
-  fileSystems = {
-    "/var/btrfs_intern" = {
-      device = "/dev/mapper/intern";
-      fsType = "btrfs";
-      options = [
-        "noatime"
-        "nodiratime"
-      ];
-    };
-    "/var/shared" = {
-      device = "/dev/mapper/intern";
-      fsType = "btrfs";
-      options = [
-        "noatime"
-        "nodiratime"
-        "subvol=@shared"
-      ];
-    };
-    "/var/smbhome" = {
-      device = "/dev/mapper/intern";
-      fsType = "btrfs";
-      options = [
-        "noatime"
-        "nodiratime"
-        "subvol=@smbhome"
-      ];
-    };
-    "/media" = {
-      device = "/dev/mapper/vg--data-media";
-      fsType = "xfs";
-      options = [
-        "noatime"
-        "nodiratime"
-      ];
-    };
-  };
+  boot.kernelParams = [
+    "console=ttyS0,115200n8"
+    "zfs.zfs_arc_max=1073741824"
+  ];
 
   networking.hostName = "apu";
+  # magic not unique host id, for ZFS
+  networking.hostId = "00bab10c";
 
-  services.zigbee2mqtt = {
-    enable = true;
-    settings = {
-      permit_join = true;
-      homeassistant = true;
-      frontend.port = 8080;
-      serial.port = "/dev/ttyACM0";
-      mqtt = {
-        server = "mqtt://mqtt.rappet.xyz:1883";
-        user = "zigbee";
-        password = "shjdbjbdljkqghdiuq";
-      };
+  networking.interfaces = {
+    enp1s0 = {
+      useDHCP = true;
     };
-  };
-
-  networking.firewall = {
-    allowedTCPPorts = [ 8080 ];
   };
 }

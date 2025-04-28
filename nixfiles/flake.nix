@@ -62,6 +62,16 @@
               system = "x86_64-linux";
             };
           };
+          "apu" = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = baseModules ++ [
+              ./hosts/apu/configuration.nix
+              ./hosts/apu/hardware-configuration.nix
+            ];
+            specialArgs = {
+              system = "x86_64-linux";
+            };
+          };
         };
 
       deploy.nodes = {
@@ -77,7 +87,7 @@
           hostname = "thinkcentre";
           profiles.system = {
             sshUser = "root";
-            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.thinkcentre;
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.thinkcentre;
             remoteBuild = true;
           };
         };
@@ -86,6 +96,13 @@
           profiles.system = {
             sshUser = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.fra1-de;
+          };
+        };
+        apu = {
+          hostname = "192.168.188.39";
+          profile.system = {
+            sshUser = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.apu;
           };
         };
       };

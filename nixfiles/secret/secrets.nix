@@ -12,13 +12,14 @@ let
   ];
 
   services = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGiBQs4tZGKGXPkc/HmpazTl5LrB8O+ka1Eao446/FOD";
-  apu = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL0DXtBKuiY0nylLoAvf65fr8VW9F0LijUIko4Q1sl9t";
   thinkcentre = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMaBGPHgYp8MA0f9PPElL/z4NiWKIgHqjO9ZQ3pgOUdu";
   fra1-de = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFJh1UtgpBvgElcJCuVNU5ykvV9LpAnlTRz3/h7E4IJn";
+  apu = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGBzD51JF2jiKhpZlJDY8ptJQk6wSE7q51t+0qeTEBAg";
   servers = [
     services
     thinkcentre
     fra1-de
+    apu
   ];
 in
 {
