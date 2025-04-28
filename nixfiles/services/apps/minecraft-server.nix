@@ -72,6 +72,42 @@ in
     defaultWorld = "${config.services.minecraft-server.dataDir}/${config.services.minecraft-server.serverProperties.level-name}";
     enableNginx = true;
     onCalendar = "03:10:00";
+
+    maps =
+      let
+        cfg = config.services.bluemap;
+      in
+      {
+        "overworld" = {
+          world = "${cfg.defaultWorld}";
+          ambient-light = 0.1;
+          cave-detection-ocean-floor = -5;
+        };
+
+        "nether" = {
+          world = "${cfg.defaultWorld}_nether/DIM-1";
+          sorting = 100;
+          sky-color = "#290000";
+          void-color = "#150000";
+          ambient-light = 0.6;
+          world-sky-light = 0;
+          remove-caves-below-y = -10000;
+          cave-detection-ocean-floor = -5;
+          cave-detection-uses-block-light = true;
+          max-y = 90;
+        };
+
+        "end" = {
+          world = "${cfg.defaultWorld}_the_end/DIM1";
+          sorting = 200;
+          sky-color = "#080010";
+          void-color = "#080010";
+          ambient-light = 0.6;
+          world-sky-light = 0;
+          remove-caves-below-y = -10000;
+          cave-detection-ocean-floor = -5;
+        };
+      };
   };
 
   systemd.services."render-bluemap-maps" = lib.mkForce {
