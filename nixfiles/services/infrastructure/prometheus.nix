@@ -26,6 +26,7 @@ in
               "services.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
               "thinkcentre.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
               "fra1-de.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
+              "apu.rappet.xyz:${toString config.services.prometheus.exporters.node.port}"
             ];
           }
         ];
