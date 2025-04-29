@@ -12,6 +12,7 @@
 
     (modulesPath + "/installer/scan/not-detected.nix")
     ./disk-config.nix
+    ../../wg-mesh.nix
   ];
 
   services.openssh.enable = true;

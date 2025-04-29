@@ -26,6 +26,12 @@ let
       publicKey = "G+dlubY61jRxl/E4f9xfBeD4gO3E47084XxDV3Hhl2g=";
       endpoint = "91.99.19.52:51821";
     }
+    {
+      name = "apu";
+      hostId = 5;
+      publicKey = "KQ1djJ+LvTW9TccK4Q7p+Ufz1go1h1r0PHF6RudG4Do=";
+      endpoint = null;
+    }
   ];
   self =
     (builtins.listToAttrs (
