@@ -59,6 +59,11 @@
             options.mountpoint = "/nix";
             mountpoint = "/nix";
           };
+          "root/media" = {
+            type = "zfs_fs";
+            options.mountpoint = "/var/media";
+            mountpoint = "/var/media";
+          };
         };
       };
     };
