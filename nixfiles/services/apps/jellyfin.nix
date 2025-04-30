@@ -62,10 +62,20 @@ rec {
 
   services.nginx.virtualHosts.${domain} = {
     forceSSL = true;
-    sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
-    sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
+    sslCertificate = "/var/lib/acme/${domain}/fullchain.pem";
+    sslCertificateKey = "/var/lib/acme/${domain}/key.pem";
     locations."/" = {
       proxyPass = "http://${config.containers.jellyfin.localAddress}:8096";
     };
+  };
+
+  security.acme.certs."${domain}" = {
+    group = "nginx";
+    dnsProvider = "hetzner";
+    credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
+    domain = domain;
+    extraDomainNames = [
+      "${config.networking.hostName}.lb.rappet.xyz"
+    ];
   };
 }
