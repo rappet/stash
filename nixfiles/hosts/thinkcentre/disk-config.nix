@@ -62,7 +62,19 @@
           "root/media" = {
             type = "zfs_fs";
             options.mountpoint = "/var/media";
+            options.compression = "off";
+            options.atime = "off";
             mountpoint = "/var/media";
+          };
+          "root/postgresql" = {
+            type = "zfs_fs";
+            options = {
+              mountpoint = "/var/lib/postgresql";
+              recordsize = "16k";
+              compression = "zstd-fast";
+              primarycache = "metadata";
+            };
+            mountpoint = "/var/lib/postgresql";
           };
         };
       };
