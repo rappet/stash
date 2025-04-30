@@ -83,7 +83,16 @@
     credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
     domain = "rappet.xyz";
     extraDomainNames = [
-      "*.rappet.xyz"
+      "hn.rappet.xyz"
+      "sync.rappet.xyz"
+      "git.rappet.xyz"
+      "ci.rappet.xyz"
+      "registry.rappet.xyz"
+      "live.rappet.xyz"
+      "maps.rappet.xyz"
+      "mc.rappet.xyz"
+      "vaultwarden.rappet.xyz"
+      "phanpy.rappet.xyz"
       "${config.networking.hostName}.lb.rappet.xyz"
     ];
   };
