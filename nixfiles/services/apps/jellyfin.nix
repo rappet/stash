@@ -20,6 +20,8 @@ rec {
     bindMounts.media = {
       mountPoint = "/media";
       hostPath = "/var/media";
+      # we want to update metadata!
+      isReadOnly = false;
     };
 
     config =
