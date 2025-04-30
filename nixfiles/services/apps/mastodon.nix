@@ -1,18 +1,31 @@
 { config, pkgs, ... }:
 
+let
+  domain = "social.rappet.xyz";
+in
 {
   services.mastodon = {
     enable = true;
-    localDomain = "social.rappet.xyz";
+    localDomain = domain;
     configureNginx = true;
-    smtp.fromAddress = "noreply@social.example.com"; # Email address used by Mastodon to send emails, replace with your own
+    smtp.fromAddress = "noreply@${domain}"; # Email address used by Mastodon to send emails, replace with your own
     extraConfig.SINGLE_USER_MODE = "true";
     streamingProcesses = 3;
   };
 
   services.nginx.virtualHosts.${config.services.mastodon.localDomain} = {
     enableACME = false;
-    sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
-    sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
+    sslCertificate = "/var/lib/acme/${domain}/fullchain.pem";
+    sslCertificateKey = "/var/lib/acme/${domain}/key.pem";
+  };
+
+  security.acme.certs."${domain}" = {
+    group = "nginx";
+    dnsProvider = "hetzner";
+    credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
+    domain = domain;
+    extraDomainNames = [
+      "${config.networking.hostName}.lb.rappet.xyz"
+    ];
   };
 }
