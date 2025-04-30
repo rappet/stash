@@ -12,6 +12,7 @@
     ../../common.nix
     ../../services/infrastructure/web.nix
     ../../services/infrastructure/postgresql-backup.nix
+    ../../services/apps/jellyfin.nix
     #./backup.nix
 
     (modulesPath + "/installer/scan/not-detected.nix")

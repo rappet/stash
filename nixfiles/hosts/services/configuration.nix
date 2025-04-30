@@ -26,7 +26,6 @@
     #../../services/infrastructure/etesync.nix
     ../../services/apps/vaultwarden.nix
     ../../services/mosquitto.nix
-    ../../services/apps/jellyfin.nix
     ../../services/smb-media.nix
     ../../services/apps/owncast.nix
     ../../services/infrastructure/kanidm.nix
