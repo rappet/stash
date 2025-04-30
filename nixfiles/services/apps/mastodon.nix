@@ -11,7 +11,10 @@ in
     smtp.fromAddress = "noreply@${domain}"; # Email address used by Mastodon to send emails, replace with your own
     extraConfig.SINGLE_USER_MODE = "true";
     streamingProcesses = 3;
+    extraEnvFiles = [ config.age.secrets.mastodon-env.path ];
   };
+
+  age.secrets.mastodon-env.file = ../../secret/mastodon-env.age;
 
   services.nginx.virtualHosts.${config.services.mastodon.localDomain} = {
     enableACME = false;

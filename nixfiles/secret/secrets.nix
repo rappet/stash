@@ -37,6 +37,7 @@ in
   "transmission.age".publicKeys = users ++ servers;
   "restic-backup-password.age".publicKeys = users ++ servers;
   "garage-env.age".publicKeys = users ++ servers;
+  "mastodon-env.age".publicKeys = users ++ [ services ];
 
   "authelia-hmac-secret.age".publicKeys = users ++ [ services ];
   "authelia-jwks.age".publicKeys = users ++ [ services ];
