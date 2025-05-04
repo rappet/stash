@@ -4,5 +4,6 @@
   services.postgresqlBackup = {
     enable = true;
     startAt = "*-*-* 02,14:00:00";
+    compression = "none";
   };
 }
