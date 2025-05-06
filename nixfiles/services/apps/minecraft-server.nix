@@ -62,6 +62,7 @@ in
       Matttin = "684e849d-8186-4f57-90ed-41888024118a";
       Auravendill = "e84ffee0-0e0b-4c16-be29-293a383d96c4";
       Riki1675 = "29453242-c200-4b2d-a6e9-52ded64c5b43";
+      SophieEntropie = "d2f25dc8-577b-4ae2-9834-5fb673c91815";
     };
   };
 
