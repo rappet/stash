@@ -1,12 +1,16 @@
 _rust-cli-template() {
     local i cur prev opts cmd
     COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    if [[ "${BASH_VERSINFO[0]}" -ge 4 ]]; then
+        cur="$2"
+    else
+        cur="${COMP_WORDS[COMP_CWORD]}"
+    fi
+    prev="$3"
     cmd=""
     opts=""
 
-    for i in ${COMP_WORDS[@]}
+    for i in "${COMP_WORDS[@]:0:COMP_CWORD}"
     do
         case "${cmd},${i}" in
             ",$1")
@@ -43,4 +47,8 @@ _rust-cli-template() {
     esac
 }
 
-complete -F _rust-cli-template -o bashdefault -o default rust-cli-template
+if [[ "${BASH_VERSINFO[0]}" -eq 4 && "${BASH_VERSINFO[1]}" -ge 4 || "${BASH_VERSINFO[0]}" -gt 4 ]]; then
+    complete -F _rust-cli-template -o nosort -o bashdefault -o default rust-cli-template
+else
+    complete -F _rust-cli-template -o bashdefault -o default rust-cli-template
+fi

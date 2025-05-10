@@ -2,30 +2,35 @@
   description = "TODO";
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        rec
-        {
-          packages.rust-cli-template = pkgs.callPackage ./default.nix { };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      utils,
+    }:
+    utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      rec {
+        packages.rust-rest-server-template = pkgs.callPackage ./default.nix { };
 
-          legacyPackages = packages;
+        legacyPackages = packages;
 
-          defaultPackage = packages.rust-cli-template;
+        defaultPackage = packages.rust-rest-server-template;
 
-          devShells.default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              libiconv
-            ];
-          };
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            libiconv
+          ];
+        };
 
-          formatter = pkgs.nixpkgs-fmt;
-        }
-      );
+        formatter = pkgs.nixfmt-rfc-style;
+      }
+    );
 }

@@ -14,13 +14,13 @@ _rust-rest-server-template() {
     fi
 
     local context curcontext="$curcontext" state line
-    _arguments "${_arguments_options[@]}" \
-'-p+[Port of the HTTP server]:HTTP_PORT: ' \
-'--http-port=[Port of the HTTP server]:HTTP_PORT: ' \
-'-a+[Address to listen on (\`0.0.0.0\`/\`\:\:\` or \`127.0.0.1\`/\`\:\:1\`)]:HTTP_ADDRESS: ' \
-'--http-address=[Address to listen on (\`0.0.0.0\`/\`\:\:\` or \`127.0.0.1\`/\`\:\:1\`)]:HTTP_ADDRESS: ' \
-'-d+[Path to the SQLite database file]:DATABASE_FILE: ' \
-'--database-file=[Path to the SQLite database file]:DATABASE_FILE: ' \
+    _arguments "${_arguments_options[@]}" : \
+'-p+[Port of the HTTP server]:HTTP_PORT:_default' \
+'--http-port=[Port of the HTTP server]:HTTP_PORT:_default' \
+'-a+[Address to listen on (\`0.0.0.0\`/\`\:\:\` or \`127.0.0.1\`/\`\:\:1\`)]:HTTP_ADDRESS:_default' \
+'--http-address=[Address to listen on (\`0.0.0.0\`/\`\:\:\` or \`127.0.0.1\`/\`\:\:1\`)]:HTTP_ADDRESS:_default' \
+'-d+[Path to the SQLite database file]:DATABASE_FILE:_default' \
+'--database-file=[Path to the SQLite database file]:DATABASE_FILE:_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \

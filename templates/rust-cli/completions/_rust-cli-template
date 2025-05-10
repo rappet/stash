@@ -14,9 +14,9 @@ _rust-cli-template() {
     fi
 
     local context curcontext="$curcontext" state line
-    _arguments "${_arguments_options[@]}" \
-'-n+[The name of the user]:NAME: ' \
-'--name=[The name of the user]:NAME: ' \
+    _arguments "${_arguments_options[@]}" : \
+'-n+[The name of the user]:NAME:_default' \
+'--name=[The name of the user]:NAME:_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \

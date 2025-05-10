@@ -1,22 +1,26 @@
-{ pkgs ? import <nixpkgs> { }
-, lib
-, stdenv ? pkgs.stdenv
+{
+  pkgs ? import <nixpkgs> { },
+  lib,
+  stdenv ? pkgs.stdenv,
   # A set providing `buildRustPackage :: attrsets -> derivation`
-, rustPlatform ? pkgs.rustPlatform
-, fetchFromGitHub ? pkgs.fetchFromGitHub
-, pkgconfig ? pkgs.pkgconfig
-, installShellFiles ? pkgs.installShellFiles
-, libiconv
+  rustPlatform ? pkgs.rustPlatform,
+  fetchFromGitHub ? pkgs.fetchFromGitHub,
+  pkg-config ? pkgs.pkg-config,
+  installShellFiles ? pkgs.installShellFiles,
+  libiconv,
 }:
 
 rustPlatform.buildRustPackage rec {
-  pname = "rust-cli-template";
+  pname = "rust-rest-server-template";
   version = "0.0.1";
 
   src = ./.;
-  cargoSha256 = "sha256-8slDLu/xC3tdE9lN+Vk475PS/Sa8ernjJyzipRIXgTA=";
+  cargoHash = "sha256-MBxsT9Ec+ovR/OK2vxNlQTquSoR5FZ46aMeBpdYhH4M=";
 
-  nativeBuildInputs = [ pkgconfig installShellFiles ];
+  nativeBuildInputs = [
+    pkg-config
+    installShellFiles
+  ];
 
   buildInputs = lib.optionals stdenv.isDarwin [ libiconv ];
 

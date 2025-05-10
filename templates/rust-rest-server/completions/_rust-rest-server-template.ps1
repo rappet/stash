@@ -21,16 +21,16 @@ Register-ArgumentCompleter -Native -CommandName 'rust-rest-server-template' -Scr
 
     $completions = @(switch ($command) {
         'rust-rest-server-template' {
-            [CompletionResult]::new('-p', 'p', [CompletionResultType]::ParameterName, 'Port of the HTTP server')
-            [CompletionResult]::new('--http-port', 'http-port', [CompletionResultType]::ParameterName, 'Port of the HTTP server')
-            [CompletionResult]::new('-a', 'a', [CompletionResultType]::ParameterName, 'Address to listen on (`0.0.0.0`/`::` or `127.0.0.1`/`::1`)')
-            [CompletionResult]::new('--http-address', 'http-address', [CompletionResultType]::ParameterName, 'Address to listen on (`0.0.0.0`/`::` or `127.0.0.1`/`::1`)')
-            [CompletionResult]::new('-d', 'd', [CompletionResultType]::ParameterName, 'Path to the SQLite database file')
-            [CompletionResult]::new('--database-file', 'database-file', [CompletionResultType]::ParameterName, 'Path to the SQLite database file')
-            [CompletionResult]::new('-h', 'h', [CompletionResultType]::ParameterName, 'Print help')
-            [CompletionResult]::new('--help', 'help', [CompletionResultType]::ParameterName, 'Print help')
-            [CompletionResult]::new('-V', 'V ', [CompletionResultType]::ParameterName, 'Print version')
-            [CompletionResult]::new('--version', 'version', [CompletionResultType]::ParameterName, 'Print version')
+            [CompletionResult]::new('-p', '-p', [CompletionResultType]::ParameterName, 'Port of the HTTP server')
+            [CompletionResult]::new('--http-port', '--http-port', [CompletionResultType]::ParameterName, 'Port of the HTTP server')
+            [CompletionResult]::new('-a', '-a', [CompletionResultType]::ParameterName, 'Address to listen on (`0.0.0.0`/`::` or `127.0.0.1`/`::1`)')
+            [CompletionResult]::new('--http-address', '--http-address', [CompletionResultType]::ParameterName, 'Address to listen on (`0.0.0.0`/`::` or `127.0.0.1`/`::1`)')
+            [CompletionResult]::new('-d', '-d', [CompletionResultType]::ParameterName, 'Path to the SQLite database file')
+            [CompletionResult]::new('--database-file', '--database-file', [CompletionResultType]::ParameterName, 'Path to the SQLite database file')
+            [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
+            [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
+            [CompletionResult]::new('-V', '-V ', [CompletionResultType]::ParameterName, 'Print version')
+            [CompletionResult]::new('--version', '--version', [CompletionResultType]::ParameterName, 'Print version')
             break
         }
     })

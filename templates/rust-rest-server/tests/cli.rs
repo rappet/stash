@@ -4,7 +4,7 @@ use std::process::Command;
 
 #[test]
 fn prints_hello_world() -> Result<(), Box<dyn std::error::Error>> {
-    let mut cmd = Command::cargo_bin("rust-cli-template")?;
+    let mut cmd = Command::cargo_bin("rust-rest-server-template")?;
 
     cmd.assert()
         .success()
@@ -15,7 +15,7 @@ fn prints_hello_world() -> Result<(), Box<dyn std::error::Error>> {
 
 #[test]
 fn prints_hello_name() -> Result<(), Box<dyn std::error::Error>> {
-    let mut cmd = Command::cargo_bin("rust-cli-template")?;
+    let mut cmd = Command::cargo_bin("rust-rest-server-template")?;
 
     cmd.arg("-n").arg("Fnord");
     cmd.assert()

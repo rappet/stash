@@ -21,12 +21,12 @@ Register-ArgumentCompleter -Native -CommandName 'rust-cli-template' -ScriptBlock
 
     $completions = @(switch ($command) {
         'rust-cli-template' {
-            [CompletionResult]::new('-n', 'n', [CompletionResultType]::ParameterName, 'The name of the user')
-            [CompletionResult]::new('--name', 'name', [CompletionResultType]::ParameterName, 'The name of the user')
-            [CompletionResult]::new('-h', 'h', [CompletionResultType]::ParameterName, 'Print help')
-            [CompletionResult]::new('--help', 'help', [CompletionResultType]::ParameterName, 'Print help')
-            [CompletionResult]::new('-V', 'V', [CompletionResultType]::ParameterName, 'Print version')
-            [CompletionResult]::new('--version', 'version', [CompletionResultType]::ParameterName, 'Print version')
+            [CompletionResult]::new('-n', '-n', [CompletionResultType]::ParameterName, 'The name of the user')
+            [CompletionResult]::new('--name', '--name', [CompletionResultType]::ParameterName, 'The name of the user')
+            [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
+            [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
+            [CompletionResult]::new('-V', '-V ', [CompletionResultType]::ParameterName, 'Print version')
+            [CompletionResult]::new('--version', '--version', [CompletionResultType]::ParameterName, 'Print version')
             break
         }
     })
