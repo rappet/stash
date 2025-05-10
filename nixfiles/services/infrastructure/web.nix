@@ -6,6 +6,10 @@
   ...
 }:
 {
+  environment.systemPackages = [
+    pkgs.tlslb
+  ];
+
   services.haproxy = {
     enable = true;
     config = builtins.readFile ./haproxy.conf;

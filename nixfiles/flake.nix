@@ -16,6 +16,9 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     rappet-xyz.url = "github:rappet/stash?dir=projects/web/rappet-xyz";
+
+    tlslb.url = "github:rappet/tlslb";
+    tlslb.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
