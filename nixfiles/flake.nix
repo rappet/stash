@@ -63,6 +63,7 @@
             ];
             specialArgs = {
               system = "x86_64-linux";
+              inputs = inputs;
             };
           };
           "apu" = nixpkgs.lib.nixosSystem {
@@ -73,6 +74,7 @@
             ];
             specialArgs = {
               system = "x86_64-linux";
+              inputs = inputs;
             };
           };
         };
