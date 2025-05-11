@@ -24,4 +24,9 @@
     80
     443
   ];
+
+  users.groups.loadbalancer.members = [
+    "nginx"
+    "haproxy"
+  ];
 }

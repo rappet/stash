@@ -44,7 +44,10 @@ in
         job_name = "haproxy";
         static_configs = [
           {
-            targets = [ "services.rappet.xyz:${toString ports.haproxy-metrics-http}" ];
+            targets = [
+              "services.rappet.xyz:${toString ports.haproxy-metrics-http}"
+              "fra1-de.rappet.xyz:${toString ports.haproxy-metrics-http}"
+            ];
           }
         ];
       }

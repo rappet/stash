@@ -77,7 +77,7 @@
   };
 
   security.acme.certs."eimer.rappet.xyz" = {
-    group = "nginx";
+    group = "loadbalancer";
     dnsProvider = "hetzner";
     credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
     domain = "eimer.rappet.xyz";
