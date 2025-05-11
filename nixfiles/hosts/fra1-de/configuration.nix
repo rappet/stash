@@ -3,6 +3,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../common.nix
+    ../../services/infrastructure/loadbalancer.nix
+    ../../services/infrastructure/garage.nix
     ../../services/infrastructure/dns.nix
     ../../wg-mesh.nix
   ];

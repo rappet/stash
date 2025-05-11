@@ -10,6 +10,8 @@
   imports = [
     #./hardware-configuration.nix
     ../../common.nix
+    ../../services/infrastructure/loadbalancer.nix
+    ../../services/infrastructure/garage.nix
     ../../services/infrastructure/web.nix
     ../../services/infrastructure/postgresql-backup.nix
     ../../services/apps/jellyfin.nix

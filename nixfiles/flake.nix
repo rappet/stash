@@ -59,6 +59,7 @@
           "fra1-de" = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = baseModules ++ [
+              ./modules/reverse-proxy.nix
               ./hosts/fra1-de/configuration.nix
             ];
             specialArgs = {

@@ -146,47 +146,6 @@ in
     };
   };
 
-  services.garage = {
-    enable = true;
-    package = pkgs.garage_1_x;
-    settings = {
-      db_engine = "sqlite";
-      replication_factor = 3;
-      rpc_bind_addr = "[::]:3901";
-
-      s3_api = {
-        s3_region = "garage";
-        api_bind_addr = "[::]:3900";
-        root_domain = ".s3.eimer.rappet.xyz";
-      };
-      s3_web = {
-        bind_addr = "[::]:3902";
-        root_domain = ".web.eimer.rappet.xyz";
-        index = "index.html";
-      };
-      k2v_api = {
-        api_bind_addr = "[::]:3904";
-      };
-      admin = {
-        api_bind_addr = "[::]:3903";
-      };
-    };
-    environmentFile = config.age.secrets.garage-env.path;
-  };
-
-  networking.firewall = {
-    allowedTCPPorts = [
-      3901
-      3903
-    ];
-  };
-
-  age.secrets.garage-env = {
-    file = ./secret/garage-env.age;
-    owner = "root";
-    group = "root";
-  };
-
   networking.nftables.enable = true;
 
   programs.ssh.extraConfig = ''
@@ -204,6 +163,17 @@ in
       15491.your-storagebox.de]:23 ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAGK0po6usux4Qv2d8zKZN1dDvbWjxKkGsx7XwFdSUCnF19Q8psHEUWR7C/LtSQ5crU/g+tQVRBtSgoUcE8T+FWp5wBxKvWG2X9gD+s9/4zRmDeSJR77W6gSA/+hpOZoSE+4KgNdnbYSNtbZH/dN74EG7GLb/gcIpbUUzPNXpfKl7mQitw==
     '')
   ];
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "certbot@rappet.de";
+  };
+
+  age.secrets.letsencrypt-hetzner = {
+    file = ./secret/letsencrypt-hetzner.age;
+    owner = "root";
+    group = "root";
+  };
 
   system.stateVersion = "23.11";
 }

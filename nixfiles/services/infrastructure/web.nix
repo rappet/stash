@@ -6,20 +6,6 @@
   ...
 }:
 {
-  environment.systemPackages = [
-    pkgs.tlslb
-  ];
-
-  services.haproxy = {
-    enable = true;
-    config = builtins.readFile ./haproxy.conf;
-  };
-
-  reverse-proxy = {
-    enable = true;
-    sniProxy.enabled = true;
-  };
-
   services.nginx = {
     clientMaxBodySize = "5G";
 
@@ -57,27 +43,6 @@
           root = "/var/www/phanpy.rappet.xyz";
         };
       };
-      "s3.eimer.rappet.xyz" = {
-        forceSSL = true;
-        serverAliases = [
-          "s3.eimer.rappet.xyz"
-          "*.s3.eimer.rappet.xyz"
-        ];
-        sslCertificate = "/var/lib/acme/eimer.rappet.xyz/fullchain.pem";
-        sslCertificateKey = "/var/lib/acme/eimer.rappet.xyz/key.pem";
-        locations."/" = {
-          proxyPass = "http://[::1]:3900";
-        };
-      };
-      "web.eimer.rappet.xyz" = {
-        forceSSL = true;
-        serverAliases = [ "*.web.eimer.rappet.xyz" ];
-        sslCertificate = "/var/lib/acme/eimer.rappet.xyz/fullchain.pem";
-        sslCertificateKey = "/var/lib/acme/eimer.rappet.xyz/key.pem";
-        locations."/" = {
-          proxyPass = "http://[::1]:3902";
-        };
-      };
     };
   };
 
@@ -101,35 +66,5 @@
     ];
   };
 
-  security.acme.certs."eimer.rappet.xyz" = {
-    group = "nginx";
-    dnsProvider = "hetzner";
-    credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
-    domain = "eimer.rappet.xyz";
-    extraDomainNames = [
-      "s3.eimer.rappet.xyz"
-      "*.s3.eimer.rappet.xyz"
-      "*.web.eimer.rappet.xyz"
-      "tools.rappet.xyz"
-      "${config.networking.hostName}.rappet.xyz"
-    ];
-  };
-
   users.groups.web-share.members = [ "nginx" ];
-
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "certbot@rappet.de";
-  };
-
-  age.secrets.letsencrypt-hetzner = {
-    file = ../../secret/letsencrypt-hetzner.age;
-    owner = "root";
-    group = "root";
-  };
-
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
 }
