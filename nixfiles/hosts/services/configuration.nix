@@ -108,8 +108,8 @@
     templates.data = {
       frequently = 0;
       hourly = 36;
-      daily = 30;
-      monthly = 3;
+      daily = 0;
+      monthly = 0;
       yearly = 0;
       autosnap = true;
       autoprune = true;
