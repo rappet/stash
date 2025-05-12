@@ -15,6 +15,7 @@
     ../../services/infrastructure/web.nix
     ../../services/infrastructure/postgresql-backup.nix
     ../../services/apps/jellyfin.nix
+    ../../services/apps/transmission.nix
     ../../services/apps/bluemap.nix
     #./backup.nix
 
