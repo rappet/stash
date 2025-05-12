@@ -35,6 +35,7 @@
     #../../services/infrastructure/authelia.nix
     ../../services/apps/mastodon.nix
     ../../services/apps/minecraft-server.nix
+    ../../services/apps/bluemap.nix
 
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
