@@ -44,7 +44,7 @@ in
     enable = true;
     eula = true;
     host = "mc.rappet.xyz";
-    defaultWorld = "${config.services.minecraft-server.dataDir}/${config.services.minecraft-server.serverProperties.level-name}";
+    defaultWorld = "${config.services.minecraft-server.dataDir}/Survival";
     enableNginx = true;
     onCalendar = "03:10:00";
 
@@ -98,7 +98,17 @@ in
 
   services.nginx.virtualHosts."mc.rappet.xyz" = {
     forceSSL = true;
-    sslCertificate = "/var/lib/acme/rappet.xyz/fullchain.pem";
-    sslCertificateKey = "/var/lib/acme/rappet.xyz/key.pem";
+    sslCertificate = "/var/lib/acme/mc.rappet.xyz/fullchain.pem";
+    sslCertificateKey = "/var/lib/acme/mc.rappet.xyz/key.pem";
+  };
+
+  security.acme.certs."mc.rappet.xyz" = {
+    group = "nginx";
+    dnsProvider = "hetzner";
+    credentialsFile = "${config.age.secrets.letsencrypt-hetzner.path}";
+    domain = "mc.rappet.xyz";
+    extraDomainNames = [
+      "${config.networking.hostName}.lb.rappet.xyz"
+    ];
   };
 }

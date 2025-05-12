@@ -59,7 +59,6 @@
       "registry.rappet.xyz"
       "live.rappet.xyz"
       "maps.rappet.xyz"
-      "mc.rappet.xyz"
       "vaultwarden.rappet.xyz"
       "phanpy.rappet.xyz"
       "${config.networking.hostName}.lb.rappet.xyz"
