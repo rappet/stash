@@ -74,4 +74,25 @@
       autoprune = true;
     };
   };
+
+  systemd.timers."sync-minecraft" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "hourly";
+      Persistent = true;
+      Unit = "sync-minecraft.service";
+    };
+  };
+
+  systemd.services."sync-minecraft" = {
+    path = [ pkgs.openssh ];
+    script = ''
+      set -eu
+      ${pkgs.rsync}/bin/rsync -av services.rappet.xyz:/var/lib/minecraft /var/lib/
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+  };
 }
