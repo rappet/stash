@@ -30,6 +30,7 @@
           baseModules = [
             agenix.nixosModules.default
             disko.nixosModules.disko
+            tlslb.nixosModules.tlslb
           ];
         in
         {
