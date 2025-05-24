@@ -17,6 +17,7 @@
     ../../services/apps/jellyfin.nix
     ../../services/apps/transmission.nix
     ../../services/apps/bluemap.nix
+    ../../services/apps/gitlab.nix
     #./backup.nix
 
     (modulesPath + "/installer/scan/not-detected.nix")
