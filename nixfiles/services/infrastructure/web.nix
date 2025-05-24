@@ -54,7 +54,6 @@
     extraDomainNames = [
       "hn.rappet.xyz"
       "sync.rappet.xyz"
-      "git.rappet.xyz"
       "ci.rappet.xyz"
       "registry.rappet.xyz"
       "live.rappet.xyz"
