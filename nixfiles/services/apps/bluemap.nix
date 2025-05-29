@@ -46,7 +46,7 @@ in
     host = "mc.rappet.xyz";
     defaultWorld = "${config.services.minecraft-server.dataDir}/Survival";
     enableNginx = true;
-    onCalendar = "03:10:00";
+    onCalendar = "hourly";
 
     maps =
       let
