@@ -177,11 +177,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1748370509,
-        "narHash": "sha256-QlL8slIgc16W5UaI3w7xHQEP+Qmv/6vSNTpoZrrSlbk=",
+        "lastModified": 1748693115,
+        "narHash": "sha256-StSrWhklmDuXT93yc3GrTlb0cKSS0agTAxMGjLKAsY8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4faa5f5321320e49a78ae7848582f684d64783e9",
+        "rev": "910796cabe436259a29a72e8d3f5e180fc6dfacc",
         "type": "github"
       },
       "original": {
@@ -265,11 +265,11 @@
       },
       "locked": {
         "dir": "projects/web/rappet-xyz",
-        "lastModified": 1748082917,
-        "narHash": "sha256-tK6zN/vVkoB5E1UMkfB2QPatQv71fZpi3wykyPNXvGk=",
+        "lastModified": 1748792829,
+        "narHash": "sha256-DFBMctWsdaZoNZ0Bsn/EqJDT+nSMoUOYqIddX48cabM=",
         "owner": "rappet",
         "repo": "stash",
-        "rev": "c9d5a8cbcea13798e6df9a2d84ffdb3d10073258",
+        "rev": "e49fdcce2712bcb5f56cabb7ffe921a7f83d0692",
         "type": "github"
       },
       "original": {
@@ -406,11 +406,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1748082887,
-        "narHash": "sha256-m+ZfFcjUMqe5Pwqj+GotmBUfTb7Enn6dyezLXJEv5JY=",
+        "lastModified": 1748793056,
+        "narHash": "sha256-kCN9vFrz8Szg47zoeK/gqcUSUoMIoRJgVx0gVwCAx0E=",
         "owner": "rappet",
         "repo": "tlslb",
-        "rev": "1f785b568b8eb512dbbd6165ac84b9472fb94401",
+        "rev": "1a95d7270eac0b1fecf59c0c28018e9c911da811",
         "type": "github"
       },
       "original": {
