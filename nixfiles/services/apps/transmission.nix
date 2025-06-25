@@ -22,6 +22,11 @@ in
     credentialsFile = "${config.age.secrets.transmission.path}";
   };
 
+  systemd.services.transmission.serviceConfig = {
+    # bug with dual stack - I hate transmission
+    RestrictAddressFamilies = "AF_UNIX AF_INET";
+  };
+
   age.secrets.transmission = {
     file = ../../secret/transmission.age;
     owner = "transmission";
