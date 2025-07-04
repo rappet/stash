@@ -115,7 +115,7 @@ in
     if pkgs.stdenv.isLinux then
       {
         enable = true;
-        pinentryPackage = pkgs.pinentry-gnome3;
+        pinentry.package = pkgs.pinentry-gnome3;
       }
     else
       { };
