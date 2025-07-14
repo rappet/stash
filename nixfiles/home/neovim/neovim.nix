@@ -10,6 +10,7 @@
       #config = "let g:airline_powerline_fonts = 1";
     }
     vim-airline-themes
+    tokyonight-nvim
     vim-nix
     vim-css-color
     {

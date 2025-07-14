@@ -3,7 +3,7 @@ set number
 set relativenumber
 syntax enable
 filetype plugin indent on
-colorscheme gruvbox
+colorscheme tokyonight-night
 
 set completeopt=menu,menuone,noselect
 
