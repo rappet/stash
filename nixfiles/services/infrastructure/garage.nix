@@ -8,7 +8,7 @@
 {
   services.garage = {
     enable = true;
-    package = pkgs.garage_1_x;
+    package = pkgs.garage_1;
     settings = {
       db_engine = "sqlite";
       replication_factor = 3;
