@@ -18,7 +18,6 @@
   owncast-http = 10015;
   woodpecker-http = 10016;
 
-  kanidm-https = 10017;
   authelia-https = 10018;
   transmission = 9091;
   haproxy-metrics-http = 10019;

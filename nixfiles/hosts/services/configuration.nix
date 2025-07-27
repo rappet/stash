@@ -30,7 +30,6 @@
     ../../services/mosquitto.nix
     ../../services/smb-media.nix
     ../../services/apps/owncast.nix
-    ../../services/infrastructure/kanidm.nix
     #../../services/infrastructure/authelia.nix
     ../../services/apps/mastodon.nix
     ../../services/apps/minecraft-server.nix
