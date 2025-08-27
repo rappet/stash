@@ -106,3 +106,5 @@ local rust_tools_opts = {
 }
 
 require('rust-tools').setup(rust_tools_opts)
+
+vim.diagnostic.config({ virtual_lines = true })
