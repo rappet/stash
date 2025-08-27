@@ -25,5 +25,5 @@
 
   age.secrets.smb-media.file = ../secret/smb-media.age;
 
-  services.postgresqlBackup.databases = config.services.postgresql.ensureDatabases;
+  #services.postgresqlBackup.databases = config.services.postgresql.ensureDatabases;
 }
