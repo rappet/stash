@@ -44,7 +44,6 @@ in
       nixpkgs-fmt
       # Publishing
       graphviz
-      texlive.combined.scheme-full
       pandoc
       # Media
       yt-dlp
