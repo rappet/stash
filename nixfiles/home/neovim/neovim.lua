@@ -97,6 +97,9 @@ local rust_tools_opts = {
         procMacro = {
           enable = true
         },
+	cargo = {
+          features = "all"
+	},
       },
     },
   },
