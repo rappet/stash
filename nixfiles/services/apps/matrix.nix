@@ -8,7 +8,7 @@ in
     settings = {
       global = {
         server_name = domain;
-        allow_registration = false;
+        allow_registration = true;
         allow_encryption = true;
         allow_federation = true;
         trusted_servers = [ "matrix.org" ];
