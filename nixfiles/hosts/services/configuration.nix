@@ -34,6 +34,7 @@
     ../../services/apps/mastodon.nix
     ../../services/apps/minecraft-server.nix
     ../../services/apps/woodpecker.nix
+    ../../services/apps/matrix.nix
 
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
