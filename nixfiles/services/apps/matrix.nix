@@ -8,9 +8,7 @@ in
     settings = {
       global = {
         server_name = domain;
-        allow_registration = true;
-        # will get deleted later lol
-        registration_token = "topsecret";
+        allow_registration = false;
         allow_encryption = true;
         allow_federation = true;
         trusted_servers = [ "matrix.org" ];
