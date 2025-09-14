@@ -52,6 +52,19 @@
       "1.1.1.1"
       "9.9.9.9"
     ];
+
+    nftables = {
+      enable = true;
+      flushRuleset = true;
+      tables."nixos-nat" = {
+        family = "ip";
+        content = ''
+          chain post {
+            masquerade
+          }
+        '';
+      };
+    };
   };
 
   services.zfs = {
