@@ -45,6 +45,17 @@
               inputs = inputs;
             };
           };
+          "ams1-nl" = nixpkgs.lib.nixosSystem {
+            system = "aarch64-linux";
+            modules = baseModules ++ [
+              ./modules/reverse-proxy.nix
+              ./hosts/ams1-nl/configuration.nix
+            ];
+            specialArgs = {
+              system = "aarch64-linux";
+              inputs = inputs;
+            };
+          };
           "thinkcentre" = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = baseModules ++ [
@@ -84,6 +95,14 @@
       deploy.nodes = {
         services = {
           hostname = "services.rappet.xyz";
+          profiles.system = {
+            sshUser = "root";
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.services;
+            remoteBuild = true;
+          };
+        };
+        ams1-nl = {
+          hostname = "152.53.60.66";
           profiles.system = {
             sshUser = "root";
             path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.services;
