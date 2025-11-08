@@ -10,7 +10,7 @@ rec {
     environment = {
       WOODPECKER_OPEN = "true";
       WOODPECKER_ADMIN = "rappet";
-      WOODPECKER_HOST= "https://${domain}";
+      WOODPECKER_HOST = "https://${domain}";
       WOODPECKER_SERVER_ADDR = ":${toString ports.woodpecker-http}";
     };
     environmentFile = config.age.secrets.woodpecker-env.path;
