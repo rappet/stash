@@ -45,7 +45,7 @@
     nat = {
       enable = true;
       internalInterfaces = [ "ve-+" ];
-      externalInterface = "eno1";
+      externalInterface = "br9";
       enableIPv6 = true;
     };
     nameservers = [
@@ -65,6 +65,10 @@
         '';
       };
     };
+
+    bridges.br0.interfaces = ["eno1"];
+    interfaces.br0.useDHCP = true;
+    useDHCP = false;
   };
 
   services.zfs = {
