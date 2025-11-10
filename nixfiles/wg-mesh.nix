@@ -32,12 +32,6 @@ let
       publicKey = "KQ1djJ+LvTW9TccK4Q7p+Ufz1go1h1r0PHF6RudG4Do=";
       endpoint = null;
     }
-    {
-      name = "ams1-nl";
-      hostId = 6;
-      publicKey = "G+dlubY61jRxl/E4f9xfBeD4gO3E47084XxDV3Hhl2G=";
-      endpoint = "152.53.60.66:51821";
-    }
   ];
   self =
     (builtins.listToAttrs (
