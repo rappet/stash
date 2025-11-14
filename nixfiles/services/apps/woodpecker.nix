@@ -16,6 +16,8 @@ rec {
     environmentFile = config.age.secrets.woodpecker-env.path;
   };
 
+  networking.firewall.allowedTCPPorts = [ 9000 ];
+
   age.secrets.woodpecker-env = {
     file = ../../secret/woodpecker-env.age;
   };
