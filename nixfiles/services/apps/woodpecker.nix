@@ -12,6 +12,7 @@ rec {
       WOODPECKER_ADMIN = "rappet";
       WOODPECKER_HOST = "https://${domain}";
       WOODPECKER_SERVER_ADDR = ":${toString ports.woodpecker-http}";
+      WOODPECKER_PLUGINS_PRIVILEGED = "woodpeckerci/plugin-docker-buildx";
     };
     environmentFile = config.age.secrets.woodpecker-env.path;
   };
