@@ -90,7 +90,7 @@ in
           PASSWORD_STORE_CLIP_TIME = "60";
         };
       };
-      starship = import ./programs/starship.nix;
+      starship.enable = true;
       tmux = import ./programs/tmux.nix { pkgs = pkgs; };
       bat = {
         enable = true;
