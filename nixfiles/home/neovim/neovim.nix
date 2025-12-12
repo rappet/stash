@@ -30,12 +30,6 @@
     vim-fugitive
     vim-surround
     awesome-vim-colorschemes
-    {
-      plugin = rust-vim;
-      config = ''
-        let g:rustfmt_autosave = 1
-      '';
-    }
     nvim-lspconfig
     cmp-nvim-lsp
     cmp-buffer
@@ -60,7 +54,6 @@
       '';
     }
     vim-devicons
-    rust-tools-nvim
   ];
   #coc.enable = true;
   extraConfig =
