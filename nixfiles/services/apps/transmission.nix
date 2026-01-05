@@ -12,7 +12,6 @@ in
     settings = {
       rpc-bind-address = "::";
       # yeah, good software
-      #rpc-whitelist = "2a0e:46c6:0:200::1";
       rpc-whitelist-enabled = false;
       rpc-host-whitelist-enabled = true;
       download-dir = "/var/media/torrents";

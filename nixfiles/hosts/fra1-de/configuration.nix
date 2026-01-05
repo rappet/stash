@@ -28,7 +28,7 @@
     lo = {
       ipv6.addresses = [
         {
-          address = "2a0e:46c6::2";
+          address = "2a0e:b107:d0::2";
           prefixLength = 128;
         }
       ];
