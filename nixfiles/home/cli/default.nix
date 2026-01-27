@@ -53,6 +53,12 @@ in
       # Cloud
       kubectl
       kubernetes-helm
+      # octodns
+      (octodns.withProviders (ps: [
+        octodns-providers.bind
+        octodns-providers.powerdns
+        octodns-providers.hetzner
+      ]))
     ];
 
     programs = {
