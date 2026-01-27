@@ -1,8 +1,8 @@
 {
   enable = true;
-  difftastic.enable = true;
+
   lfs.enable = true;
-  extraConfig = {
+  settings = {
     core.editor = "nvim";
     pull.rebase = true;
     init.defaultBranch = "main";

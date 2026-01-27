@@ -89,6 +89,10 @@ in
         };
       };
       git = import ./programs/git.nix;
+      difftastic = {
+        enable = true;
+        git.enable = true;
+      };
       password-store = {
         enable = true;
         settings = {

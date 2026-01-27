@@ -53,8 +53,10 @@ in
 
   programs = {
     git = {
-      userName = "Raphael Peters";
-      userEmail = "rappet@rappet.de";
+      settings.user = {
+        name = "Raphael Peters";
+        email = "rappet@rappet.de";
+      };
       signing = {
         key = gpg-key;
         signByDefault = true;
