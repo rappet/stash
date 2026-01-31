@@ -109,6 +109,29 @@
     '';
   };
 
+  networking.wireguard = {
+    enabled = true;
+    interfaces.wg-fra1-dlink = {
+      ips = [
+        "2a0e:46c6:0:1::1/64"
+      ];
+      listenPort = 51822;
+      privateKeyFile = "/root/wireguard-keys/wg-fra1-dlink.key";
+      mtu = 1432;
+      allowedIPsAsRoutes = false;
+
+      peers = [
+        {
+          name = "dlink";
+          publicKey = "ZEamORgwQ8UFzxPa0krdSoYH89gx1wReJsHXdMdIFGk=";
+          allowedIPs = [
+            "::/0"
+          ];
+        }
+      ];
+    };
+  };
+
   #services.birdwatcher = {
   #  enable = true;
   #  settings = ''
