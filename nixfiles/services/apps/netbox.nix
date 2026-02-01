@@ -7,6 +7,7 @@ in
 rec {
   services.netbox = {
     enable = true;
+    package = pkgs.netbox_4_3;
     settings = {
       ALLOWES_HOSTS = [ domain ];
     };
