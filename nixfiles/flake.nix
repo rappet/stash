@@ -103,7 +103,7 @@
           profiles.system = {
             sshUser = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.fra1-de;
-            remoteBuild = true;
+            remoteBuild = false;
           };
         };
         apu = {
