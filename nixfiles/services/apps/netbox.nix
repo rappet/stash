@@ -19,8 +19,13 @@ rec {
     forceSSL = true;
     sslCertificate = "/var/lib/acme/${domain}/fullchain.pem";
     sslCertificateKey = "/var/lib/acme/${domain}/key.pem";
-    locations."/" = {
-      proxyPass = "http://[::1]:${toString config.services.netbox.port}";
+    locations = {
+      "/" = {
+        proxyPass = "http://[::1]:${toString config.services.netbox.port}";
+      };
+      "/static/" = {
+        alias = "${config.services.netbox.dataDir}/static/";
+      };
     };
   };
 
