@@ -38,6 +38,9 @@
 
       [backends."social.rappet.xyz"]
       addresses = ["services.rappet.xyz:8443"]
+
+      [backends."netbox.rappet.xyz"]
+      addresses = ["services.rappet.xyz:8443"]
     '';
   };
 

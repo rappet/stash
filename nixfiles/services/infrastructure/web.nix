@@ -59,7 +59,6 @@
       "maps.rappet.xyz"
       "vaultwarden.rappet.xyz"
       "phanpy.rappet.xyz"
-      "netbox.rappet.xyz"
       "${config.networking.hostName}.lb.rappet.xyz"
     ];
   };
