@@ -24,4 +24,6 @@
   unbound-https = 10020;
   unbound-metrics = 10021;
   postgres-metrics = 10022;
+
+  netbox-http = 10023;
 }

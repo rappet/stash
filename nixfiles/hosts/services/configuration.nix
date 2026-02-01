@@ -35,6 +35,7 @@
     ../../services/apps/minecraft-server.nix
     ../../services/apps/woodpecker.nix
     ../../services/apps/matrix.nix
+    ../../services/apps/netbox.nix
 
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
