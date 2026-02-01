@@ -110,7 +110,7 @@
   };
 
   networking.wireguard = {
-    enabled = true;
+    enable = true;
     interfaces.wg-fra1-dlink = {
       ips = [
         "2a0e:46c6:0:1::1/64"
