@@ -26,4 +26,5 @@
   postgres-metrics = 10022;
 
   netbox-http = 10023;
+  qbittorrent-http = 10024;
 }

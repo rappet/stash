@@ -16,6 +16,8 @@
     #../../services/infrastructure/postgresql-backup.nix
     ../../services/apps/jellyfin.nix
     #../../services/apps/transmission.nix
+    ../../services/apps/qbittorrent.nix
+
     #../../services/apps/bluemap.nix
     ../../services/apps/gitlab.nix
     #./backup.nix
