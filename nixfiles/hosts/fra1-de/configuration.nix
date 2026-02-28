@@ -145,9 +145,9 @@
   #  '';
   #};
 
-  services.prometheus.exporters.bird = {
-    enable = true;
-    openFirewall = true;
-  };
+  #services.prometheus.exporters.bird = {
+  #  enable = true;
+  #  openFirewall = true;
+  #};
 
 }
