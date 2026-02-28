@@ -60,6 +60,7 @@ in
         octodns-providers.hetzner
       ]))
       nil
+      nixd
     ];
 
     programs = {
