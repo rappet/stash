@@ -19,8 +19,8 @@
     ../../services/apps/headscale.nix
     ../../services/apps/quassel.nix
     ../../services/infrastructure/dns.nix
-    ../../services/infrastructure/grafana.nix
-    ../../services/infrastructure/prometheus.nix
+    #../../services/infrastructure/grafana.nix
+    #../../services/infrastructure/prometheus.nix
     ../../services/infrastructure/loki.nix
     ../../services/infrastructure/unbound.nix
     #../../services/infrastructure/gitea.nix
