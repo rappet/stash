@@ -22,4 +22,10 @@ in
       recommendedProxySettings = true;
     };
   };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 51413 ];
+    allowedUDPPorts = [ 51413 ];
+  };
 }
