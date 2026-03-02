@@ -125,7 +125,7 @@ in
       "-L" # print build logs
     ];
     dates = "*-*-* 01,05,10,16,22:00:00";
-    allowReboot = true;
+    allowReboot = false;
     rebootWindow = {
       lower = "02:00";
       upper = "06:00";
