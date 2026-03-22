@@ -26,7 +26,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # CLI
-      neofetch
+      fastfetch
       binwalk
       xxd
       ripgrep
